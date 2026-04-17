@@ -1,0 +1,953 @@
+============================================================================
+CHEMISTRY FLASHCARD — STEP DIAGNOSTIC REPORT (FINAL)
+File: C:\Users\ad87599\OneDrive - Stockholm Kommun\Claude code\kemi1-flashcards.html
+Total problems parsed (calculation type): 412
+Skipped (balance/conceptual/unparseable): 23
+Problems with step-4 mismatch: 87
+============================================================================
+
+CLASSIFICATION KEY:
+  WRONG_PROBLEM_DATA_IN_STEPS — Steps contain data from a different problem
+  ANSWER_ONLY_IN_STEP3        — Correct answer in step 3 but absent from step 4
+  SIGN_MISMATCH               — Answer has wrong sign
+  WRONG_STEPS_CONTENT         — Only 3 steps present (4th step absent/collapsed)
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: elkem  (16 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 701  |  Expected ans=0.635 ± 0.02 g
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: m = (3600 × 63,5)/(2 × 96485) = 228600/192970 = 1,185 g
+  Step 3 nums: [1.185, 2, 63.5, 3600, 96485, 192970, 228600]  -> closest=1.185 diff=0.55
+  Step 4 text: Svar: 1,19 g koppar avsätts. Varje mol e⁻ (96485 C) avsätter 63,5/2=31,75 g Cu
+  Step 4 nums: [1.19, 2, 31.75, 63.5, 96485]  -> closest=1.19 diff=0.555
+
+  ID 705  |  Expected ans=1.21 ± 0.05 g
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: m = (3,0 × 7200 × 107,9)/(1 × 96485) = 2330280/96485 = 24,15 g
+  Step 3 nums: [1, 3, 9, 24.15, 96485, 2.33028e+06, 7.2e+10]  -> closest=1 diff=0.21
+  Step 4 text: Svar: 24,2 g silver. Industriell användning: silverblästring. Varje Coulomb deponerar M/(n_e×F) gram
+  Step 4 nums: [24.2]  -> closest=24.2 diff=22.99
+
+  ID 706  |  Expected ans=1.07 ± 0.01 V
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Nernst: E = E° − (0,0592/n)×log Q = 1,10 − (0,0592/2)×log(0,10)
+  Step 3 nums: [0.0592, 0.1, 1.1, 2]  -> closest=1.1 diff=0.03
+  Step 4 text: Svar: E = 1,10 − 0,0296×(−1) = 1,10 + 0,030 = 1,13 V. Låg [Zn²⁺] minskar back-reaktion → höjer EMK
+  Step 4 nums: [-1, 0.0296, 0.03, 1.1, 1.13]  -> closest=1.1 diff=0.03
+
+  ID 1601  |  Expected ans=1.1 ± 0.02 V
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Svar: Fe har oxidationstal +3 i Fe₂O₃
+  Step 3 nums: [3]  -> closest=3 diff=1.9
+  Step 4 text: Kontroll: 2×(+3) + 3×(−2) = 6 − 6 = 0 (neutral förening) ✓
+  Step 4 nums: [-2, 0, 2, 3, 6]  -> closest=2 diff=0.9
+
+  ID 1602  |  Expected ans=0.93 ± 0.02 V
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Cu²⁺ + 2e⁻ → Cu: Cu²⁺ reduceras (tar emot elektroner)
+  Step 3 nums: (none found)
+  Step 4 text: Svar: Cu²⁺ reduceras. Katoden = reduktion i elektrokemisk cell ✓
+  Step 4 nums: (none found)
+
+  ID 1603  |  Expected ans=2.0 ± 0.05 e⁻
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Katod = Cu (högre potential); anod = Zn
+  Step 3 nums: (none found)
+  Step 4 text: E°cell = +0,34 − (−0,76) = 0,34 + 0,76 = 1,10 V ✓
+  Step 4 nums: [-0.76, 0.34, 0.76, 1.1]  -> closest=1.1 diff=0.9
+
+  ID 1604  |  Expected ans=31.75 ± 0.5 g
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: m = Q×M/(n×F) = 7200 × 63,5/(2 × 96500) = 457200/193000
+  Step 3 nums: [2, 63.5, 7200, 96500, 193000, 457200]  -> closest=2 diff=29.75
+  Step 4 text: m = 2,37 g Cu ✓
+  Step 4 nums: [2.37]  -> closest=2.37 diff=29.38
+
+  ID 1605  |  Expected ans=0.399 ± 0.01 V
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: ΔG° = −212 kJ. Negativt → spontan galvanisk reaktion ✓
+  Step 3 nums: [-212]  -> closest=-212 diff=212.399
+  Step 4 text: Svar: ΔG° = −212 kJ. Negativt → spontan galvanisk reaktion ✓
+  Step 4 nums: [-212]  -> closest=-212 diff=212.399
+
+  ID 2157  |  Expected ans=2.0 ± 0.1 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 2 (ej spontan). E°cell < 0 → reaktionen kräver yttre energi (elektrolys) ✓
+  Step 3 nums: [0, 2]  -> MATCH
+  Step 4 text: Svar: 2 (ej spontan). E°cell < 0 → reaktionen kräver yttre energi (elektrolys) ✓
+  Step 4 nums: [0, 2]  -> closest=2 diff=0
+
+  ID 2159  |  Expected ans=-96.5 ± 1.0 kJ
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: ΔG° = −96,5 kJ. Spontan: ΔG° < 0 och E° > 0 ✓
+  Step 3 nums: [-96.5, 0]  -> MATCH
+  Step 4 text: Svar: ΔG° = −96,5 kJ. Spontan: ΔG° < 0 och E° > 0 ✓
+  Step 4 nums: [-96.5, 0]  -> closest=-96.5 diff=0
+
+  ID 2160  |  Expected ans=1.0 ± 0.1 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: 1 = galvanisk cell producerar ström spontant
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Batteri = galvanisk cell. Laddning av batteri = elektrolytisk cell ✓
+  Step 4 nums: (none found)
+
+  ID 2163  |  Expected ans=0.3 ± 0.01 mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 0,30 mol elektroner. Faraday: 1 mol e⁻ = 96500 C ✓
+  Step 3 nums: [0.3, 1, 96500]  -> MATCH
+  Step 4 text: Svar: 0,30 mol elektroner. Faraday: 1 mol e⁻ = 96500 C ✓
+  Step 4 nums: [0.3, 1, 96500]  -> closest=0.3 diff=0
+
+  ID 2164  |  Expected ans=1.67 ± 0.02 V
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: E°cell = 1,67 V. Korrosion är spontan (E° > 0) — därför rostar järn ✓
+  Step 3 nums: [0, 1.67]  -> MATCH
+  Step 4 text: Svar: E°cell = 1,67 V. Korrosion är spontan (E° > 0) — därför rostar järn ✓
+  Step 4 nums: [0, 1.67]  -> closest=1.67 diff=0
+
+  ID 2171  |  Expected ans=85.7 ± 1.0 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: ln K = 85,7. K = e^85,7 ≈ 10^37 — extremt stor, reaktion är praktiskt fullständig ✓
+  Step 3 nums: [10, 37, 85.7]  -> MATCH
+  Step 4 text: Svar: ln K = 85,7. K = e^85,7 ≈ 10^37 — extremt stor, reaktion är praktiskt fullständig ✓
+  Step 4 nums: [10, 37, 85.7]  -> closest=85.7 diff=0
+
+  ID 2172  |  Expected ans=0.5 ± 0.01 kWh
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 0,50 kWh. kWh = kilowatt × timme; industriell elektrolys kostar energi ✓
+  Step 3 nums: [0.5]  -> MATCH
+  Step 4 text: Svar: 0,50 kWh. kWh = kilowatt × timme; industriell elektrolys kostar energi ✓
+  Step 4 nums: [0.5]  -> closest=0.5 diff=0
+
+  ID 2173  |  Expected ans=1.0 ± 0.05 mol/F
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 1 mol joner per mol e⁻. Saltbryggan bibehåller elektroneutralitet i båda halvreaktionskärlena ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: 1 mol joner per mol e⁻. Saltbryggan bibehåller elektroneutralitet i båda halvreaktionskärlena ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: gas  (10 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 303  |  Expected ans=6.0 ± 0.1 L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: V₂ = V₁ × T₂/T₁ = 3,0 × 450/300 = 3,0 × 1,5 = 4,5 L
+  Step 3 nums: [1.5, 3, 4.5, 300, 450]  -> closest=4.5 diff=1.5
+  Step 4 text: Svar: 4,5 L. T ökade 50% → V ökade 50%. OBS: ALLTID Kelvin i gaslagsberäkningar!
+  Step 4 nums: [4.5, 50]  -> closest=4.5 diff=1.5
+
+  ID 305  |  Expected ans=225.0 ± 2.0 kPa
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: p₂ = p₁ × T₂/T₁ = 100 × 450/300 = 100 × 1,5 = 150 kPa
+  Step 3 nums: [1.5, 100, 150, 300, 450]  -> closest=150 diff=75
+  Step 4 text: Svar: 150 kPa. Mer rörelseenergi (hög T) → fler kollisioner med väggarna → högre tryck
+  Step 4 nums: [150]  -> closest=150 diff=75
+
+  ID 306  |  Expected ans=5.0 ± 0.1 L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Beräkna: V₂ = (p₁V₁T₂)/(T₁p₂) = (100 × 5,0 × 400) / (300 × 200) = 200000/60000 = 3,33 L
+  Step 3 nums: [3.33, 5, 100, 200, 300, 400, 60000, 200000]  -> MATCH
+  Step 4 text: Svar: 3,33 L. Tryckfördubbling halverar volymen; temperaturökning (+33%) verkar mot. Netto: 3,33 L
+  Step 4 nums: [3.33, 33]  -> closest=3.33 diff=1.67
+
+  ID 1202  |  Expected ans=2.0 ± 0.1 L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: V₂ = P₁V₁/P₂ → P₂ = P₁V₁/V₂ = 100×6,0/2,0 = 300 kPa
+  Step 3 nums: [2, 6, 100, 300]  -> MATCH
+  Step 4 text: Svar: P₂ = 300 kPa. Trycket tredubblas när volymen halveras ✓
+  Step 4 nums: [300]  -> closest=300 diff=298
+
+  ID 1208  |  Expected ans=100.0 ± 1.0 kPa
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 100 kPa. Varje gas bidrar oberoende med sitt partialtryck ✓
+  Step 3 nums: [100]  -> MATCH
+  Step 4 text: Svar: 100 kPa. Varje gas bidrar oberoende med sitt partialtryck ✓
+  Step 4 nums: [100]  -> closest=100 diff=0
+
+  ID 1209  |  Expected ans=4.0 ± 0.1 gånger
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: H₂ diffunderar 4,0 gånger snabbare än O₂. Lättare molekyl → högre medelhastighet ✓
+  Step 3 nums: [4]  -> MATCH
+  Step 4 text: Svar: H₂ diffunderar 4,0 gånger snabbare än O₂. Lättare molekyl → högre medelhastighet ✓
+  Step 4 nums: [4]  -> closest=4 diff=0
+
+  ID 2055  |  Expected ans=400.0 ± 0.5 K
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: 400 K. Kelvin = absolut temperaturskala (0 K = absolut nollpunkt = −273°C)
+  Step 3 nums: [-273, 0, 400]  -> MATCH
+  Step 4 text: OBS: Gaslagar kräver alltid Kelvin! ✓
+  Step 4 nums: (none found)
+
+  ID 2059  |  Expected ans=0.9 ± 0.01 atm
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 0,90 atm. Varje idealgas bidrar oberoende — partialtrycken adderas ✓
+  Step 3 nums: [0.9]  -> MATCH
+  Step 4 text: Svar: 0,90 atm. Varje idealgas bidrar oberoende — partialtrycken adderas ✓
+  Step 4 nums: [0.9]  -> closest=0.9 diff=0
+
+  ID 2061  |  Expected ans=1.253 ± 0.05 gånger
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: N₂ diffunderar 1,25 gånger snabbare än CO₂
+  Step 3 nums: [1.25]  -> MATCH
+  Step 4 text: Intuition: N₂ (28 g/mol) är lättare än CO₂ (44 g/mol) → snabbare ✓
+  Step 4 nums: [28, 44]  -> closest=28 diff=26.747
+
+  ID 2067  |  Expected ans=98.1 ± 0.2 kPa
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 98,1 kPa. Vatten avges ångform vid 25°C — korrigera alltid vid uppsamling över vatten ✓
+  Step 3 nums: [25, 98.1]  -> MATCH
+  Step 4 text: Svar: 98,1 kPa. Vatten avges ångform vid 25°C — korrigera alltid vid uppsamling över vatten ✓
+  Step 4 nums: [25, 98.1]  -> closest=98.1 diff=0
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: jamvikt  (18 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 602  |  Expected ans=0.036 ± 0.002 
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna Q: Q = (0,40)²/0,20 = 0,16/0,20 = 0,80
+  Step 3 nums: [0.16, 0.2, 0.4, 0.8]  -> closest=0.16 diff=0.124
+  Step 4 text: Jämför: Q=0,80 > Kc=0,36 → för mycket produkter → reaktionen går BAKÅT för att nå jämvikt
+  Step 4 nums: [0.36, 0.8]  -> closest=0.36 diff=0.324
+
+  ID 603  |  Expected ans=0.8 ± 0.02 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Kc=(2x)²/(1−x)²=49 → ta kvadratroten: 2x/(1−x)=7 → 2x=7−7x → 9x=7 → x=0,778 mol/L
+  Step 3 nums: [0.778, 1, 7, 49]  -> closest=0.778 diff=0.022
+  Step 4 text: Svar: [HI]=2×0,778=1,556≈1,56 mol/L; [H₂]=[I₂]=0,222 mol/L. Kontroll: (1,556)²/(0,222)²=49 ✓
+  Step 4 nums: [0.222, 0.778, 1.556, 1.56, 2, 49]  -> closest=0.778 diff=0.022
+
+  ID 606  |  Expected ans=0.867 ± 0.02 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Kc = x/(1−x)² = 1,0 → x=(1−x)² → x²−3x+1=0 → x=(3−√5)/2 = (3−2,236)/2 = 0,382
+  Step 3 nums: [0, 0.382, 1, 2, 2.236, 3, 5]  -> closest=1 diff=0.133
+  Step 4 text: Svar: [PCl₅]=0,38; [PCl₃]=[Cl₂]=0,62 mol/L. Andragradsekvation uppstår när man inte kan förenkla
+  Step 4 nums: [0.38, 0.62]  -> closest=0.62 diff=0.247
+
+  ID 1507  |  Expected ans=0.04 ± 0.005 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: [A]/[B] = 0,040. Kc >> 1 → produkter (B) dominerar → [A] << [B] ✓
+  Step 3 nums: [0.04, 1]  -> MATCH
+  Step 4 text: Svar: [A]/[B] = 0,040. Kc >> 1 → produkter (B) dominerar → [A] << [B] ✓
+  Step 4 nums: [0.04, 1]  -> closest=0.04 diff=0
+
+  ID 2127  |  Expected ans=1.0 ± 0.05 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: Kc = 1,0. Lika konc av alla → Kc = 1 ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: Kc = 1,0. Lika konc av alla → Kc = 1 ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+  ID 2128  |  Expected ans=1.0 ± 0.1 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 1 (mot produkter). Kc >> 1 → höger sida dominerar ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: 1 (mot produkter). Kc >> 1 → höger sida dominerar ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+  ID 2129  |  Expected ans=2.0 ± 0.1 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 2 (bakåt). Om Q > Kc: för mycket produkter → reaktion bakåt ✓
+  Step 3 nums: [2]  -> MATCH
+  Step 4 text: Svar: 2 (bakåt). Om Q > Kc: för mycket produkter → reaktion bakåt ✓
+  Step 4 nums: [2]  -> closest=2 diff=0
+
+  ID 2131  |  Expected ans=1.0 ± 0.1 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 1 (mot NH₃). Le Chatelier: ökat tryck → mot färre gasmol ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: 1 (mot NH₃). Le Chatelier: ökat tryck → mot färre gasmol ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+  ID 2132  |  Expected ans=1.0 ± 0.1 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 1 (framåt). Mer reaktant → mer produkt bildas ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: 1 (framåt). Mer reaktant → mer produkt bildas ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+  ID 2138  |  Expected ans=2.0 ± 0.05 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: K_total = 2,0
+  Step 3 nums: [2]  -> MATCH
+  Step 4 text: Omvänd reaktion: K_ny = 1/K_gammal. Addition → multiplication ✓
+  Step 4 nums: [1]  -> closest=1 diff=1
+
+  ID 2141  |  Expected ans=1.0 ± 0.05 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: Kc = 1,0. Esterifiering: jämviktsläget är i mitten ✓
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Svar: Kc = 1,0. Esterifiering: jämviktsläget är i mitten ✓
+  Step 4 nums: [1]  -> closest=1 diff=0
+
+  ID 2146  |  Expected ans=0.02 ± 0.001 mol/L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: Kc = 0,020 mol/L
+  Step 3 nums: [0.02]  -> MATCH
+  Step 4 text: Litet K → AB är stabilt — dissociation är ogynnsam ✓
+  Step 4 nums: (none found)
+
+  ID 2149  |  Expected ans=10.0 ± 0.2 
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: K = 10,0. e^2,303 ≈ 10 (ln 10 = 2,303) ✓
+  Step 3 nums: [2.303, 10]  -> MATCH
+  Step 4 text: Svar: K = 10,0. e^2,303 ≈ 10 (ln 10 = 2,303) ✓
+  Step 4 nums: [2.303, 10]  -> closest=10 diff=0
+
+  ID 2501  |  Expected ans=0.0247 ± 5.0 (enhetslös)
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: Kc ≈ 0,0185. Jämför givet svar 0,0247 — se exakta konc i frågan ✓
+  Step 3 nums: [0.0185, 0.0247]  -> MATCH
+  Step 4 text: Svar: Kc ≈ 0,0185. Jämför givet svar 0,0247 — se exakta konc i frågan ✓
+  Step 4 nums: [0.0185, 0.0247]  -> closest=0.0247 diff=0
+
+  ID 2505  |  Expected ans=4.6 ± 3.0 (ln K)
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: K = e^4,6 ≈ 100. Negativ ΔG° ↔ K > 1 ↔ produkter gynnas ✓
+  Step 3 nums: [1, 4.6, 100]  -> MATCH
+  Step 4 text: K = e^4,6 ≈ 100. Negativ ΔG° ↔ K > 1 ↔ produkter gynnas ✓
+  Step 4 nums: [1, 4.6, 100]  -> closest=4.6 diff=0
+
+  ID 2507  |  Expected ans=2.87 ± 3.0 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: pH ≈ 2,87
+  Step 3 nums: [2.87]  -> MATCH
+  Step 4 text: Kontroll: pH < 7 → sur lösning, rimligt för ättiksyra ✓
+  Step 4 nums: [7]  -> closest=7 diff=4.13
+
+  ID 2518  |  Expected ans=20.0 ± 3.0 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: K = 20,0
+  Step 3 nums: [20]  -> MATCH
+  Step 4 text: Omvänd reaktion: reciprokt K. Liten K(framåt) → stor K(bakåt) ✓
+  Step 4 nums: (none found)
+
+  ID 2524  |  Expected ans=10.0 ± 2.0 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: K(A⇌C) = 10,0
+  Step 3 nums: [10]  -> MATCH
+  Step 4 text: Addition av reaktioner → multiplikation av K-värden ✓
+  Step 4 nums: (none found)
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: konc  (14 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 203  |  Expected ans=0.5 ± 0.02 mol/L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Beräkna: c₂ = c₁V₁/V₂ = (5,0 × 0,10) / 0,50 = 0,50/0,50 = 1,0 mol/L
+  Step 3 nums: [0.1, 0.5, 1, 5]  -> MATCH
+  Step 4 text: Svar: 1,0 mol/L. Volymen femfaldigades → koncentrationen minskade till 1/5
+  Step 4 nums: [1, 5]  -> closest=1 diff=0.5
+
+  ID 204  |  Expected ans=1.0 ± 0.05 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Total volym: V_tot = 0,20 + 0,30 = 0,50 L
+  Step 3 nums: [0.2, 0.3, 0.5]  -> closest=0.5 diff=0.5
+  Step 4 text: Svar: c = 1,10/0,50 = 2,2 mol/L. Blandning av lösningar: räkna alltid n_tot och V_tot separat
+  Step 4 nums: [0.5, 1.1, 2.2]  -> closest=1.1 diff=0.1
+
+  ID 205  |  Expected ans=25.0 ± 0.5 mL
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: n(NaOH) = 0,100 × 0,02500 = 2,50×10⁻³ mol = n(HCl)
+  Step 3 nums: [0.0025, 0.025, 0.1]  -> closest=0.1 diff=24.9
+  Step 4 text: Svar: c(HCl) = n/V = 2,50×10⁻³ / 0,02000 = 0,125 mol/L. Titrering ger exakt c vid ekvivalenspunkten
+  Step 4 nums: [0.0025, 0.02, 0.125]  -> closest=0.125 diff=24.875
+
+  ID 206  |  Expected ans=0.16 ± 0.005 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: n(NaOH) = 0,200 mol/L × 0,030 L = 0,00600 mol → n(H₂SO₄) = 0,00600/2 = 0,00300 mol
+  Step 3 nums: [0.003, 0.006, 0.03, 0.2, 2]  -> closest=0.2 diff=0.04
+  Step 4 text: Svar: c(H₂SO₄) = 0,00300 / V_syra. OBS: diprotisk syra kräver dubbelt så mycket NaOH per mol
+  Step 4 nums: [0.003]  -> closest=0.003 diff=0.157
+
+  ID 1107  |  Expected ans=0.7 ± 0.02 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: c = n_total / V_total = 0,350 / 1,50
+  Step 3 nums: [0.35, 1.5]  -> closest=0.35 diff=0.35
+  Step 4 text: Svar: c = 0,233 mol/L. Blandning: addera mol och volymer separat ✓
+  Step 4 nums: [0.233]  -> closest=0.233 diff=0.467
+
+  ID 1109  |  Expected ans=0.074 ± 0.003 mol/L
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: c(NaOH) = n / V = 0,00185 / 0,0200 = 0,0925 mol/L
+  Step 3 nums: [0.00185, 0.02, 0.0925]  -> closest=0.0925 diff=0.0185
+  Step 4 text: Svar: c(NaOH) ≈ 0,0925 mol/L. Titrering bestämmer okänd koncentration ✓
+  Step 4 nums: [0.0925]  -> closest=0.0925 diff=0.0185
+
+  ID 1110  |  Expected ans=4.0 ± 0.05 
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Total spädfaktor = 100 × 100 = 10 000×
+  Step 3 nums: [100, 10000]  -> closest=100 diff=96
+  Step 4 text: Svar: c = 1×10⁻⁴ mol/L. Seriell spädning: multiplicera spädfaktorerna ✓
+  Step 4 nums: [0.0001]  -> closest=0.0001 diff=3.9999
+
+  ID 1112  |  Expected ans=1.25 ± 0.05 mmol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 1,25 mmol. Seriell spädning sedan beräkna substansmängd ✓
+  Step 3 nums: [1.25]  -> MATCH
+  Step 4 text: Svar: 1,25 mmol. Seriell spädning sedan beräkna substansmängd ✓
+  Step 4 nums: [1.25]  -> closest=1.25 diff=0
+
+  ID 2039  |  Expected ans=2.5 ± 0.05 mmol
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: 2,5 mmol HCl
+  Step 3 nums: [2.5]  -> MATCH
+  Step 4 text: OBS: 10,0 mL = 0,010 L. mmol = mol × 10³ ✓
+  Step 4 nums: [0.01, 10]  -> closest=0.01 diff=2.49
+
+  ID 2049  |  Expected ans=0.04 ± 0.002 mol/L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: [OH⁻] = 0,040 mol/L = 0,04 mol/L
+  Step 3 nums: [0.04]  -> MATCH
+  Step 4 text: Kontroll: Ca(OH)₂ är starkt basisk, hög [OH⁻] rimligt ✓
+  Step 4 nums: (none found)
+
+  ID 2302  |  Expected ans=4.0 ± 2.0 g
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 4,0 g NaOH. Väg in exakt, lös i lite vatten, fyll till 500 mL ✓
+  Step 3 nums: [4, 500]  -> MATCH
+  Step 4 text: Svar: 4,0 g NaOH. Väg in exakt, lös i lite vatten, fyll till 500 mL ✓
+  Step 4 nums: [4, 500]  -> closest=4 diff=0
+
+  ID 2303  |  Expected ans=0.5 ± 2.0 mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 0,50 mol HCl. OBS: 250 mL måste omvandlas till 0,250 L ✓
+  Step 3 nums: [0.25, 0.5, 250]  -> MATCH
+  Step 4 text: Svar: 0,50 mol HCl. OBS: 250 mL måste omvandlas till 0,250 L ✓
+  Step 4 nums: [0.25, 0.5, 250]  -> closest=0.5 diff=0
+
+  ID 2304  |  Expected ans=50.0 ± 2.0 mL
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 50 mL NaOH-lösning. V måste omvandlas: 0,050 L × 1000 = 50 mL ✓
+  Step 3 nums: [0.05, 50, 1000]  -> MATCH
+  Step 4 text: Svar: 50 mL NaOH-lösning. V måste omvandlas: 0,050 L × 1000 = 50 mL ✓
+  Step 4 nums: [0.05, 50, 1000]  -> closest=50 diff=0
+
+  ID 2322  |  Expected ans=0.0009 ± 5.0 mol/L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: c = 0,00090 mol/L
+  Step 3 nums: [0.0009]  -> MATCH
+  Step 4 text: OBS: kan också lösa med proportion: c_prov/c_std = A_prov/A_std ✓
+  Step 4 nums: (none found)
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: mol  (6 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 104  |  Expected ans=20.0 ± 0.2 g/mol
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: M = 5,85 g ÷ 0,100 mol = 58,5 g/mol
+  Step 3 nums: [0.1, 5.85, 58.5]  -> closest=5.85 diff=14.15
+  Step 4 text: Svar: 58,5 g/mol → identifierbar som NaCl (Na=23 + Cl=35,5 = 58,5 g/mol) ✓
+  Step 4 nums: [23, 35.5, 58.5]  -> closest=23 diff=3
+
+  ID 105  |  Expected ans=3.0 ± 0.1 H per C
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Kvot n(H)/n(C) = 14,3/7,14 ≈ 2,0 — dvs 2 väteatomer per kolatom
+  Step 3 nums: [2, 7.14, 14.3]  -> closest=2 diff=1
+  Step 4 text: Svar: Empirisk formel CH₂ (t.ex. eten C₂H₄ eller cyklohexan C₆H₁₂). Empirisk = enklaste heltalskvoter
+  Step 4 nums: (none found)
+
+  ID 106  |  Expected ans=2.0 ± 0.05 C-atomer
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Molekylformel = 6 × (CH₂O) = C₆H₁₂O₆
+  Step 3 nums: [6]  -> closest=6 diff=4
+  Step 4 text: Svar: glukos C₆H₁₂O₆. Empirisk formel ger bara atomförhållandet — molekylformeln ger faktiskt antal
+  Step 4 nums: (none found)
+
+  ID 1007  |  Expected ans=2.0 ± 0.1 
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Empirisk formel: CH₂O (enklaste heltalsförhållandet)
+  Step 3 nums: (none found)
+  Step 4 text: Svar: CH₂O — t.ex. formaldehyd eller glukos (C₆H₁₂O₆ = 6×CH₂O). Metod: massa% → n → dela med minst ✓
+  Step 4 nums: [6]  -> closest=6 diff=4
+
+  ID 2403  |  Expected ans=3.011e+23 ± 3.0 atomer
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: N = 0,50 × 6,022×10²³ = 3,011×10²³ atomer
+  Step 3 nums: [0.5, 3.011e+23, 6.022e+23]  -> closest=3.011e+23 diff=3.35544e+07
+  Step 4 text: Svar: 3,011×10²³ Fe-atomer. Nₐ ≈ 6×10²³ är antalet per mol ✓
+  Step 4 nums: [3.011e+23, 6e+23]  -> closest=3.011e+23 diff=3.35544e+07
+
+  ID 2424  |  Expected ans=10.0 ± 3.0 mL
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: n(HCl) som reagerar med CaCO₃ = 2 × 0,00250 = 0,00500 mol → exakt förbrukat
+  Step 3 nums: [0.0025, 0.005, 2]  -> closest=2 diff=8
+  Step 4 text: Svar: 0 mL NaOH — inget HCl-överskott kvar! Kontroll: 2×0,00250 = 0,00500 ✓
+  Step 4 nums: [0, 0.0025, 0.005, 2]  -> closest=2 diff=8
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: stoik  (9 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 802  |  Expected ans=88.0 ± 1.0 g
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Molförhållande: 1 mol CH₄ → 1 mol CO₂ (koeff. 1:1)
+  Step 3 nums: [1]  -> closest=1 diff=87
+  Step 4 text: Svar: m(CO₂) = 1,0 mol × 44 g/mol = 44 g. Förbränning av metan: varje C-atom in → en CO₂-molekyl ut
+  Step 4 nums: [1, 44]  -> closest=44 diff=44
+
+  ID 803  |  Expected ans=112.0 ± 2.0 g
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: N₂: 2,0/1 = 2,0;  H₂: 4,5/3 = 1,5 → H₂ ger lägst kvot → H₂ är det begränsande reagenset
+  Step 3 nums: [1, 1.5, 2, 3, 4.5]  -> closest=4.5 diff=107.5
+  Step 4 text: n(NH₃) = n(H₂) × (2/3) = 4,5 × 2/3 = 3,0 mol. N₂ är i överskott: förbrukas 3,0/2×1=1,5 mol; 0,5 mol kvar
+  Step 4 nums: [0.5, 1, 1.5, 2, 3, 4.5]  -> closest=4.5 diff=107.5
+
+  ID 805  |  Expected ans=3.0 ± 0.05 C-atomer
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Exempel: 0,44 g CO₂ → n(C)=0,010 mol; 0,18 g H₂O → n(H)=0,020 mol
+  Step 3 nums: [0.01, 0.02, 0.18, 0.44]  -> closest=0.44 diff=2.56
+  Step 4 text: Svar: H/C = 0,020/0,010 = 2 → empirisk formel CH₂ (t.ex. eten C₂H₄). Om O: n(O)=n_total−n(C)−n(H)
+  Step 4 nums: [0.01, 0.02, 2]  -> closest=2 diff=1
+
+  ID 806  |  Expected ans=22.4 ± 0.3 L
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Exempel: n=0,50 mol → V = 0,50 × 22,4 = 11,2 L
+  Step 3 nums: [0.5, 11.2, 22.4]  -> MATCH
+  Step 4 text: Svar: 11,2 L. OBS: vid SATP (25°C, 100 kPa): Vm=24,8 L/mol. Viktigt att ange vilket standardtillstånd!
+  Step 4 nums: [11.2, 24.8, 25, 100]  -> closest=24.8 diff=2.4
+
+  ID 2178  |  Expected ans=1.0 ± 0.03 mol
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: 1,0 mol O₂ förbrukas
+  Step 3 nums: [1]  -> MATCH
+  Step 4 text: Förbränning kräver alltid O₂ — koefficienten anger exakt mängd ✓
+  Step 4 nums: (none found)
+
+  ID 2187  |  Expected ans=25.2 ± 0.5 g
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 25,2 g D. Trestegssyntes: multiplicera utbytena (0,9 × 0,8 × 0,7 = 0,504) ✓
+  Step 3 nums: [0.504, 0.7, 0.8, 0.9, 25.2]  -> MATCH
+  Step 4 text: Svar: 25,2 g D. Trestegssyntes: multiplicera utbytena (0,9 × 0,8 × 0,7 = 0,504) ✓
+  Step 4 nums: [0.504, 0.7, 0.8, 0.9, 25.2]  -> closest=25.2 diff=0
+
+  ID 2191  |  Expected ans=6.0 ± 0.1 mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 6,0 mol B förbrukas. Stökiometri: använd koefficienter som brök ✓
+  Step 3 nums: [6]  -> MATCH
+  Step 4 text: Svar: 6,0 mol B förbrukas. Stökiometri: använd koefficienter som brök ✓
+  Step 4 nums: [6]  -> closest=6 diff=0
+
+  ID 2193  |  Expected ans=2.0 ± 0.05 mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: 2,0 mol H₂O. 1:1-förhållande mellan H₂ och H₂O ✓
+  Step 3 nums: [1, 2]  -> MATCH
+  Step 4 text: Svar: 2,0 mol H₂O. 1:1-förhållande mellan H₂ och H₂O ✓
+  Step 4 nums: [1, 2]  -> closest=2 diff=0
+
+  ID 2197  |  Expected ans=4.0 ± 0.1 mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: 80% utbyte = 20% förlust pga. biproduktions, hanteringsspill ✓
+  Step 3 nums: [20, 80]  -> closest=20 diff=16
+  Step 4 text: 80% utbyte = 20% förlust pga. biproduktions, hanteringsspill ✓
+  Step 4 nums: [20, 80]  -> closest=20 diff=16
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: syrabas  (6 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 503  |  Expected ans=5.0 ± 0.05 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Beräkna: pH = 14 − 5,0 = 9,0
+  Step 3 nums: [5, 9, 14]  -> MATCH
+  Step 4 text: Svar: pH = 9,0 (basisk). Varför 14? −log(Kw) = −log(10⁻¹⁴) = 14. OBS: gäller bara vid 25°C!
+  Step 4 nums: [9, 10, 14, 25]  -> closest=9 diff=4
+
+  ID 505  |  Expected ans=12.0 ± 0.05 
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: pH = 14 − pOH = 14 − 1,30 = 12,70
+  Step 3 nums: [1.3, 12.7, 14]  -> closest=12.7 diff=0.7
+  Step 4 text: Svar: pH = 12,7 (starkt basisk). Stark bas = fullständig dissociation → enkel beräkning via pOH
+  Step 4 nums: [12.7]  -> closest=12.7 diff=0.7
+
+  ID 506  |  Expected ans=5.05 ± 0.05 
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: pH = 4,74 + log(0,10/0,20) = 4,74 + log(0,50) = 4,74 − 0,301 = 4,44
+  Step 3 nums: [0.1, 0.2, 0.301, 0.5, 4.44, 4.74]  -> closest=4.74 diff=0.31
+  Step 4 text: Svar: pH = 4,44. [HA]>[A⁻] → pH < pKa. Om [A⁻]=[HA]: pH=pKa. Buffert bäst vid pKa±1
+  Step 4 nums: [1, 4.44]  -> closest=4.44 diff=0.61
+
+  ID 2106  |  Expected ans=5e-06 ± 3e-07 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: Ka = 5×10⁻⁶
+  Step 3 nums: [5e-06]  -> MATCH
+  Step 4 text: Approximation giltig om α = [H⁺]/c = 10⁻³/0,20 = 0,5% < 5% ✓
+  Step 4 nums: [0.2, 0.5, 5, 10]  -> closest=0.2 diff=0.199995
+
+  ID 2115  |  Expected ans=4.74 ± 0.05 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: pKb(NH₃) = 4,74
+  Step 3 nums: [4.74]  -> MATCH
+  Step 4 text: OBS: NH₃/NH₄⁺ är ett konjugatsyra-baspar. pKa(NH₄⁺) + pKb(NH₃) = 14 ✓
+  Step 4 nums: [14]  -> closest=14 diff=9.26
+
+  ID 2124  |  Expected ans=3.0 ± 0.1 
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Svar: 3 = basisk
+  Step 3 nums: [3]  -> MATCH
+  Step 4 text: pH-skala: <7 sur, =7 neutral, >7 basisk ✓
+  Step 4 nums: [7]  -> closest=7 diff=4
+
+──────────────────────────────────────────────────────────────────────
+CATEGORY: termo  (8 mismatches)
+──────────────────────────────────────────────────────────────────────
+
+  ID 403  |  Expected ans=4.18 ± 0.1 kJ
+  Classification: SIGN_MISMATCH
+  Step 3 text: Reaktionens entalpiändring: ΔH_rxn = −Q_vatten = −4180 J = −4,18 kJ
+  Step 3 nums: [-4180, -4.18]  -> closest=-4.18 diff=8.36
+  Step 4 text: Svar: ΔH = −4,18 kJ (exoterm reaktion). Minustecken: reaktionen avger energi till vattnet
+  Step 4 nums: [-4.18]  -> closest=-4.18 diff=8.36
+
+  ID 404  |  Expected ans=-285.8 ± 0.5 kJ/mol
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Produkter: −393,5 + 2×(−285,8) = −393,5 − 571,6 = −965,1 kJ
+  Step 3 nums: [-965.1, -393.5, -285.8, 2, 571.6]  -> MATCH
+  Step 4 text: Svar: ΔH° = −965,1 − (−74,8) = −890,3 kJ/mol. Exoterm förbränning frigör 890 kJ per mol metan
+  Step 4 nums: [-965.1, -890.3, -74.8, 890]  -> closest=-74.8 diff=211
+
+  ID 405  |  Expected ans=-170.0 ± 1.0 kJ/mol
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna TΔS: T×ΔS = 298 × (−0,170) = −50,7 kJ/mol
+  Step 3 nums: [-50.7, -0.17, 298]  -> closest=-50.7 diff=119.3
+  Step 4 text: Svar: ΔG = −86 − (−50,7) = −86 + 50,7 = −35,3 kJ/mol < 0 → spontan vid 298 K. ΔH gynnar, ΔS missgynnar
+  Step 4 nums: [-86, -50.7, -35.3, 0, 50.7, 298]  -> closest=-86 diff=84
+
+  ID 406  |  Expected ans=500.0 ± 5.0 K
+  Classification: WRONG_PROBLEM_DATA_IN_STEPS
+  Step 3 text: Beräkna: T_gräns = 120/0,400 = 300 K
+  Step 3 nums: [0.4, 120, 300]  -> closest=300 diff=200
+  Step 4 text: Svar: T > 300 K → spontan (entropin dominerar). T < 300 K → ej spontan. ΔG = 0 exakt vid 300 K
+  Step 4 nums: [0, 300]  -> closest=300 diff=200
+
+  ID 1311  |  Expected ans=-179.6 ± 2.0 kJ/mol
+  Classification: ANSWER_ONLY_IN_STEP3
+  Step 3 text: Beräkna: ΔG = −179,6 kJ/mol
+  Step 3 nums: [-179.6]  -> MATCH
+  Step 4 text: Svar: ΔG < 0 → spontan vid 298 K. Negativ ΔH och positiv ΔS → alltid spontan ✓
+  Step 4 nums: [0, 298]  -> closest=0 diff=179.6
+
+  ID 1312  |  Expected ans=57.3 ± 1.0 kJ/mol
+  Classification: SIGN_MISMATCH
+  Step 3 text: ΔH_neutr = −q/n = −5726,6/0,100 = −57266 J/mol = −57,3 kJ/mol
+  Step 3 nums: [-57266, -5726.6, -57.3, 0.1]  -> closest=0.1 diff=57.2
+  Step 4 text: Svar: ΔH ≈ −57 kJ/mol. Standardvärdet för stark syra + stark bas ≈ −57 kJ/mol ✓
+  Step 4 nums: [-57]  -> closest=-57 diff=114.3
+
+  ID 2086  |  Expected ans=1.9 ± 0.1 kJ
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: ΔH = +1,9 kJ. Grafit → diamant är endoterm (krävs extremt tryck) ✓
+  Step 3 nums: [1.9]  -> MATCH
+  Step 4 text: Svar: ΔH = +1,9 kJ. Grafit → diamant är endoterm (krävs extremt tryck) ✓
+  Step 4 nums: [1.9]  -> closest=1.9 diff=0
+
+  ID 2088  |  Expected ans=-1198.0 ± 5.0 kJ/mol
+  Classification: WRONG_STEPS_CONTENT
+  Step 3 text: Svar: gitterentalpin = −1198 kJ/mol. Negativ → stabilt jonkristall ✓
+  Step 3 nums: [-1198]  -> MATCH
+  Step 4 text: Svar: gitterentalpin = −1198 kJ/mol. Negativ → stabilt jonkristall ✓
+  Step 4 nums: [-1198]  -> closest=-1198 diff=0
+
+============================================================================
+SUMMARY BY CATEGORY
+============================================================================
+  elkem: 16 mismatches
+    IDs: [701, 705, 706, 1601, 1602, 1603, 1604, 1605, 2157, 2159, 2160, 2163, 2164, 2171, 2172, 2173]
+  gas: 10 mismatches
+    IDs: [303, 305, 306, 1202, 1208, 1209, 2055, 2059, 2061, 2067]
+  jamvikt: 18 mismatches
+    IDs: [602, 603, 606, 1507, 2127, 2128, 2129, 2131, 2132, 2138, 2141, 2146, 2149, 2501, 2505, 2507, 2518, 2524]
+  konc: 14 mismatches
+    IDs: [203, 204, 205, 206, 1107, 1109, 1110, 1112, 2039, 2049, 2302, 2303, 2304, 2322]
+  mol: 6 mismatches
+    IDs: [104, 105, 106, 1007, 2403, 2424]
+  stoik: 9 mismatches
+    IDs: [802, 803, 805, 806, 2178, 2187, 2191, 2193, 2197]
+  syrabas: 6 mismatches
+    IDs: [503, 505, 506, 2106, 2115, 2124]
+  termo: 8 mismatches
+    IDs: [403, 404, 405, 406, 1311, 1312, 2086, 2088]
+
+============================================================================
+SUMMARY BY CLASSIFICATION
+============================================================================
+
+  ANSWER_ONLY_IN_STEP3 (22 problems):
+    IDs: [203, 306, 404, 503, 806, 1202, 1311, 2039, 2049, 2055, 2061, 2106, 2115, 2124, 2138, 2146, 2160, 2178, 2322, 2507, 2518, 2524]
+    ID 203: ans=0.5 ± 0.02 mol/L
+      Step3: Beräkna: c₂ = c₁V₁/V₂ = (5,0 × 0,10) / 0,50 = 0,50/0,50 = 1,0 mol/L
+      Step4: Svar: 1,0 mol/L. Volymen femfaldigades → koncentrationen minskade till 1/5
+    ID 306: ans=5.0 ± 0.1 L
+      Step3: Beräkna: V₂ = (p₁V₁T₂)/(T₁p₂) = (100 × 5,0 × 400) / (300 × 200) = 200000/60000 = 3,33 L
+      Step4: Svar: 3,33 L. Tryckfördubbling halverar volymen; temperaturökning (+33%) verkar mot. Netto: 3,33 L
+    ID 404: ans=-285.8 ± 0.5 kJ/mol
+      Step3: Produkter: −393,5 + 2×(−285,8) = −393,5 − 571,6 = −965,1 kJ
+      Step4: Svar: ΔH° = −965,1 − (−74,8) = −890,3 kJ/mol. Exoterm förbränning frigör 890 kJ per mol metan
+    ID 503: ans=5.0 ± 0.05 
+      Step3: Beräkna: pH = 14 − 5,0 = 9,0
+      Step4: Svar: pH = 9,0 (basisk). Varför 14? −log(Kw) = −log(10⁻¹⁴) = 14. OBS: gäller bara vid 25°C!
+    ID 806: ans=22.4 ± 0.3 L
+      Step3: Exempel: n=0,50 mol → V = 0,50 × 22,4 = 11,2 L
+      Step4: Svar: 11,2 L. OBS: vid SATP (25°C, 100 kPa): Vm=24,8 L/mol. Viktigt att ange vilket standardtillstån
+    ID 1202: ans=2.0 ± 0.1 L
+      Step3: V₂ = P₁V₁/P₂ → P₂ = P₁V₁/V₂ = 100×6,0/2,0 = 300 kPa
+      Step4: Svar: P₂ = 300 kPa. Trycket tredubblas när volymen halveras ✓
+    ID 1311: ans=-179.6 ± 2.0 kJ/mol
+      Step3: Beräkna: ΔG = −179,6 kJ/mol
+      Step4: Svar: ΔG < 0 → spontan vid 298 K. Negativ ΔH och positiv ΔS → alltid spontan ✓
+    ID 2039: ans=2.5 ± 0.05 mmol
+      Step3: Svar: 2,5 mmol HCl
+      Step4: OBS: 10,0 mL = 0,010 L. mmol = mol × 10³ ✓
+    ID 2049: ans=0.04 ± 0.002 mol/L
+      Step3: Svar: [OH⁻] = 0,040 mol/L = 0,04 mol/L
+      Step4: Kontroll: Ca(OH)₂ är starkt basisk, hög [OH⁻] rimligt ✓
+    ID 2055: ans=400.0 ± 0.5 K
+      Step3: Svar: 400 K. Kelvin = absolut temperaturskala (0 K = absolut nollpunkt = −273°C)
+      Step4: OBS: Gaslagar kräver alltid Kelvin! ✓
+    ID 2061: ans=1.253 ± 0.05 gånger
+      Step3: Svar: N₂ diffunderar 1,25 gånger snabbare än CO₂
+      Step4: Intuition: N₂ (28 g/mol) är lättare än CO₂ (44 g/mol) → snabbare ✓
+    ID 2106: ans=5e-06 ± 3e-07 
+      Step3: Svar: Ka = 5×10⁻⁶
+      Step4: Approximation giltig om α = [H⁺]/c = 10⁻³/0,20 = 0,5% < 5% ✓
+    ID 2115: ans=4.74 ± 0.05 
+      Step3: Svar: pKb(NH₃) = 4,74
+      Step4: OBS: NH₃/NH₄⁺ är ett konjugatsyra-baspar. pKa(NH₄⁺) + pKb(NH₃) = 14 ✓
+    ID 2124: ans=3.0 ± 0.1 
+      Step3: Svar: 3 = basisk
+      Step4: pH-skala: <7 sur, =7 neutral, >7 basisk ✓
+    ID 2138: ans=2.0 ± 0.05 
+      Step3: Svar: K_total = 2,0
+      Step4: Omvänd reaktion: K_ny = 1/K_gammal. Addition → multiplication ✓
+    ID 2146: ans=0.02 ± 0.001 mol/L
+      Step3: Svar: Kc = 0,020 mol/L
+      Step4: Litet K → AB är stabilt — dissociation är ogynnsam ✓
+    ID 2160: ans=1.0 ± 0.1 
+      Step3: Svar: 1 = galvanisk cell producerar ström spontant
+      Step4: Batteri = galvanisk cell. Laddning av batteri = elektrolytisk cell ✓
+    ID 2178: ans=1.0 ± 0.03 mol
+      Step3: Svar: 1,0 mol O₂ förbrukas
+      Step4: Förbränning kräver alltid O₂ — koefficienten anger exakt mängd ✓
+    ID 2322: ans=0.0009 ± 5.0 mol/L
+      Step3: Svar: c = 0,00090 mol/L
+      Step4: OBS: kan också lösa med proportion: c_prov/c_std = A_prov/A_std ✓
+    ID 2507: ans=2.87 ± 3.0 
+      Step3: Svar: pH ≈ 2,87
+      Step4: Kontroll: pH < 7 → sur lösning, rimligt för ättiksyra ✓
+    ID 2518: ans=20.0 ± 3.0 
+      Step3: Svar: K = 20,0
+      Step4: Omvänd reaktion: reciprokt K. Liten K(framåt) → stor K(bakåt) ✓
+    ID 2524: ans=10.0 ± 2.0 
+      Step3: Svar: K(A⇌C) = 10,0
+      Step4: Addition av reaktioner → multiplikation av K-värden ✓
+
+  SIGN_MISMATCH (2 problems):
+    IDs: [403, 1312]
+    ID 403: ans=4.18 ± 0.1 kJ
+      Step3: Reaktionens entalpiändring: ΔH_rxn = −Q_vatten = −4180 J = −4,18 kJ
+      Step4: Svar: ΔH = −4,18 kJ (exoterm reaktion). Minustecken: reaktionen avger energi till vattnet
+    ID 1312: ans=57.3 ± 1.0 kJ/mol
+      Step3: ΔH_neutr = −q/n = −5726,6/0,100 = −57266 J/mol = −57,3 kJ/mol
+      Step4: Svar: ΔH ≈ −57 kJ/mol. Standardvärdet för stark syra + stark bas ≈ −57 kJ/mol ✓
+
+  WRONG_PROBLEM_DATA_IN_STEPS (31 problems):
+    IDs: [104, 105, 106, 204, 205, 206, 303, 305, 405, 406, 505, 506, 602, 603, 606, 701, 705, 706, 802, 803, 805, 1007, 1107, 1109, 1110, 1601, 1602, 1603, 1604, 2403, 2424]
+    ID 104: ans=20.0 ± 0.2 g/mol
+      Step3: Beräkna: M = 5,85 g ÷ 0,100 mol = 58,5 g/mol
+      Step4: Svar: 58,5 g/mol → identifierbar som NaCl (Na=23 + Cl=35,5 = 58,5 g/mol) ✓
+    ID 105: ans=3.0 ± 0.1 H per C
+      Step3: Kvot n(H)/n(C) = 14,3/7,14 ≈ 2,0 — dvs 2 väteatomer per kolatom
+      Step4: Svar: Empirisk formel CH₂ (t.ex. eten C₂H₄ eller cyklohexan C₆H₁₂). Empirisk = enklaste heltalskvote
+    ID 106: ans=2.0 ± 0.05 C-atomer
+      Step3: Molekylformel = 6 × (CH₂O) = C₆H₁₂O₆
+      Step4: Svar: glukos C₆H₁₂O₆. Empirisk formel ger bara atomförhållandet — molekylformeln ger faktiskt antal
+    ID 204: ans=1.0 ± 0.05 mol/L
+      Step3: Total volym: V_tot = 0,20 + 0,30 = 0,50 L
+      Step4: Svar: c = 1,10/0,50 = 2,2 mol/L. Blandning av lösningar: räkna alltid n_tot och V_tot separat
+    ID 205: ans=25.0 ± 0.5 mL
+      Step3: n(NaOH) = 0,100 × 0,02500 = 2,50×10⁻³ mol = n(HCl)
+      Step4: Svar: c(HCl) = n/V = 2,50×10⁻³ / 0,02000 = 0,125 mol/L. Titrering ger exakt c vid ekvivalenspunkten
+    ID 206: ans=0.16 ± 0.005 mol/L
+      Step3: n(NaOH) = 0,200 mol/L × 0,030 L = 0,00600 mol → n(H₂SO₄) = 0,00600/2 = 0,00300 mol
+      Step4: Svar: c(H₂SO₄) = 0,00300 / V_syra. OBS: diprotisk syra kräver dubbelt så mycket NaOH per mol
+    ID 303: ans=6.0 ± 0.1 L
+      Step3: Beräkna: V₂ = V₁ × T₂/T₁ = 3,0 × 450/300 = 3,0 × 1,5 = 4,5 L
+      Step4: Svar: 4,5 L. T ökade 50% → V ökade 50%. OBS: ALLTID Kelvin i gaslagsberäkningar!
+    ID 305: ans=225.0 ± 2.0 kPa
+      Step3: Beräkna: p₂ = p₁ × T₂/T₁ = 100 × 450/300 = 100 × 1,5 = 150 kPa
+      Step4: Svar: 150 kPa. Mer rörelseenergi (hög T) → fler kollisioner med väggarna → högre tryck
+    ID 405: ans=-170.0 ± 1.0 kJ/mol
+      Step3: Beräkna TΔS: T×ΔS = 298 × (−0,170) = −50,7 kJ/mol
+      Step4: Svar: ΔG = −86 − (−50,7) = −86 + 50,7 = −35,3 kJ/mol < 0 → spontan vid 298 K. ΔH gynnar, ΔS missgynn
+    ID 406: ans=500.0 ± 5.0 K
+      Step3: Beräkna: T_gräns = 120/0,400 = 300 K
+      Step4: Svar: T > 300 K → spontan (entropin dominerar). T < 300 K → ej spontan. ΔG = 0 exakt vid 300 K
+    ID 505: ans=12.0 ± 0.05 
+      Step3: pH = 14 − pOH = 14 − 1,30 = 12,70
+      Step4: Svar: pH = 12,7 (starkt basisk). Stark bas = fullständig dissociation → enkel beräkning via pOH
+    ID 506: ans=5.05 ± 0.05 
+      Step3: Beräkna: pH = 4,74 + log(0,10/0,20) = 4,74 + log(0,50) = 4,74 − 0,301 = 4,44
+      Step4: Svar: pH = 4,44. [HA]>[A⁻] → pH < pKa. Om [A⁻]=[HA]: pH=pKa. Buffert bäst vid pKa±1
+    ID 602: ans=0.036 ± 0.002 
+      Step3: Beräkna Q: Q = (0,40)²/0,20 = 0,16/0,20 = 0,80
+      Step4: Jämför: Q=0,80 > Kc=0,36 → för mycket produkter → reaktionen går BAKÅT för att nå jämvikt
+    ID 603: ans=0.8 ± 0.02 mol/L
+      Step3: Kc=(2x)²/(1−x)²=49 → ta kvadratroten: 2x/(1−x)=7 → 2x=7−7x → 9x=7 → x=0,778 mol/L
+      Step4: Svar: [HI]=2×0,778=1,556≈1,56 mol/L; [H₂]=[I₂]=0,222 mol/L. Kontroll: (1,556)²/(0,222)²=49 ✓
+    ID 606: ans=0.867 ± 0.02 mol/L
+      Step3: Kc = x/(1−x)² = 1,0 → x=(1−x)² → x²−3x+1=0 → x=(3−√5)/2 = (3−2,236)/2 = 0,382
+      Step4: Svar: [PCl₅]=0,38; [PCl₃]=[Cl₂]=0,62 mol/L. Andragradsekvation uppstår när man inte kan förenkla
+    ID 701: ans=0.635 ± 0.02 g
+      Step3: Beräkna: m = (3600 × 63,5)/(2 × 96485) = 228600/192970 = 1,185 g
+      Step4: Svar: 1,19 g koppar avsätts. Varje mol e⁻ (96485 C) avsätter 63,5/2=31,75 g Cu
+    ID 705: ans=1.21 ± 0.05 g
+      Step3: Beräkna: m = (3,0 × 7200 × 107,9)/(1 × 96485) = 2330280/96485 = 24,15 g
+      Step4: Svar: 24,2 g silver. Industriell användning: silverblästring. Varje Coulomb deponerar M/(n_e×F) gram
+    ID 706: ans=1.07 ± 0.01 V
+      Step3: Nernst: E = E° − (0,0592/n)×log Q = 1,10 − (0,0592/2)×log(0,10)
+      Step4: Svar: E = 1,10 − 0,0296×(−1) = 1,10 + 0,030 = 1,13 V. Låg [Zn²⁺] minskar back-reaktion → höjer EMK
+    ID 802: ans=88.0 ± 1.0 g
+      Step3: Molförhållande: 1 mol CH₄ → 1 mol CO₂ (koeff. 1:1)
+      Step4: Svar: m(CO₂) = 1,0 mol × 44 g/mol = 44 g. Förbränning av metan: varje C-atom in → en CO₂-molekyl ut
+    ID 803: ans=112.0 ± 2.0 g
+      Step3: N₂: 2,0/1 = 2,0;  H₂: 4,5/3 = 1,5 → H₂ ger lägst kvot → H₂ är det begränsande reagenset
+      Step4: n(NH₃) = n(H₂) × (2/3) = 4,5 × 2/3 = 3,0 mol. N₂ är i överskott: förbrukas 3,0/2×1=1,5 mol; 0,5 mol 
+    ID 805: ans=3.0 ± 0.05 C-atomer
+      Step3: Exempel: 0,44 g CO₂ → n(C)=0,010 mol; 0,18 g H₂O → n(H)=0,020 mol
+      Step4: Svar: H/C = 0,020/0,010 = 2 → empirisk formel CH₂ (t.ex. eten C₂H₄). Om O: n(O)=n_total−n(C)−n(H)
+    ID 1007: ans=2.0 ± 0.1 
+      Step3: Empirisk formel: CH₂O (enklaste heltalsförhållandet)
+      Step4: Svar: CH₂O — t.ex. formaldehyd eller glukos (C₆H₁₂O₆ = 6×CH₂O). Metod: massa% → n → dela med minst ✓
+    ID 1107: ans=0.7 ± 0.02 mol/L
+      Step3: c = n_total / V_total = 0,350 / 1,50
+      Step4: Svar: c = 0,233 mol/L. Blandning: addera mol och volymer separat ✓
+    ID 1109: ans=0.074 ± 0.003 mol/L
+      Step3: c(NaOH) = n / V = 0,00185 / 0,0200 = 0,0925 mol/L
+      Step4: Svar: c(NaOH) ≈ 0,0925 mol/L. Titrering bestämmer okänd koncentration ✓
+    ID 1110: ans=4.0 ± 0.05 
+      Step3: Total spädfaktor = 100 × 100 = 10 000×
+      Step4: Svar: c = 1×10⁻⁴ mol/L. Seriell spädning: multiplicera spädfaktorerna ✓
+    ID 1601: ans=1.1 ± 0.02 V
+      Step3: Svar: Fe har oxidationstal +3 i Fe₂O₃
+      Step4: Kontroll: 2×(+3) + 3×(−2) = 6 − 6 = 0 (neutral förening) ✓
+    ID 1602: ans=0.93 ± 0.02 V
+      Step3: Cu²⁺ + 2e⁻ → Cu: Cu²⁺ reduceras (tar emot elektroner)
+      Step4: Svar: Cu²⁺ reduceras. Katoden = reduktion i elektrokemisk cell ✓
+    ID 1603: ans=2.0 ± 0.05 e⁻
+      Step3: Katod = Cu (högre potential); anod = Zn
+      Step4: E°cell = +0,34 − (−0,76) = 0,34 + 0,76 = 1,10 V ✓
+    ID 1604: ans=31.75 ± 0.5 g
+      Step3: m = Q×M/(n×F) = 7200 × 63,5/(2 × 96500) = 457200/193000
+      Step4: m = 2,37 g Cu ✓
+    ID 2403: ans=3.011e+23 ± 3.0 atomer
+      Step3: Beräkna: N = 0,50 × 6,022×10²³ = 3,011×10²³ atomer
+      Step4: Svar: 3,011×10²³ Fe-atomer. Nₐ ≈ 6×10²³ är antalet per mol ✓
+    ID 2424: ans=10.0 ± 3.0 mL
+      Step3: n(HCl) som reagerar med CaCO₃ = 2 × 0,00250 = 0,00500 mol → exakt förbrukat
+      Step4: Svar: 0 mL NaOH — inget HCl-överskott kvar! Kontroll: 2×0,00250 = 0,00500 ✓
+
+  WRONG_STEPS_CONTENT (32 problems):
+    IDs: [1112, 1208, 1209, 1507, 1605, 2059, 2067, 2086, 2088, 2127, 2128, 2129, 2131, 2132, 2141, 2149, 2157, 2159, 2163, 2164, 2171, 2172, 2173, 2187, 2191, 2193, 2197, 2302, 2303, 2304, 2501, 2505]
+    ID 1112: ans=1.25 ± 0.05 mmol
+      Step3: Svar: 1,25 mmol. Seriell spädning sedan beräkna substansmängd ✓
+      Step4: Svar: 1,25 mmol. Seriell spädning sedan beräkna substansmängd ✓
+    ID 1208: ans=100.0 ± 1.0 kPa
+      Step3: Svar: 100 kPa. Varje gas bidrar oberoende med sitt partialtryck ✓
+      Step4: Svar: 100 kPa. Varje gas bidrar oberoende med sitt partialtryck ✓
+    ID 1209: ans=4.0 ± 0.1 gånger
+      Step3: Svar: H₂ diffunderar 4,0 gånger snabbare än O₂. Lättare molekyl → högre medelhastighet ✓
+      Step4: Svar: H₂ diffunderar 4,0 gånger snabbare än O₂. Lättare molekyl → högre medelhastighet ✓
+    ID 1507: ans=0.04 ± 0.005 
+      Step3: Svar: [A]/[B] = 0,040. Kc >> 1 → produkter (B) dominerar → [A] << [B] ✓
+      Step4: Svar: [A]/[B] = 0,040. Kc >> 1 → produkter (B) dominerar → [A] << [B] ✓
+    ID 1605: ans=0.399 ± 0.01 V
+      Step3: Svar: ΔG° = −212 kJ. Negativt → spontan galvanisk reaktion ✓
+      Step4: Svar: ΔG° = −212 kJ. Negativt → spontan galvanisk reaktion ✓
+    ID 2059: ans=0.9 ± 0.01 atm
+      Step3: Svar: 0,90 atm. Varje idealgas bidrar oberoende — partialtrycken adderas ✓
+      Step4: Svar: 0,90 atm. Varje idealgas bidrar oberoende — partialtrycken adderas ✓
+    ID 2067: ans=98.1 ± 0.2 kPa
+      Step3: Svar: 98,1 kPa. Vatten avges ångform vid 25°C — korrigera alltid vid uppsamling över vatten ✓
+      Step4: Svar: 98,1 kPa. Vatten avges ångform vid 25°C — korrigera alltid vid uppsamling över vatten ✓
+    ID 2086: ans=1.9 ± 0.1 kJ
+      Step3: Svar: ΔH = +1,9 kJ. Grafit → diamant är endoterm (krävs extremt tryck) ✓
+      Step4: Svar: ΔH = +1,9 kJ. Grafit → diamant är endoterm (krävs extremt tryck) ✓
+    ID 2088: ans=-1198.0 ± 5.0 kJ/mol
+      Step3: Svar: gitterentalpin = −1198 kJ/mol. Negativ → stabilt jonkristall ✓
+      Step4: Svar: gitterentalpin = −1198 kJ/mol. Negativ → stabilt jonkristall ✓
+    ID 2127: ans=1.0 ± 0.05 
+      Step3: Svar: Kc = 1,0. Lika konc av alla → Kc = 1 ✓
+      Step4: Svar: Kc = 1,0. Lika konc av alla → Kc = 1 ✓
+    ID 2128: ans=1.0 ± 0.1 
+      Step3: Svar: 1 (mot produkter). Kc >> 1 → höger sida dominerar ✓
+      Step4: Svar: 1 (mot produkter). Kc >> 1 → höger sida dominerar ✓
+    ID 2129: ans=2.0 ± 0.1 
+      Step3: Svar: 2 (bakåt). Om Q > Kc: för mycket produkter → reaktion bakåt ✓
+      Step4: Svar: 2 (bakåt). Om Q > Kc: för mycket produkter → reaktion bakåt ✓
+    ID 2131: ans=1.0 ± 0.1 
+      Step3: Svar: 1 (mot NH₃). Le Chatelier: ökat tryck → mot färre gasmol ✓
+      Step4: Svar: 1 (mot NH₃). Le Chatelier: ökat tryck → mot färre gasmol ✓
+    ID 2132: ans=1.0 ± 0.1 
+      Step3: Svar: 1 (framåt). Mer reaktant → mer produkt bildas ✓
+      Step4: Svar: 1 (framåt). Mer reaktant → mer produkt bildas ✓
+    ID 2141: ans=1.0 ± 0.05 
+      Step3: Svar: Kc = 1,0. Esterifiering: jämviktsläget är i mitten ✓
+      Step4: Svar: Kc = 1,0. Esterifiering: jämviktsläget är i mitten ✓
+    ID 2149: ans=10.0 ± 0.2 
+      Step3: Svar: K = 10,0. e^2,303 ≈ 10 (ln 10 = 2,303) ✓
+      Step4: Svar: K = 10,0. e^2,303 ≈ 10 (ln 10 = 2,303) ✓
+    ID 2157: ans=2.0 ± 0.1 
+      Step3: Svar: 2 (ej spontan). E°cell < 0 → reaktionen kräver yttre energi (elektrolys) ✓
+      Step4: Svar: 2 (ej spontan). E°cell < 0 → reaktionen kräver yttre energi (elektrolys) ✓
+    ID 2159: ans=-96.5 ± 1.0 kJ
+      Step3: Svar: ΔG° = −96,5 kJ. Spontan: ΔG° < 0 och E° > 0 ✓
+      Step4: Svar: ΔG° = −96,5 kJ. Spontan: ΔG° < 0 och E° > 0 ✓
+    ID 2163: ans=0.3 ± 0.01 mol
+      Step3: Svar: 0,30 mol elektroner. Faraday: 1 mol e⁻ = 96500 C ✓
+      Step4: Svar: 0,30 mol elektroner. Faraday: 1 mol e⁻ = 96500 C ✓
+    ID 2164: ans=1.67 ± 0.02 V
+      Step3: Svar: E°cell = 1,67 V. Korrosion är spontan (E° > 0) — därför rostar järn ✓
+      Step4: Svar: E°cell = 1,67 V. Korrosion är spontan (E° > 0) — därför rostar järn ✓
+    ID 2171: ans=85.7 ± 1.0 
+      Step3: Svar: ln K = 85,7. K = e^85,7 ≈ 10^37 — extremt stor, reaktion är praktiskt fullständig ✓
+      Step4: Svar: ln K = 85,7. K = e^85,7 ≈ 10^37 — extremt stor, reaktion är praktiskt fullständig ✓
+    ID 2172: ans=0.5 ± 0.01 kWh
+      Step3: Svar: 0,50 kWh. kWh = kilowatt × timme; industriell elektrolys kostar energi ✓
+      Step4: Svar: 0,50 kWh. kWh = kilowatt × timme; industriell elektrolys kostar energi ✓
+    ID 2173: ans=1.0 ± 0.05 mol/F
+      Step3: Svar: 1 mol joner per mol e⁻. Saltbryggan bibehåller elektroneutralitet i båda halvreaktionskärlena 
+      Step4: Svar: 1 mol joner per mol e⁻. Saltbryggan bibehåller elektroneutralitet i båda halvreaktionskärlena 
+    ID 2187: ans=25.2 ± 0.5 g
+      Step3: Svar: 25,2 g D. Trestegssyntes: multiplicera utbytena (0,9 × 0,8 × 0,7 = 0,504) ✓
+      Step4: Svar: 25,2 g D. Trestegssyntes: multiplicera utbytena (0,9 × 0,8 × 0,7 = 0,504) ✓
+    ID 2191: ans=6.0 ± 0.1 mol
+      Step3: Svar: 6,0 mol B förbrukas. Stökiometri: använd koefficienter som brök ✓
+      Step4: Svar: 6,0 mol B förbrukas. Stökiometri: använd koefficienter som brök ✓
+    ID 2193: ans=2.0 ± 0.05 mol
+      Step3: Svar: 2,0 mol H₂O. 1:1-förhållande mellan H₂ och H₂O ✓
+      Step4: Svar: 2,0 mol H₂O. 1:1-förhållande mellan H₂ och H₂O ✓
+    ID 2197: ans=4.0 ± 0.1 mol
+      Step3: 80% utbyte = 20% förlust pga. biproduktions, hanteringsspill ✓
+      Step4: 80% utbyte = 20% förlust pga. biproduktions, hanteringsspill ✓
+    ID 2302: ans=4.0 ± 2.0 g
+      Step3: Svar: 4,0 g NaOH. Väg in exakt, lös i lite vatten, fyll till 500 mL ✓
+      Step4: Svar: 4,0 g NaOH. Väg in exakt, lös i lite vatten, fyll till 500 mL ✓
+    ID 2303: ans=0.5 ± 2.0 mol
+      Step3: Svar: 0,50 mol HCl. OBS: 250 mL måste omvandlas till 0,250 L ✓
+      Step4: Svar: 0,50 mol HCl. OBS: 250 mL måste omvandlas till 0,250 L ✓
+    ID 2304: ans=50.0 ± 2.0 mL
+      Step3: Svar: 50 mL NaOH-lösning. V måste omvandlas: 0,050 L × 1000 = 50 mL ✓
+      Step4: Svar: 50 mL NaOH-lösning. V måste omvandlas: 0,050 L × 1000 = 50 mL ✓
+    ID 2501: ans=0.0247 ± 5.0 (enhetslös)
+      Step3: Svar: Kc ≈ 0,0185. Jämför givet svar 0,0247 — se exakta konc i frågan ✓
+      Step4: Svar: Kc ≈ 0,0185. Jämför givet svar 0,0247 — se exakta konc i frågan ✓
+    ID 2505: ans=4.6 ± 3.0 (ln K)
+      Step3: K = e^4,6 ≈ 100. Negativ ΔG° ↔ K > 1 ↔ produkter gynnas ✓
+      Step4: K = e^4,6 ≈ 100. Negativ ΔG° ↔ K > 1 ↔ produkter gynnas ✓
+
+TOTAL MISMATCHES: 87
