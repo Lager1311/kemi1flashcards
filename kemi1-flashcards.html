@@ -415,12 +415,13 @@
   /* ── Bottom navigation ── */
   .bottom-nav-wrap {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
-    height: var(--navbar-height);
     background: var(--nav-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-top: 1px solid var(--border);
     box-shadow: 0 -2px 30px rgba(0,0,0,0.15);
+    /* Safe-area padding keeps content above iPhone home bar */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .bottom-nav {
     max-width: 800px; margin: 0 auto;
@@ -438,6 +439,21 @@
   .nav-btn.active { background: var(--accent-light); }
   .nav-btn.active .nav-btn-label { color: var(--accent); font-weight: 700; }
   .nav-btn.active .nav-btn-icon { transform: scale(1.2); filter: drop-shadow(0 0 6px var(--accent)); }
+  /* Scrollable nav on narrow screens — all 10 items reachable by swiping */
+  @media (max-width: 429px) {
+    .bottom-nav {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-snap-type: x proximity;
+    }
+    .bottom-nav::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex: 0 0 auto;
+      min-width: 64px;
+      scroll-snap-align: start;
+    }
+  }
 
   /* ── Balance equation ── */
   .bal-eq {
