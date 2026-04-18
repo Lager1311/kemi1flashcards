@@ -2232,7 +2232,7 @@
 .chem-tab { flex:0 0 auto; padding:10px 13px; font-size:0.79rem; font-weight:600; border:none; background:none; cursor:pointer; color:var(--text2); border-bottom:3px solid transparent; margin-bottom:-2px; white-space:nowrap; font-family:inherit; transition:color 0.15s,border-color 0.15s; }
 .chem-tab.active { color:var(--accent); border-bottom-color:var(--accent); background:var(--surface); }
 .chem-tab:hover:not(.active) { color:var(--text); }
-.chem-panels { padding:18px 20px; }
+.chem-panels { padding:0; }
 .chem-panel { display:none; }
 .chem-panel.active { display:block; }
 .chem-formula { text-align:center; font-size:1rem; color:var(--accent); font-weight:700; padding:9px 14px; background:var(--accent-light); border-radius:8px; margin-bottom:16px; letter-spacing:0.02em; }
@@ -2260,6 +2260,19 @@
 .chem-converter-row { display:flex; align-items:center; gap:8px; margin-top:14px; padding:10px 12px; background:var(--surface2); border-radius:8px; font-size:0.82rem; flex-wrap:wrap; }
 .chem-molar-breakdown { font-family:monospace; font-size:0.82rem; line-height:1.9; color:var(--text2); margin-top:4px; }
 .chem-molar-total { margin-top:4px; padding-top:4px; font-weight:700; color:var(--accent); border-top:1px dashed var(--border); }
+/* ── Category grid ── */
+.chem-cat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:16px; }
+@media (max-width:500px) { .chem-cat-grid { grid-template-columns:repeat(2,1fr); } }
+.chem-cat-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 10px; cursor:pointer; text-align:center; transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition); display:flex; flex-direction:column; align-items:center; gap:5px; font-family:inherit; color:var(--text); }
+.chem-cat-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-card); border-color:var(--accent); }
+.chem-cat-card-icon { font-size:1.9rem; line-height:1; }
+.chem-cat-card-name { font-size:0.82rem; font-weight:700; color:var(--text); }
+.chem-cat-card-desc { font-size:0.71rem; color:var(--text2); }
+.chem-back-btn { display:inline-flex; align-items:center; gap:5px; padding:7px 13px; margin:12px 18px 0; background:var(--surface2); border:1px solid var(--border); border-radius:8px; font-size:0.8rem; font-weight:600; color:var(--text2); cursor:pointer; font-family:inherit; transition:background var(--transition),color var(--transition); }
+.chem-back-btn:hover { background:var(--accent-light); color:var(--accent); }
+.chem-sub-section { border-top:1px solid var(--border); margin-top:18px; padding-top:14px; }
+.chem-info-box { background:var(--accent-light); border-radius:10px; padding:13px 16px; font-size:0.83rem; color:var(--text); line-height:1.75; margin-top:10px; }
+.chem-info-box strong { color:var(--accent); }
 @media (max-width:500px){
   .chem-field-label { min-width:100px; font-size:0.77rem; }
   .chem-field-unit { width:46px; font-size:0.7rem; }
@@ -2780,14 +2793,17 @@
       </div>
       <!-- Chemistry Tools -->
       <div class="chem-tools-wrap">
-        <div class="chem-tabs" id="chemTabs">
-          <button class="chem-tab active" data-tool="mol">⚖️ Mol</button>
-          <button class="chem-tab" data-tool="conc">🧪 Konc.</button>
-          <button class="chem-tab" data-tool="ph">🔴 pH</button>
-          <button class="chem-tab" data-tool="dil">💧 Utspädn.</button>
-          <button class="chem-tab" data-tool="gas">💨 Gas</button>
-          <button class="chem-tab" data-tool="enthalpy">🔥 Entalpi</button>
-          <button class="chem-tab" data-tool="molar">⚗️ Molmassa</button>
+        <div class="chem-cat-grid" id="chemCatGrid">
+          <button class="chem-cat-card" onclick="chemShowCat('mol')"><span class="chem-cat-card-icon">⚖️</span><span class="chem-cat-card-name">Mol</span><span class="chem-cat-card-desc">n, m, M, N, ρ</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('conc')"><span class="chem-cat-card-icon">🟢</span><span class="chem-cat-card-name">Koncentration</span><span class="chem-cat-card-desc">c, n, V, w%</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('ph')"><span class="chem-cat-card-icon">🔴</span><span class="chem-cat-card-name">pH</span><span class="chem-cat-card-desc">pH, pOH, Ka, Kw</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('dil')"><span class="chem-cat-card-icon">💧</span><span class="chem-cat-card-name">Utspädning</span><span class="chem-cat-card-desc">c₁V₁ = c₂V₂</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('gas')"><span class="chem-cat-card-icon">💨</span><span class="chem-cat-card-name">Gas</span><span class="chem-cat-card-desc">pV=nRT, gaslagarna</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('enthalpy')"><span class="chem-cat-card-icon">🔥</span><span class="chem-cat-card-name">Entalpi</span><span class="chem-cat-card-desc">Q, ΔH°rxn</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('elektro')"><span class="chem-cat-card-icon">⚡</span><span class="chem-cat-card-name">Elektrokemi</span><span class="chem-cat-card-desc">E°cell, laddning</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('jmvkt')"><span class="chem-cat-card-icon">⚖️</span><span class="chem-cat-card-name">Jämvikt</span><span class="chem-cat-card-desc">Q vs K, Le Chatelier</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('stoik')"><span class="chem-cat-card-icon">📐</span><span class="chem-cat-card-name">Stökiometri</span><span class="chem-cat-card-desc">Molförhållande, utbyte</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('molar')"><span class="chem-cat-card-icon">⚗️</span><span class="chem-cat-card-name">Molmassa</span><span class="chem-cat-card-desc">Formelräknare</span></button>
         </div>
         <div class="chem-panels" id="chemPanels"></div>
       </div>
@@ -12988,6 +13004,340 @@ function chemCalcEnthalpy() {
     '<div class="chem-result-detail">Q = 4,18 \u00d7 '+calcFmt(m)+' \u00d7 '+calcFmt(dT)+' = '+calcFmt(Q)+' kJ</div>');
 }
 
+// ── New formula calculators ───────────────────────────
+var _NA=6.02214076e23, _KW=1e-14, _FARADAY=96485;
+
+// N = n × Nₐ
+function chemCalcParticles(solve) {
+  var n=chemVal('molPartN'), N=chemVal('molPartBig');
+  if (solve==='N') {
+    if (isNaN(n)) return chemShowError('molPartResult','molPartError','Ange substansmängd (n).');
+    var res=n*_NA; chemSet('molPartBig',res);
+    chemShowResult('molPartResult','molPartError','<div class="chem-result-main">N = '+res.toExponential(4)+'</div><div class="chem-result-detail">N = n \u00d7 N\u2090 | N\u2090 = 6,022\u00d710\u00b2\u00b3</div>');
+  } else {
+    if (isNaN(N)) return chemShowError('molPartResult','molPartError','Ange antal partiklar (N).');
+    var res=N/_NA; chemSet('molPartN',res);
+    chemShowResult('molPartResult','molPartError','<div class="chem-result-main">n = '+calcFmt(res)+' mol</div><div class="chem-result-detail">n = N / N\u2090</div>');
+  }
+}
+
+// ρ = m / V
+function chemCalcDens(solve) {
+  var m=chemVal('densM'), V=chemVal('densV'), rho=chemVal('densRho'), res, label, unit;
+  if (solve==='rho') {
+    if (isNaN(m)||isNaN(V)) return chemShowError('densResult','densError','Ange massa och volym.');
+    if (V===0) return chemShowError('densResult','densError','Division med noll är inte möjlig.');
+    res=m/V; label='\u03c1'; unit='g/cm\u00b3'; chemSet('densRho',res);
+  } else if (solve==='m') {
+    if (isNaN(rho)||isNaN(V)) return chemShowError('densResult','densError','Ange densitet och volym.');
+    res=rho*V; label='m'; unit='g'; chemSet('densM',res);
+  } else {
+    if (isNaN(m)||isNaN(rho)) return chemShowError('densResult','densError','Ange massa och densitet.');
+    if (rho===0) return chemShowError('densResult','densError','Division med noll är inte möjlig.');
+    res=m/rho; label='V'; unit='cm\u00b3'; chemSet('densV',res);
+  }
+  if (!isFinite(res)) return chemShowError('densResult','densError','Kontrollera inmatningen.');
+  chemShowResult('densResult','densError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">\u03c1 = m / V</div>');
+}
+
+// w = mᵢ / m_tot × 100%
+function chemCalcMassFrac(solve) {
+  var mi=chemVal('wMi'), mtot=chemVal('wMtot'), w=chemVal('wW'), res, label, unit;
+  if (solve==='w') {
+    if (isNaN(mi)||isNaN(mtot)) return chemShowError('wResult','wError','Ange m\u1d62 och m_tot.');
+    if (mtot===0) return chemShowError('wResult','wError','Division med noll är inte möjlig.');
+    res=(mi/mtot)*100; label='w'; unit='%'; chemSet('wW',res);
+  } else if (solve==='mi') {
+    if (isNaN(w)||isNaN(mtot)) return chemShowError('wResult','wError','Ange w och m_tot.');
+    res=(w/100)*mtot; label='m\u1d62'; unit='g'; chemSet('wMi',res);
+  } else {
+    if (isNaN(mi)||isNaN(w)) return chemShowError('wResult','wError','Ange m\u1d62 och w.');
+    if (w===0) return chemShowError('wResult','wError','Division med noll är inte möjlig.');
+    res=(mi/w)*100; label='m_tot'; unit='g'; chemSet('wMtot',res);
+  }
+  if (!isFinite(res)) return chemShowError('wResult','wError','Kontrollera inmatningen.');
+  chemShowResult('wResult','wError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">w = m\u1d62 / m_tot \u00d7 100%</div>');
+}
+
+// pOH = -log[OH⁻]
+var _pohMode='OH_to_pOH';
+function pohSetMode(mode) {
+  _pohMode=mode;
+  document.getElementById('pohModeOH').classList.toggle('active',mode==='OH_to_pOH');
+  document.getElementById('pohModePOH').classList.toggle('active',mode==='pOH_to_OH');
+  document.getElementById('pohSectionOH').style.display=mode==='OH_to_pOH'?'':'none';
+  document.getElementById('pohSectionPOH').style.display=mode==='pOH_to_OH'?'':'none';
+  ['pohResult','pohError'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('visible');});
+}
+function chemCalcPOH() {
+  if (_pohMode==='OH_to_pOH') {
+    var OH=chemVal('pohOH');
+    if (isNaN(OH)||OH<=0) return chemShowError('pohResult','pohError','Ange en positiv [OH\u207b]-koncentration.');
+    var pOH=-Math.log10(OH), pH=14-pOH;
+    chemShowResult('pohResult','pohError','<div class="chem-result-main">pOH = '+calcFmt(pOH)+'</div><div class="chem-result-detail">pH = '+calcFmt(pH)+'<br>[OH\u207b] = '+calcFmt(OH)+' mol/dm\u00b3</div>');
+  } else {
+    var pOH=chemVal('pohPOH');
+    if (isNaN(pOH)) return chemShowError('pohResult','pohError','Ange ett pOH-värde.');
+    var OH=Math.pow(10,-pOH), pH=14-pOH;
+    chemShowResult('pohResult','pohError','<div class="chem-result-main">[OH\u207b] = '+calcFmt(OH)+' mol/dm\u00b3</div><div class="chem-result-detail">pOH = '+calcFmt(pOH)+'<br>pH = '+calcFmt(pH)+'</div>');
+  }
+}
+function chemClearPOH() {
+  ['pohOH','pohPOH'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  ['pohResult','pohError'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('visible');});
+}
+
+// pH + pOH = 14
+function chemCalcPH14(solve) {
+  var ph=chemVal('ph14pH'), poh=chemVal('ph14pOH'), res;
+  if (solve==='poh') {
+    if (isNaN(ph)) return chemShowError('ph14Result','ph14Error','Ange ett pH-värde.');
+    res=14-ph; chemSet('ph14pOH',res);
+    chemShowResult('ph14Result','ph14Error','<div class="chem-result-main">pOH = '+calcFmt(res)+'</div><div class="chem-result-detail">pH + pOH = 14</div>');
+  } else {
+    if (isNaN(poh)) return chemShowError('ph14Result','ph14Error','Ange ett pOH-värde.');
+    res=14-poh; chemSet('ph14pH',res);
+    chemShowResult('ph14Result','ph14Error','<div class="chem-result-main">pH = '+calcFmt(res)+'</div><div class="chem-result-detail">pH + pOH = 14</div>');
+  }
+}
+
+// Ka = [H⁺][A⁻]/[HA]
+function chemCalcKa(solve) {
+  var H=chemVal('kaH'), A=chemVal('kaA'), HA=chemVal('kaHA'), Ka=chemVal('kaKa'), res, label;
+  if (solve==='Ka') {
+    if (isNaN(H)||isNaN(A)||isNaN(HA)) return chemShowError('kaResult','kaError','Ange [H\u207a], [A\u207b] och [HA].');
+    if (HA===0) return chemShowError('kaResult','kaError','Division med noll är inte möjlig.');
+    res=(H*A)/HA; label='Ka'; chemSet('kaKa',res);
+  } else if (solve==='H') {
+    if (isNaN(Ka)||isNaN(A)||isNaN(HA)) return chemShowError('kaResult','kaError','Ange Ka, [A\u207b] och [HA].');
+    if (A===0) return chemShowError('kaResult','kaError','Division med noll är inte möjlig.');
+    res=(Ka*HA)/A; label='[H\u207a]'; chemSet('kaH',res);
+  } else if (solve==='A') {
+    if (isNaN(Ka)||isNaN(H)||isNaN(HA)) return chemShowError('kaResult','kaError','Ange Ka, [H\u207a] och [HA].');
+    if (H===0) return chemShowError('kaResult','kaError','Division med noll är inte möjlig.');
+    res=(Ka*HA)/H; label='[A\u207b]'; chemSet('kaA',res);
+  } else {
+    if (isNaN(Ka)||isNaN(H)||isNaN(A)) return chemShowError('kaResult','kaError','Ange Ka, [H\u207a] och [A\u207b].');
+    if (Ka===0) return chemShowError('kaResult','kaError','Division med noll är inte möjlig.');
+    res=(H*A)/Ka; label='[HA]'; chemSet('kaHA',res);
+  }
+  if (!isFinite(res)) return chemShowError('kaResult','kaError','Kontrollera inmatningen.');
+  chemShowResult('kaResult','kaError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+'</div><div class="chem-result-detail">Ka = [H\u207a][A\u207b] / [HA]</div>');
+}
+
+// Kw = [H⁺][OH⁻] = 10⁻¹⁴
+function chemCalcKw(solve) {
+  var H=chemVal('kwH'), OH=chemVal('kwOH'), res;
+  if (solve==='OH') {
+    if (isNaN(H)||H===0) return chemShowError('kwResult','kwError','Ange [H\u207a]-koncentration (> 0).');
+    res=_KW/H; chemSet('kwOH',res);
+    chemShowResult('kwResult','kwError','<div class="chem-result-main">[OH\u207b] = '+calcFmt(res)+' mol/dm\u00b3</div><div class="chem-result-detail">Kw = [H\u207a][OH\u207b] = 10\u207b\u00b9\u2074</div>');
+  } else {
+    if (isNaN(OH)||OH===0) return chemShowError('kwResult','kwError','Ange [OH\u207b]-koncentration (> 0).');
+    res=_KW/OH; chemSet('kwH',res);
+    chemShowResult('kwResult','kwError','<div class="chem-result-main">[H\u207a] = '+calcFmt(res)+' mol/dm\u00b3</div><div class="chem-result-detail">Kw = [H\u207a][OH\u207b] = 10\u207b\u00b9\u2074</div>');
+  }
+}
+
+// Boyles lag: p₁V₁ = p₂V₂
+function chemCalcBoyle(solve) {
+  var p1=chemVal('boylp1'),V1=chemVal('boylV1'),p2=chemVal('boylp2'),V2=chemVal('boylV2'), res, label, unit;
+  if (solve==='p1') {
+    if (isNaN(p2)||isNaN(V2)||isNaN(V1)) return chemShowError('boylResult','boylError','Ange p\u2082, V\u2082 och V\u2081.');
+    if (V1===0) return chemShowError('boylResult','boylError','Division med noll.');
+    res=(p2*V2)/V1; label='p\u2081'; unit='Pa'; chemSet('boylp1',res);
+  } else if (solve==='V1') {
+    if (isNaN(p1)||isNaN(p2)||isNaN(V2)) return chemShowError('boylResult','boylError','Ange p\u2081, p\u2082 och V\u2082.');
+    if (p1===0) return chemShowError('boylResult','boylError','Division med noll.');
+    res=(p2*V2)/p1; label='V\u2081'; unit='dm\u00b3'; chemSet('boylV1',res);
+  } else if (solve==='p2') {
+    if (isNaN(p1)||isNaN(V1)||isNaN(V2)) return chemShowError('boylResult','boylError','Ange p\u2081, V\u2081 och V\u2082.');
+    if (V2===0) return chemShowError('boylResult','boylError','Division med noll.');
+    res=(p1*V1)/V2; label='p\u2082'; unit='Pa'; chemSet('boylp2',res);
+  } else {
+    if (isNaN(p1)||isNaN(V1)||isNaN(p2)) return chemShowError('boylResult','boylError','Ange p\u2081, V\u2081 och p\u2082.');
+    if (p2===0) return chemShowError('boylResult','boylError','Division med noll.');
+    res=(p1*V1)/p2; label='V\u2082'; unit='dm\u00b3'; chemSet('boylV2',res);
+  }
+  if (!isFinite(res)) return chemShowError('boylResult','boylError','Kontrollera inmatningen.');
+  chemShowResult('boylResult','boylError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">p\u2081V\u2081 = p\u2082V\u2082 (Boyles lag)</div>');
+}
+
+// Charles lag: V₁/T₁ = V₂/T₂
+function chemCalcCharles(solve) {
+  var V1=chemVal('charlV1'),T1=chemVal('charlT1'),V2=chemVal('charlV2'),T2=chemVal('charlT2'), res, label, unit;
+  if (solve==='V1') {
+    if (isNaN(V2)||isNaN(T1)||isNaN(T2)) return chemShowError('charlResult','charlError','Ange V\u2082, T\u2081 och T\u2082.');
+    if (T2===0) return chemShowError('charlResult','charlError','Division med noll.');
+    res=(V2*T1)/T2; label='V\u2081'; unit='dm\u00b3'; chemSet('charlV1',res);
+  } else if (solve==='T1') {
+    if (isNaN(V1)||isNaN(V2)||isNaN(T2)) return chemShowError('charlResult','charlError','Ange V\u2081, V\u2082 och T\u2082.');
+    if (V2===0) return chemShowError('charlResult','charlError','Division med noll.');
+    res=(V1*T2)/V2; label='T\u2081'; unit='K'; chemSet('charlT1',res);
+  } else if (solve==='V2') {
+    if (isNaN(V1)||isNaN(T1)||isNaN(T2)) return chemShowError('charlResult','charlError','Ange V\u2081, T\u2081 och T\u2082.');
+    if (T1===0) return chemShowError('charlResult','charlError','Division med noll.');
+    res=(V1*T2)/T1; label='V\u2082'; unit='dm\u00b3'; chemSet('charlV2',res);
+  } else {
+    if (isNaN(V1)||isNaN(T1)||isNaN(V2)) return chemShowError('charlResult','charlError','Ange V\u2081, T\u2081 och V\u2082.');
+    if (V1===0) return chemShowError('charlResult','charlError','Division med noll.');
+    res=(V2*T1)/V1; label='T\u2082'; unit='K'; chemSet('charlT2',res);
+  }
+  if (!isFinite(res)) return chemShowError('charlResult','charlError','Kontrollera inmatningen.');
+  chemShowResult('charlResult','charlError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">V\u2081/T\u2081 = V\u2082/T\u2082 (Charles lag)</div>');
+}
+
+// Gay-Lussacs lag: p₁/T₁ = p₂/T₂
+function chemCalcGayLussac(solve) {
+  var p1=chemVal('glp1'),T1=chemVal('glT1'),p2=chemVal('glp2'),T2=chemVal('glT2'), res, label, unit;
+  if (solve==='p1') {
+    if (isNaN(p2)||isNaN(T1)||isNaN(T2)) return chemShowError('glResult','glError','Ange p\u2082, T\u2081 och T\u2082.');
+    if (T2===0) return chemShowError('glResult','glError','Division med noll.');
+    res=(p2*T1)/T2; label='p\u2081'; unit='Pa'; chemSet('glp1',res);
+  } else if (solve==='T1') {
+    if (isNaN(p1)||isNaN(p2)||isNaN(T2)) return chemShowError('glResult','glError','Ange p\u2081, p\u2082 och T\u2082.');
+    if (p2===0) return chemShowError('glResult','glError','Division med noll.');
+    res=(p1*T2)/p2; label='T\u2081'; unit='K'; chemSet('glT1',res);
+  } else if (solve==='p2') {
+    if (isNaN(p1)||isNaN(T1)||isNaN(T2)) return chemShowError('glResult','glError','Ange p\u2081, T\u2081 och T\u2082.');
+    if (T1===0) return chemShowError('glResult','glError','Division med noll.');
+    res=(p1*T2)/T1; label='p\u2082'; unit='Pa'; chemSet('glp2',res);
+  } else {
+    if (isNaN(p1)||isNaN(T1)||isNaN(p2)) return chemShowError('glResult','glError','Ange p\u2081, T\u2081 och p\u2082.');
+    if (p1===0) return chemShowError('glResult','glError','Division med noll.');
+    res=(p2*T1)/p1; label='T\u2082'; unit='K'; chemSet('glT2',res);
+  }
+  if (!isFinite(res)) return chemShowError('glResult','glError','Kontrollera inmatningen.');
+  chemShowResult('glResult','glError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">p\u2081/T\u2081 = p\u2082/T\u2082 (Gay-Lussacs lag)</div>');
+}
+
+// ΔH°rxn = ΣΔH°f(prod) − ΣΔH°f(reak)
+function chemCalcHess() {
+  var prodStr=document.getElementById('hessProds')?document.getElementById('hessProds').value:'';
+  var reakStr=document.getElementById('hessReaks')?document.getElementById('hessReaks').value:'';
+  if (!prodStr.trim()&&!reakStr.trim()) return chemShowError('hessResult','hessError','Ange minst ett värde för produkter eller reaktanter.');
+  function parseList(s) { if (!s.trim()) return []; return s.split(',').map(function(v){return parseFloat(v.trim().replace(',','.'));}); }
+  var prods=parseList(prodStr), reaks=parseList(reakStr);
+  if (prods.some(isNaN)||reaks.some(isNaN)) return chemShowError('hessResult','hessError','Ogiltiga värden. Separera med kommatecken, ex: \u2212285.8, \u2212393.5');
+  var sumProd=prods.reduce(function(a,b){return a+b;},0), sumReak=reaks.reduce(function(a,b){return a+b;},0), dH=sumProd-sumReak;
+  chemShowResult('hessResult','hessError','<div class="chem-result-main">\u0394H\u00b0rxn = '+calcFmt(dH)+' kJ/mol</div><div class="chem-result-detail">\u03a3\u0394H\u00b0f(prod) = '+calcFmt(sumProd)+'<br>\u03a3\u0394H\u00b0f(reak) = '+calcFmt(sumReak)+'</div>');
+}
+function chemClearHess() {
+  ['hessProds','hessReaks'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  ['hessResult','hessError'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('visible');});
+}
+
+// E°cell = E°katod − E°anod
+function chemCalcEcell(solve) {
+  var Ecell=chemVal('elEcell'), Ekat=chemVal('elEkat'), Eanod=chemVal('elEanod'), res, label;
+  if (solve==='Ecell') {
+    if (isNaN(Ekat)||isNaN(Eanod)) return chemShowError('elResult','elError','Ange E\u00b0katod och E\u00b0anod.');
+    res=Ekat-Eanod; label='E\u00b0cell'; chemSet('elEcell',res);
+  } else if (solve==='Ekat') {
+    if (isNaN(Ecell)||isNaN(Eanod)) return chemShowError('elResult','elError','Ange E\u00b0cell och E\u00b0anod.');
+    res=Ecell+Eanod; label='E\u00b0katod'; chemSet('elEkat',res);
+  } else {
+    if (isNaN(Ecell)||isNaN(Ekat)) return chemShowError('elResult','elError','Ange E\u00b0cell och E\u00b0katod.');
+    res=Ekat-Ecell; label='E\u00b0anod'; chemSet('elEanod',res);
+  }
+  if (!isFinite(res)) return chemShowError('elResult','elError','Kontrollera inmatningen.');
+  chemShowResult('elResult','elError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' V</div><div class="chem-result-detail">E\u00b0cell = E\u00b0katod \u2212 E\u00b0anod</div>');
+}
+
+// Q = nₑ × F = I × t
+function chemCalcCharge(solve) {
+  var Q=chemVal('elQ'), ne=chemVal('elNe'), I=chemVal('elI'), t=chemVal('elT'), res, label, unit;
+  if (solve==='Q') {
+    if (!isNaN(ne)) { res=ne*_FARADAY; }
+    else if (!isNaN(I)&&!isNaN(t)) { res=I*t; }
+    else return chemShowError('elCResult','elCError','Ange n\u2091 eller (I och t).');
+    label='Q'; unit='C'; chemSet('elQ',res);
+  } else if (solve==='ne') {
+    if (isNaN(Q)) return chemShowError('elCResult','elCError','Ange Q.');
+    res=Q/_FARADAY; label='n\u2091'; unit='mol'; chemSet('elNe',res);
+  } else if (solve==='I') {
+    if (isNaN(Q)||isNaN(t)) return chemShowError('elCResult','elCError','Ange Q och t.');
+    if (t===0) return chemShowError('elCResult','elCError','Division med noll.');
+    res=Q/t; label='I'; unit='A'; chemSet('elI',res);
+  } else {
+    if (isNaN(Q)||isNaN(I)) return chemShowError('elCResult','elCError','Ange Q och I.');
+    if (I===0) return chemShowError('elCResult','elCError','Division med noll.');
+    res=Q/I; label='t'; unit='s'; chemSet('elT',res);
+  }
+  if (!isFinite(res)) return chemShowError('elCResult','elCError','Kontrollera inmatningen.');
+  chemShowResult('elCResult','elCError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+' '+unit+'</div><div class="chem-result-detail">Q = n\u2091 \u00d7 F = I \u00d7 t | F = 96 485 C/mol</div>');
+}
+
+// Q vs K — reaktionsriktning
+function chemCalcQK() {
+  var Q=chemVal('qkQ'), K=chemVal('qkK');
+  if (isNaN(Q)||isNaN(K)) return chemShowError('qkResult','qkError','Ange Q och K.');
+  var direction, detail, color;
+  if (Math.abs(Q-K)/Math.max(Math.abs(K),1e-30)<1e-9) {
+    direction='Q = K \u2192 Systemet är i jämvikt'; color='var(--green)'; detail='Ingen nettoreaktion sker.';
+  } else if (Q<K) {
+    direction='Q < K \u2192 Reaktionen g\u00e5r fram\u00e5t (\u2192)'; color='var(--accent)'; detail='Mer produkter bildas tills Q = K.';
+  } else {
+    direction='Q > K \u2192 Reaktionen g\u00e5r bak\u00e5t (\u2190)'; color='var(--red)'; detail='Mer reaktanter bildas tills Q = K.';
+  }
+  chemShowResult('qkResult','qkError','<div class="chem-result-main" style="color:'+color+'">'+direction+'</div><div class="chem-result-detail">'+detail+'<br>Q = '+calcFmt(Q)+' | K = '+calcFmt(K)+'</div>');
+}
+
+// n_A/a = n_B/b
+function chemCalcStoich(solve) {
+  var nA=chemVal('stoNA'), a=chemVal('stoA'), nB=chemVal('stoNB'), b=chemVal('stoB'), res, label, unit='mol';
+  if (solve==='nA') {
+    if (isNaN(nB)||isNaN(a)||isNaN(b)) return chemShowError('stoResult','stoError','Ange n_B, a och b.');
+    if (b===0) return chemShowError('stoResult','stoError','Division med noll.');
+    res=(nB*a)/b; label='n_A'; chemSet('stoNA',res);
+  } else if (solve==='nB') {
+    if (isNaN(nA)||isNaN(a)||isNaN(b)) return chemShowError('stoResult','stoError','Ange n_A, a och b.');
+    if (a===0) return chemShowError('stoResult','stoError','Division med noll.');
+    res=(nA*b)/a; label='n_B'; chemSet('stoNB',res);
+  } else if (solve==='a') {
+    if (isNaN(nA)||isNaN(nB)||isNaN(b)) return chemShowError('stoResult','stoError','Ange n_A, n_B och b.');
+    if (nB===0) return chemShowError('stoResult','stoError','Division med noll.');
+    res=(nA*b)/nB; label='a'; unit=''; chemSet('stoA',res);
+  } else {
+    if (isNaN(nA)||isNaN(nB)||isNaN(a)) return chemShowError('stoResult','stoError','Ange n_A, n_B och a.');
+    if (nA===0) return chemShowError('stoResult','stoError','Division med noll.');
+    res=(nB*a)/nA; label='b'; unit=''; chemSet('stoB',res);
+  }
+  if (!isFinite(res)) return chemShowError('stoResult','stoError','Kontrollera inmatningen.');
+  chemShowResult('stoResult','stoError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+(unit?' '+unit:'')+'</div><div class="chem-result-detail">n_A / a = n_B / b</div>');
+}
+
+// Utbyte = (faktisk / teoretisk) × 100%
+function chemCalcYield(solve) {
+  var fakt=chemVal('yieldFakt'), teor=chemVal('yieldTeor'), pct=chemVal('yieldPct'), res, label, unit;
+  if (solve==='pct') {
+    if (isNaN(fakt)||isNaN(teor)) return chemShowError('yieldResult','yieldError','Ange faktisk och teoretisk mängd.');
+    if (teor===0) return chemShowError('yieldResult','yieldError','Division med noll.');
+    res=(fakt/teor)*100; label='Utbyte'; unit='%'; chemSet('yieldPct',res);
+  } else if (solve==='fakt') {
+    if (isNaN(pct)||isNaN(teor)) return chemShowError('yieldResult','yieldError','Ange utbyte (%) och teoretisk mängd.');
+    res=(pct/100)*teor; label='Faktisk mängd'; unit=''; chemSet('yieldFakt',res);
+  } else {
+    if (isNaN(pct)||isNaN(fakt)) return chemShowError('yieldResult','yieldError','Ange utbyte (%) och faktisk mängd.');
+    if (pct===0) return chemShowError('yieldResult','yieldError','Division med noll.');
+    res=(fakt/(pct/100)); label='Teoretisk mängd'; unit=''; chemSet('yieldTeor',res);
+  }
+  if (!isFinite(res)) return chemShowError('yieldResult','yieldError','Kontrollera inmatningen.');
+  chemShowResult('yieldResult','yieldError','<div class="chem-result-main">'+label+' = '+calcFmt(res)+(unit?' '+unit:'')+'</div><div class="chem-result-detail">Utbyte = (faktisk / teoretisk) \u00d7 100%</div>');
+}
+
+// Begränsande reagens
+function chemCalcLimReag() {
+  var n1=chemVal('limN1'), a1=chemVal('limA1'), n2=chemVal('limN2'), a2=chemVal('limA2');
+  if (isNaN(n1)||isNaN(a1)||isNaN(n2)||isNaN(a2)) return chemShowError('limResult','limError','Ange alla fyra värden.');
+  if (a1===0||a2===0) return chemShowError('limResult','limError','Koefficienterna kan inte vara noll.');
+  var r1=n1/a1, r2=n2/a2, winner, loser;
+  if (r1<r2) { winner='Reaktant 1'; loser='Reaktant 2 är i överskott'; }
+  else if (r2<r1) { winner='Reaktant 2'; loser='Reaktant 1 är i överskott'; }
+  else { winner='Ingen (stökiometrisk blandning)'; loser='Båda förbrukas helt'; }
+  chemShowResult('limResult','limError','<div class="chem-result-main">Begr\u00e4nsande reagens: '+winner+'</div><div class="chem-result-detail">n\u2081/a\u2081 = '+calcFmt(r1)+' mol/enhet<br>n\u2082/a\u2082 = '+calcFmt(r2)+' mol/enhet<br>'+loser+'</div>');
+}
+
 // ── Tool 7: Molar mass ────────────────────────────────
 var _AM = {
   H:1.008,He:4.003,Li:6.941,Be:9.012,B:10.811,C:12.011,N:14.007,O:15.999,
@@ -13049,15 +13399,18 @@ function initCalc() {
   var panels=document.getElementById('chemPanels');
   if (!panels) return;
   panels.innerHTML=_buildChemPanels();
-  document.querySelectorAll('#calcScreen .chem-tab').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('#calcScreen .chem-tab').forEach(function(b){b.classList.remove('active');});
-      document.querySelectorAll('#calcScreen .chem-panel').forEach(function(p){p.classList.remove('active');});
-      btn.classList.add('active');
-      var panel=document.getElementById('chemTool-'+btn.dataset.tool);
-      if(panel) panel.classList.add('active');
-    });
-  });
+}
+function chemShowCat(tool) {
+  var grid=document.getElementById('chemCatGrid');
+  if (grid) grid.style.display='none';
+  document.querySelectorAll('#chemPanels .chem-panel').forEach(function(p){p.classList.remove('active');});
+  var panel=document.getElementById('chemTool-'+tool);
+  if (panel) panel.classList.add('active');
+}
+function chemBackToGrid() {
+  document.querySelectorAll('#chemPanels .chem-panel').forEach(function(p){p.classList.remove('active');});
+  var grid=document.getElementById('chemCatGrid');
+  if (grid) grid.style.display='';
 }
 
 function _cfr(id, label, unit, type) {
@@ -13070,9 +13423,12 @@ function _cfr(id, label, unit, type) {
 }
 
 function _buildChemPanels() {
+  var _BACK='<button class="chem-back-btn" onclick="chemBackToGrid()">\u2190 Tillbaka</button>';
   return (
   // ── MOL
-  '<div class="chem-panel active" id="chemTool-mol">'+
+  '<div class="chem-panel" id="chemTool-mol">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">n = m / M</div>'+
     _cfr('molM','Massa (m)','g')+
     _cfr('molMM','Molmassa (M)','g/mol')+
@@ -13085,9 +13441,39 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="molResult"></div>'+
     '<div class="chem-error" id="molError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">N = n \u00d7 N\u2090</div>'+
+      '<div class="chem-const-note">N\u2090 = 6,022 \u00d7 10\u00b2\u00b3 mol\u207b\u00b9</div>'+
+      _cfr('molPartN','Substansmängd (n)','mol')+
+      _cfr('molPartBig','Antal partiklar (N)','')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcParticles(\'N\')">Beräkna N</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcParticles(\'n\')">Beräkna n</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'molPart\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="molPartResult"></div>'+
+      '<div class="chem-error" id="molPartError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">\u03c1 = m / V</div>'+
+      _cfr('densM','Massa (m)','g')+
+      _cfr('densV','Volym (V)','cm\u00b3')+
+      _cfr('densRho','Densitet (\u03c1)','g/cm\u00b3')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcDens(\'rho\')">Beräkna \u03c1</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcDens(\'m\')">Beräkna m</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcDens(\'V\')">Beräkna V</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'dens\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="densResult"></div>'+
+      '<div class="chem-error" id="densError"></div>'+
+    '</div>'+
+    '</div>'+
   '</div>'+
   // ── KONCENTRATION
   '<div class="chem-panel" id="chemTool-conc">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">c = n / V</div>'+
     _cfr('concN','Substansmängd (n)','mol')+
     _cfr('concV','Volym (V)','dm\u00b3')+
@@ -13100,9 +13486,26 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="concResult"></div>'+
     '<div class="chem-error" id="concError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">w = m\u1d62 / m_tot \u00d7 100%</div>'+
+      _cfr('wMi','Massa av ämne (m\u1d62)','g')+
+      _cfr('wMtot','Total massa (m_tot)','g')+
+      _cfr('wW','Massprocent (w)','%')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcMassFrac(\'w\')">Beräkna w</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcMassFrac(\'mi\')">Beräkna m\u1d62</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcMassFrac(\'mtot\')">Beräkna m_tot</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'w\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="wResult"></div>'+
+      '<div class="chem-error" id="wError"></div>'+
+    '</div>'+
+    '</div>'+
   '</div>'+
   // ── pH
   '<div class="chem-panel" id="chemTool-ph">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-mode-toggle">'+
       '<button class="chem-mode-btn active" id="phModeH" onclick="phSetMode(\'H_to_pH\')">[H\u207a] \u2192 pH</button>'+
       '<button class="chem-mode-btn" id="phModePH" onclick="phSetMode(\'pH_to_H\')">pH \u2192 [H\u207a]</button>'+
@@ -13121,9 +13524,67 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="phResult"></div>'+
     '<div class="chem-error" id="phError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">pOH = \u2212log[OH\u207b]</div>'+
+      '<div class="chem-mode-toggle">'+
+        '<button class="chem-mode-btn active" id="pohModeOH" onclick="pohSetMode(\'OH_to_pOH\')">[OH\u207b] \u2192 pOH</button>'+
+        '<button class="chem-mode-btn" id="pohModePOH" onclick="pohSetMode(\'pOH_to_OH\')">pOH \u2192 [OH\u207b]</button>'+
+      '</div>'+
+      '<div id="pohSectionOH">'+_cfr('pohOH','[OH\u207b]-koncentration','mol/dm\u00b3')+'</div>'+
+      '<div id="pohSectionPOH" style="display:none">'+_cfr('pohPOH','pOH-värde','')+'</div>'+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcPOH()">Beräkna</button>'+
+        '<button class="chem-clear-btn" onclick="chemClearPOH()">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="pohResult"></div>'+
+      '<div class="chem-error" id="pohError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">pH + pOH = 14</div>'+
+      _cfr('ph14pH','pH-värde','')+
+      _cfr('ph14pOH','pOH-värde','')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcPH14(\'poh\')">Beräkna pOH</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcPH14(\'ph\')">Beräkna pH</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'ph14\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="ph14Result"></div>'+
+      '<div class="chem-error" id="ph14Error"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">Ka = [H\u207a][A\u207b] / [HA]</div>'+
+      _cfr('kaH','[H\u207a]','mol/dm\u00b3')+
+      _cfr('kaA','[A\u207b]','mol/dm\u00b3')+
+      _cfr('kaHA','[HA]','mol/dm\u00b3')+
+      _cfr('kaKa','Ka','')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcKa(\'Ka\')">Beräkna Ka</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcKa(\'H\')">[H\u207a]</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcKa(\'A\')">[A\u207b]</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcKa(\'HA\')">[HA]</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'ka\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="kaResult"></div>'+
+      '<div class="chem-error" id="kaError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">Kw = [H\u207a][OH\u207b] = 10\u207b\u00b9\u2074</div>'+
+      _cfr('kwH','[H\u207a]','mol/dm\u00b3')+
+      _cfr('kwOH','[OH\u207b]','mol/dm\u00b3')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcKw(\'OH\')">Beräkna [OH\u207b]</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcKw(\'H\')">Beräkna [H\u207a]</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'kw\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="kwResult"></div>'+
+      '<div class="chem-error" id="kwError"></div>'+
+    '</div>'+
+    '</div>'+
   '</div>'+
   // ── UTSPÄDNING
   '<div class="chem-panel" id="chemTool-dil">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">c\u2081 \u00d7 V\u2081 = c\u2082 \u00d7 V\u2082</div>'+
     _cfr('dilC1','c\u2081 (startkoncentration)','mol/dm\u00b3')+
     _cfr('dilV1','V\u2081 (startvolym)','dm\u00b3')+
@@ -13138,9 +13599,12 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="dilResult"></div>'+
     '<div class="chem-error" id="dilError"></div>'+
+    '</div>'+
   '</div>'+
   // ── GASLAGEN
   '<div class="chem-panel" id="chemTool-gas">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">pV = nRT</div>'+
     '<div class="chem-const-note">R = 8,314 J/(mol\u00b7K) | V i dm\u00b3, p i Pa, T i K</div>'+
     _cfr('gasp','Tryck (p)','Pa')+
@@ -13163,9 +13627,63 @@ function _buildChemPanels() {
       '<input type="number" class="chem-field-input" id="gasTempK" placeholder="K" style="width:70px;flex:none" readonly>'+
       '<span style="font-size:0.72rem;color:var(--text2)">K = \u00b0C + 273,15</span>'+
     '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">p\u2081V\u2081 = p\u2082V\u2082</div>'+
+      '<div class="chem-const-note">Boyles lag \u2014 konstant temperatur</div>'+
+      _cfr('boylp1','Tryck p\u2081','Pa')+
+      _cfr('boylV1','Volym V\u2081','dm\u00b3')+
+      _cfr('boylp2','Tryck p\u2082','Pa')+
+      _cfr('boylV2','Volym V\u2082','dm\u00b3')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcBoyle(\'p1\')">Beräkna p\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcBoyle(\'V1\')">Beräkna V\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcBoyle(\'p2\')">Beräkna p\u2082</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcBoyle(\'V2\')">Beräkna V\u2082</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'boyl\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="boylResult"></div>'+
+      '<div class="chem-error" id="boylError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">V\u2081 / T\u2081 = V\u2082 / T\u2082</div>'+
+      '<div class="chem-const-note">Charles lag \u2014 konstant tryck | T i Kelvin</div>'+
+      _cfr('charlV1','Volym V\u2081','dm\u00b3')+
+      _cfr('charlT1','Temperatur T\u2081','K')+
+      _cfr('charlV2','Volym V\u2082','dm\u00b3')+
+      _cfr('charlT2','Temperatur T\u2082','K')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharles(\'V1\')">Beräkna V\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharles(\'T1\')">Beräkna T\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharles(\'V2\')">Beräkna V\u2082</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharles(\'T2\')">Beräkna T\u2082</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'charl\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="charlResult"></div>'+
+      '<div class="chem-error" id="charlError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">p\u2081 / T\u2081 = p\u2082 / T\u2082</div>'+
+      '<div class="chem-const-note">Gay-Lussacs lag \u2014 konstant volym | T i Kelvin</div>'+
+      _cfr('glp1','Tryck p\u2081','Pa')+
+      _cfr('glT1','Temperatur T\u2081','K')+
+      _cfr('glp2','Tryck p\u2082','Pa')+
+      _cfr('glT2','Temperatur T\u2082','K')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcGayLussac(\'p1\')">Beräkna p\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcGayLussac(\'T1\')">Beräkna T\u2081</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcGayLussac(\'p2\')">Beräkna p\u2082</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcGayLussac(\'T2\')">Beräkna T\u2082</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'gl\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="glResult"></div>'+
+      '<div class="chem-error" id="glError"></div>'+
+    '</div>'+
+    '</div>'+
   '</div>'+
   // ── ENTALPI
   '<div class="chem-panel" id="chemTool-enthalpy">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">Q = c \u00d7 m \u00d7 \u0394T</div>'+
     '<div class="chem-const-note">c (vatten) = 4,18 kJ/(kg\u00b7K) \u2014 låst konstant</div>'+
     _cfr('enthM','Massa vatten (m)','kg')+
@@ -13181,9 +13699,140 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="enthResult"></div>'+
     '<div class="chem-error" id="enthError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">\u0394H\u00b0rxn = \u03a3\u0394H\u00b0f(prod) \u2212 \u03a3\u0394H\u00b0f(reak)</div>'+
+      '<div class="chem-const-note">Ange bildningsentalpier separerade med kommatecken (ex: \u2212285.8, \u2212393.5)</div>'+
+      '<div class="chem-field-row">'+
+        '<span class="chem-field-label">Produkter \u0394H\u00b0f</span>'+
+        '<input type="text" class="chem-field-input" id="hessProds" placeholder="\u2212285.8, \u2212393.5">'+
+        '<span class="chem-field-unit">kJ/mol</span>'+
+      '</div>'+
+      '<div class="chem-field-row">'+
+        '<span class="chem-field-label">Reaktanter \u0394H\u00b0f</span>'+
+        '<input type="text" class="chem-field-input" id="hessReaks" placeholder="\u22120, \u2212110.5">'+
+        '<span class="chem-field-unit">kJ/mol</span>'+
+      '</div>'+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcHess()">Beräkna \u0394H\u00b0rxn</button>'+
+        '<button class="chem-clear-btn" onclick="chemClearHess()">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="hessResult"></div>'+
+      '<div class="chem-error" id="hessError"></div>'+
+    '</div>'+
+    '</div>'+
+  '</div>'+
+  // ── ELEKTROKEMI
+  '<div class="chem-panel" id="chemTool-elektro">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
+    '<div class="chem-formula">E\u00b0cell = E\u00b0katod \u2212 E\u00b0anod</div>'+
+    _cfr('elEcell','E\u00b0cell','V')+
+    _cfr('elEkat','E\u00b0katod','V')+
+    _cfr('elEanod','E\u00b0anod','V')+
+    '<div class="chem-btn-row">'+
+      '<button class="chem-calc-btn" onclick="chemCalcEcell(\'Ecell\')">Beräkna E\u00b0cell</button>'+
+      '<button class="chem-calc-btn" onclick="chemCalcEcell(\'Ekat\')">Beräkna E\u00b0kat</button>'+
+      '<button class="chem-calc-btn" onclick="chemCalcEcell(\'Eanod\')">Beräkna E\u00b0anod</button>'+
+      '<button class="chem-clear-btn" onclick="chemClear(\'el\')">Rensa</button>'+
+    '</div>'+
+    '<div class="chem-result" id="elResult"></div>'+
+    '<div class="chem-error" id="elError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">Q = n\u2091 \u00d7 F = I \u00d7 t</div>'+
+      '<div class="chem-const-note">F = 96 485 C/mol (Faradays konstant)</div>'+
+      _cfr('elQ','Laddning (Q)','C')+
+      _cfr('elNe','Elektroner (n\u2091)','mol')+
+      _cfr('elI','Ström (I)','A')+
+      _cfr('elT','Tid (t)','s')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'Q\')">Beräkna Q</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'ne\')">Beräkna n\u2091</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'I\')">Beräkna I</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'t\')">Beräkna t</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'elC\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="elCResult"></div>'+
+      '<div class="chem-error" id="elCError"></div>'+
+    '</div>'+
+    '</div>'+
+  '</div>'+
+  // ── JÄMVIKT
+  '<div class="chem-panel" id="chemTool-jmvkt">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
+    '<div class="chem-formula">Q vs K \u2014 reaktionsriktning</div>'+
+    _cfr('qkQ','Reaktionskvot (Q)','')+
+    _cfr('qkK','Jämviktskonstant (K)','')+
+    '<div class="chem-btn-row">'+
+      '<button class="chem-calc-btn" onclick="chemCalcQK()">Bestäm riktning</button>'+
+      '<button class="chem-clear-btn" onclick="chemClear(\'qk\')">Rensa</button>'+
+    '</div>'+
+    '<div class="chem-result" id="qkResult"></div>'+
+    '<div class="chem-error" id="qkError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-info-box">'+
+        '<strong>Le Chateliers princip</strong><br>'+
+        'Om ett system i jämvikt utsätts för en störning, förskjuts jämvikten för att motverka störningen.<br><br>'+
+        '<strong>Koncentration \u2191 (reaktant):</strong> Jämvikt förskjuts fram\u00e5t<br>'+
+        '<strong>Koncentration \u2191 (produkt):</strong> Jämvikt förskjuts bak\u00e5t<br>'+
+        '<strong>Tryck \u2191 (gas):</strong> F\u00f6rskjuts mot f\u00e4rre mol gas<br>'+
+        '<strong>Temperatur \u2191:</strong> F\u00f6rskjuts \u00e5t det endoterma h\u00e5llet'+
+      '</div>'+
+    '</div>'+
+    '</div>'+
+  '</div>'+
+  // ── STÖKIOMETRI
+  '<div class="chem-panel" id="chemTool-stoik">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
+    '<div class="chem-formula">n_A / a = n_B / b</div>'+
+    _cfr('stoNA','Substansmängd n_A','mol')+
+    _cfr('stoA','Koefficient a','')+
+    _cfr('stoNB','Substansmängd n_B','mol')+
+    _cfr('stoB','Koefficient b','')+
+    '<div class="chem-btn-row">'+
+      '<button class="chem-calc-btn" onclick="chemCalcStoich(\'nA\')">Beräkna n_A</button>'+
+      '<button class="chem-calc-btn" onclick="chemCalcStoich(\'nB\')">Beräkna n_B</button>'+
+      '<button class="chem-calc-btn" onclick="chemCalcStoich(\'a\')">Beräkna a</button>'+
+      '<button class="chem-calc-btn" onclick="chemCalcStoich(\'b\')">Beräkna b</button>'+
+      '<button class="chem-clear-btn" onclick="chemClear(\'sto\')">Rensa</button>'+
+    '</div>'+
+    '<div class="chem-result" id="stoResult"></div>'+
+    '<div class="chem-error" id="stoError"></div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">Utbyte = (faktisk / teoretisk) \u00d7 100%</div>'+
+      _cfr('yieldFakt','Faktisk mängd','')+
+      _cfr('yieldTeor','Teoretisk mängd','')+
+      _cfr('yieldPct','Utbyte (%)','%')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcYield(\'pct\')">Beräkna utbyte</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcYield(\'fakt\')">Beräkna faktisk</button>'+
+        '<button class="chem-calc-btn" onclick="chemCalcYield(\'teor\')">Beräkna teoretisk</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'yield\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="yieldResult"></div>'+
+      '<div class="chem-error" id="yieldError"></div>'+
+    '</div>'+
+    '<div class="chem-sub-section">'+
+      '<div class="chem-formula">Begränsande reagens</div>'+
+      '<div class="chem-const-note">Ange substansmängd och koefficient för varje reaktant</div>'+
+      _cfr('limN1','Substansmängd n\u2081','mol')+
+      _cfr('limA1','Koefficient a\u2081','')+
+      _cfr('limN2','Substansmängd n\u2082','mol')+
+      _cfr('limA2','Koefficient a\u2082','')+
+      '<div class="chem-btn-row">'+
+        '<button class="chem-calc-btn" onclick="chemCalcLimReag()">Bestäm begränsande reagens</button>'+
+        '<button class="chem-clear-btn" onclick="chemClear(\'lim\')">Rensa</button>'+
+      '</div>'+
+      '<div class="chem-result" id="limResult"></div>'+
+      '<div class="chem-error" id="limError"></div>'+
+    '</div>'+
+    '</div>'+
   '</div>'+
   // ── MOLMASSA-RÄKNARE
   '<div class="chem-panel" id="chemTool-molar">'+
+    _BACK+
+    '<div style="padding:18px 20px">'+
     '<div class="chem-formula">Molmassa-räknare</div>'+
     '<div class="chem-field-row">'+
       '<span class="chem-field-label">Kemisk formel</span>'+
@@ -13193,6 +13842,7 @@ function _buildChemPanels() {
     '<div class="chem-const-note">Stöder vanliga siffror och \u2080\u2081\u2082... och parenteser som Ca(OH)\u2082.</div>'+
     '<div class="chem-result" id="molarResult"></div>'+
     '<div class="chem-error" id="molarError"></div>'+
+    '</div>'+
   '</div>'
   );
 }
