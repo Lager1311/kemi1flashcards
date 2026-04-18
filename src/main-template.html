@@ -538,6 +538,14 @@
   .prob-input:focus { border-color: var(--accent); }
   .prob-input.correct { border-color: var(--green); background: var(--green-light); }
   .prob-input.wrong { border-color: var(--red); background: var(--red-light); }
+  .prob-select {
+    flex: 1; min-width: 180px; padding: 11px 14px; border: 2px solid var(--border);
+    border-radius: 10px; font-size: 1rem; background: var(--surface); color: var(--text);
+    outline: none; transition: border-color var(--transition); font-family: inherit; cursor: pointer;
+  }
+  .prob-select:focus { border-color: var(--accent); }
+  .prob-select.correct { border-color: var(--green); background: var(--green-light); }
+  .prob-select.wrong   { border-color: var(--red);   background: var(--red-light); }
   .tq-answer-input {
     width: 100%; padding: 12px 14px; border: 2px solid var(--border);
     border-radius: 10px; font-size: 0.92rem; background: var(--surface); color: var(--text);
@@ -8907,6 +8915,7 @@ const CAT_INFO = {
   elkem:   { icon:'⚡',  label:'Elektrokemi' },
   stoik:   { icon:'🔢',  label:'Stoikiometri' },
   bal:     { icon:'⚖️',  label:'Balansering' },
+  redox:   { icon:'🔴',  label:'Redox & oxidationstal' },
 };
 
 
@@ -9070,8 +9079,11 @@ function _probGiveUp(prob) {
   // Lock input field
   const input = document.getElementById('probInput');
   if (input) input.disabled = true;
-  // Lock balance inputs
+  const sel = document.getElementById('probSelect');
+  if (sel) sel.disabled = true;
+  // Lock balance inputs and redox-table selects
   document.querySelectorAll('.bal-input').forEach(inp => inp.disabled = true);
+  document.querySelectorAll('.rt-select').forEach(s => s.disabled = true);
   // Hide action buttons
   const checkBtn = document.getElementById('probCheckBtn');
   const giveUp   = document.getElementById('exGiveUpBtn');
@@ -9084,7 +9096,9 @@ function _probGiveUp(prob) {
   if (fb) {
     fb.className = 'prob-feedback show fail';
     fb.innerHTML = '<strong>🏳️ Uppgiften hoppades över.</strong>' +
-      (prob.ans !== undefined ? ' Rätt svar: <strong>' + prob.ans + ' ' + (prob.unit || '') + '</strong>' : '') +
+      (prob.type === 'dropdown'
+        ? ' Rätt svar: <strong>' + prob.choices[prob.correct] + '</strong>'
+        : (prob.ans !== undefined ? ' Rätt svar: <strong>' + prob.ans + ' ' + (prob.unit || '') + '</strong>' : '')) +
       _buildSolutionHTML(prob);
   }
   if (_exProbStatuses) _exProbStatuses[_curProbIdx] = 'skipped';
@@ -9150,6 +9164,35 @@ function renderProblem() {
     <div id="exSolPanel" class="prob-sol-panel" style="display:none"></div>`;
 
 
+  if (prob.type === 'dropdown') {
+    const qHtml = prob.q.replace(/\n/g, '<br>');
+    const optionsHtml = prob.choices.map((c, i) =>
+      `<option value="${i}">${c}</option>`
+    ).join('');
+    container.innerHTML = `
+      <div class="prob-card">
+        <div class="prob-meta">
+          <span class="prob-tag">Uppgift ${_curProbIdx+1} / ${total}</span>
+          <span class="prob-lvl-tag lvl-${prob.lv}">${li.icon} ${li.name}</span>
+        </div>
+        <div class="prob-q">${prob.title}</div>
+        <p style="font-size:0.92rem;line-height:1.65;margin:8px 0 14px;color:var(--text)">${qHtml}</p>
+        <div class="prob-input-row">
+          <select id="probSelect" class="prob-select">
+            <option value="" disabled selected>Välj svar…</option>
+            ${optionsHtml}
+          </select>
+          <button class="prob-check" id="probCheckBtn">Kontrollera</button>
+        </div>
+        <div class="prob-feedback" id="probFeedback"></div>
+        ${actionRow}
+      </div>`;
+    document.getElementById('probCheckBtn').addEventListener('click', () => checkDropdown(prob));
+    _wireHintSol(prob);
+    exUpdatePanel();
+    return;
+  }
+
   if (prob.type === 'balance') {
     container.innerHTML = `
       <div class="prob-card">
@@ -9170,6 +9213,63 @@ function renderProblem() {
     document.querySelectorAll('.bal-input').forEach(inp => {
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') checkBalance(prob); });
     });
+    _wireHintSol(prob);
+    exUpdatePanel();
+    return;
+  }
+
+  if (prob.type === 'redox-table') {
+    const OX_VALS = ['−IV','−III','−II','−I','0','+I','+II','+III','+IV','+V','+VI','+VII'];
+    const oxOpts = OX_VALS.map(v => `<option value="${v}">${v}</option>`).join('');
+    const noteHtml = prob.note
+      ? `<div style="background:var(--accent-light);border-left:3px solid var(--accent);padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem;color:var(--text)">${prob.note}</div>`
+      : '';
+    const rowsHtml = prob.rows.map((row, i) => `
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:7px 10px;font-size:0.88rem;color:var(--text)">${row.label}</td>
+        <td style="padding:4px 8px"><select id="rt-before-${i}" class="rt-select prob-select" style="min-width:80px">
+          <option value="" disabled selected>–</option>${oxOpts}
+        </select></td>
+        <td style="padding:4px 8px"><select id="rt-after-${i}" class="rt-select prob-select" style="min-width:80px">
+          <option value="" disabled selected>–</option>${oxOpts}
+        </select></td>
+      </tr>`).join('');
+    const extraHtml = prob.extraQuestions.map((eq, j) => {
+      const eqOpts = eq.choices.map((c, k) => `<option value="${k}">${c}</option>`).join('');
+      return `<div style="margin-top:10px">
+        <div style="font-size:0.87rem;color:var(--text2);margin-bottom:4px">${eq.q}</div>
+        <select id="rt-extra-${j}" class="rt-select prob-select" style="min-width:180px">
+          <option value="" disabled selected>Välj svar…</option>${eqOpts}
+        </select>
+      </div>`;
+    }).join('');
+    container.innerHTML = `
+      <div class="prob-card">
+        <div class="prob-meta">
+          <span class="prob-tag">Uppgift ${_curProbIdx+1} / ${total}</span>
+          <span class="prob-lvl-tag lvl-${prob.lv}">${li.icon} ${li.name}</span>
+        </div>
+        <div class="prob-q">${prob.title}</div>
+        <p style="font-family:monospace;font-size:0.95rem;background:var(--surface2,var(--surface));border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:8px 0 12px;color:var(--text)">${prob.reaction}</p>
+        ${noteHtml}
+        <table style="width:100%;border-collapse:collapse;margin-bottom:4px">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border)">
+              <th style="text-align:left;padding:6px 10px;font-size:0.82rem;color:var(--text2);font-weight:600">Ämne</th>
+              <th style="text-align:left;padding:6px 8px;font-size:0.82rem;color:var(--text2);font-weight:600">Före (ox.tal)</th>
+              <th style="text-align:left;padding:6px 8px;font-size:0.82rem;color:var(--text2);font-weight:600">Efter (ox.tal)</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+        <div id="rt-extra" style="margin-bottom:14px">${extraHtml}</div>
+        <div style="margin-top:16px">
+          <button class="prob-check" id="probCheckBtn">Kontrollera</button>
+        </div>
+        <div class="prob-feedback" id="probFeedback"></div>
+        ${actionRow}
+      </div>`;
+    document.getElementById('probCheckBtn').addEventListener('click', () => checkRedoxTable(prob));
     _wireHintSol(prob);
     exUpdatePanel();
     return;
@@ -9213,6 +9313,7 @@ function _getCatExplanation(cat) {
     stoik:   'Vi använder stökiometri för att räkna med molförhållanden i en balanserad reaktion. Koefficienterna i reaktionsformeln visar exakt vilket förhållande reaktanter och produkter reagerar i.',
     konc:    'Vi använder koncentrationsformeln c = n/V, där c är koncentrationen i mol/L, n är substansmängden i mol och V är volymen i liter.',
     bal:     'Vi balanserar en kemisk reaktion genom att se till att antalet atomer av varje grundämne är lika på båda sidor om reaktionspilen. Vi justerar koefficienterna, aldrig index i formlerna.',
+    redox:   'Vi bestämmer oxidationstal genom att använda reglerna: fria grundämnen = 0, alkalimetaller = +I, syre = −II (undantag: peroxider −I, OF₂ +II), väte = +I (undantag: metallhydrider −I). Summera sedan oxidationstalen × antalet atomer och sätt lika med molekylens totala laddning.',
   };
   return map[cat] || 'Vi löser uppgiften steg för steg med hjälp av relevanta kemiformler. Identifiera vad som är känt och vad som ska beräknas, välj rätt formel och sätt in värdena.';
 }
@@ -9240,7 +9341,7 @@ function _buildSolutionHTML(prob) {
   }
   if (answerStep) {
     html += '<div class="sol-answer-box">&#10003; ' + answerStep + '</div>';
-  } else {
+  } else if (prob.ans !== undefined) {
     html += '<div class="sol-answer-box">&#10003; Svar: ' + prob.ans + ' ' + prob.unit + '</div>';
   }
   html += '</div>';
@@ -9421,6 +9522,73 @@ function checkProblem(prob) {
 }
 
 
+function checkDropdown(prob) {
+  if (_probAnswered) return;
+  var sel = document.getElementById('probSelect');
+  var idx = parseInt(sel.value);
+  if (isNaN(idx)) { showToast('Välj ett svar'); return; }
+  var correct = idx === prob.correct;
+  _probAnswered = true;
+  sel.disabled = true;
+  sel.classList.add(correct ? 'correct' : 'wrong');
+  var fb = document.getElementById('probFeedback');
+  fb.className = 'prob-feedback show ' + (correct ? 'ok' : 'fail');
+  if (correct) {
+    fb.innerHTML = '<strong>✅ Rätt!</strong> ' + prob.choices[prob.correct];
+  } else {
+    fb.innerHTML = '<strong>❌ Fel.</strong> Du valde: <em>' + prob.choices[idx] +
+      '</em> &nbsp;|&nbsp; Rätt svar: <strong>' + prob.choices[prob.correct] + '</strong>';
+  }
+  if (_exProbStatuses) _exProbStatuses[_curProbIdx] = correct ? 'done' : 'skipped';
+  _probRevealSolution(prob, correct);
+  if (typeof exUpdatePanel === 'function') exUpdatePanel();
+}
+
+
+function checkRedoxTable(prob) {
+  if (_probAnswered) return;
+  var allFilled = true;
+  prob.rows.forEach(function(row, i) {
+    var bef = document.getElementById('rt-before-' + i);
+    var aft = document.getElementById('rt-after-' + i);
+    if (!bef || !bef.value || !aft || !aft.value) allFilled = false;
+  });
+  prob.extraQuestions.forEach(function(eq, j) {
+    var sel = document.getElementById('rt-extra-' + j);
+    if (!sel || sel.value === '') allFilled = false;
+  });
+  if (!allFilled) { showToast('Fyll i alla rutor'); return; }
+  var allCorrect = true;
+  prob.rows.forEach(function(row, i) {
+    var bef = document.getElementById('rt-before-' + i);
+    var aft = document.getElementById('rt-after-' + i);
+    var befOk = bef.value === row.before;
+    var aftOk = aft.value === row.after;
+    bef.disabled = true;
+    aft.disabled = true;
+    bef.classList.add(befOk ? 'correct' : 'wrong');
+    aft.classList.add(aftOk ? 'correct' : 'wrong');
+    if (!befOk || !aftOk) allCorrect = false;
+  });
+  prob.extraQuestions.forEach(function(eq, j) {
+    var sel = document.getElementById('rt-extra-' + j);
+    var ok = parseInt(sel.value) === eq.correct;
+    sel.disabled = true;
+    sel.classList.add(ok ? 'correct' : 'wrong');
+    if (!ok) allCorrect = false;
+  });
+  _probAnswered = true;
+  var fb = document.getElementById('probFeedback');
+  fb.className = 'prob-feedback show ' + (allCorrect ? 'ok' : 'fail');
+  fb.innerHTML = allCorrect
+    ? '<strong>✅ Rätt!</strong> Alla oxidationstal och svar är korrekta.'
+    : '<strong>❌ Fel.</strong> Kontrollera de röda rutorna. Se lösningen för detaljer.';
+  if (_exProbStatuses) _exProbStatuses[_curProbIdx] = allCorrect ? 'done' : 'skipped';
+  _probRevealSolution(prob, allCorrect);
+  if (typeof exUpdatePanel === 'function') exUpdatePanel();
+}
+
+
 // ═══════════════════════════════════════════════════════
 //  LÄGESVÄXLING (Räkna / Luckor / Memorera)
 // ═══════════════════════════════════════════════════════
@@ -9440,7 +9608,7 @@ function buildExSearchIndex() {
     const catLabel = catInfo ? catInfo.label : p.cat;
     const catIcon = catInfo ? catInfo.icon : '';
     // Balancing problems use 'eq' instead of 'q'
-    const questionText = p.q || (p.eq ? p.eq.join(' → ') : '') || '';
+    const questionText = p.q || p.reaction || (p.eq ? p.eq.join(' → ') : '') || '';
     // Build searchable text from title + question + hint + category
     const searchText = [p.title || '', questionText, p.hint || '', catLabel].join(' ').toLowerCase();
     // Snippet: first meaningful line of question
