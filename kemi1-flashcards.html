@@ -3169,7 +3169,7 @@ const CARDS = [
   { id:3, cat:"Atomens byggnad", term:"Isotop", def:"Atomer av samma grundämne med samma antal protoner men olika antal neutroner, och därmed olika masstal." },
   { id:4, cat:"Atomens byggnad", term:"Atomnummer", def:"Antalet protoner i en atoms kärna; definierar vilket grundämne det är och avgör ämnets plats i periodiska systemet." },
   { id:5, cat:"Atomens byggnad", term:"Masstal", def:"Summan av antalet protoner och neutroner i en atoms kärna; betecknas A." },
-  { id:6, cat:"Atomens byggnad", term:"Elektron", def:"Negativt laddad partikel (−1,6 × 10⁻¹⁹ C) som befinner sig i skal runt atomkärnan; bidrar till kemiska reaktioner." },
+  { id:6, cat:"Atomens byggnad", term:"Elektron", def:"Negativt laddad partikel (laddning ≈ −1,602 × 10⁻¹⁹ C) som befinner sig i skal runt atomkärnan; bidrar till kemiska reaktioner." },
   { id:7, cat:"Atomens byggnad", term:"Proton", def:"Positivt laddad partikel i atomkärnan; antalet protoner (atomnumret) avgör vilket grundämne det är." },
   { id:8, cat:"Atomens byggnad", term:"Neutron", def:"Oladdad partikel i atomkärnan; bidrar till atommassans men inte till laddningen; stabiliserar kärnan." },
   { id:9, cat:"Atomens byggnad", term:"Skal", def:"Energinivå runt atomkärnan där elektroner befinner sig; betecknas K, L, M… eller n = 1, 2, 3…" },
@@ -3180,14 +3180,14 @@ const CARDS = [
   { id:14, cat:"Atomens byggnad", term:"Metallkaraktär", def:"Egenskapen att ge ifrån sig elektroner och bilda positiva joner; ökar nedåt och åt vänster i periodiska systemet." },
 
   // ── 2. Kemisk bindning ──
-  { id:15, cat:"Kemisk bindning", term:"Jonbindning", def:"Kemisk bindning genom elektrostatisk attraktion mellan positivt och negativt laddade joner; bildas när elektroner överförs från metall till icke-metall." },
+  { id:15, cat:"Kemisk bindning", term:"Jonbindning", def:"Kemisk bindning genom elektrostatisk attraktion mellan positivt och negativt laddade joner; bildas när elektroner överförs från metall till icke-metall (stor elektronnegativitetsskillnad, ΔEN > 1,7)." },
   { id:16, cat:"Kemisk bindning", term:"Kovalent bindning", def:"Kemisk bindning där atomer delar ett eller flera elektronpar; vanlig mellan icke-metaller." },
   { id:17, cat:"Kemisk bindning", term:"Metallbindning", def:"Bindning i metaller där positiva metalljoner omges av ett 'hav' av fria, rörliga elektroner; förklarar elektrisk ledningsförmåga." },
   { id:18, cat:"Kemisk bindning", term:"Polär bindning", def:"Kovalent bindning där elektronerna delas ojämnt pga skillnad i elektronegativitet; skapar en partiell laddningsskillnad (δ+ och δ−)." },
   { id:19, cat:"Kemisk bindning", term:"Opolär bindning", def:"Kovalent bindning där elektronerna delas jämnt mellan likartade atomer (t.ex. H₂, O₂); ingen nettoladdningsskillnad." },
   { id:20, cat:"Kemisk bindning", term:"Dipolmoment", def:"Vektoriellt mått på separationen av laddningar i en molekyl; beror på bindningarnas polaritet och molekylens geometri." },
   { id:21, cat:"Kemisk bindning", term:"Vätebindning", def:"Stark intermolekylär kraft mellan ett väte bundet till N, O eller F och ett elektronnegativt atom i en annan molekyl; ger vatten högt kokpunkt." },
-  { id:22, cat:"Kemisk bindning", term:"Van der Waals-krafter", def:"Svaga intermolekylära krafter orsakade av tillfälliga och inducerade dipoler (London-dispersion); ökar med molekylstorlek." },
+  { id:22, cat:"Kemisk bindning", term:"Van der Waals-krafter", def:"Svaga intermolekylära krafter: London-dispersion (tillfälliga/inducerade dipoler), dipol-dipol-krafter (permanenta dipoler) och dipol-inducerad-dipol. Ökar med molekylstorlek." },
   { id:23, cat:"Kemisk bindning", term:"Lewis-struktur", def:"Schematisk bild av en molekyl som visar kovalenta bindningar som streck och fria elektronpar som punkter." },
   { id:24, cat:"Kemisk bindning", term:"VSEPR", def:"Modell (Valence Shell Electron Pair Repulsion) för att förutsäga molekylers geometri: elektronpar repellerar varandra och intar maximalt avstånd." },
 
@@ -3205,7 +3205,7 @@ const CARDS = [
   { id:35, cat:"Reaktioner & stökiometri", term:"Balansering", def:"Att justera koefficienter i en reaktionsformel så att antal atomar av varje slag och total laddning är lika på båda sidor." },
 
   // ── 4. Syror & baser ──
-  { id:36, cat:"Syror & baser", term:"Syra", def:"Ämne som donerar protoner (H⁺) enligt Brønsted-Lowry, eller som ökar vätejonkoncentrationen [H⁺] i vattenlösning." },
+  { id:36, cat:"Syror & baser", term:"Syra", def:"Ämne som donerar protoner (H⁺) enligt Brønsted-Lowry. Arrhenius-definition (enklare): ämne som ökar [H⁺] i vattenlösning. Arrhenius lärs oftast ut först i Kemi 1." },
   { id:37, cat:"Syror & baser", term:"Bas", def:"Ämne som accepterar protoner (H⁺) enligt Brønsted-Lowry, eller som ökar hydroxidjonkoncentrationen [OH⁻] i lösning." },
   { id:38, cat:"Syror & baser", term:"pH", def:"Logaritmiskt mått på vätejonkoncentrationen: pH = −log[H⁺]. Skala 0–14; pH 7 = neutralt, < 7 = surt, > 7 = basiskt." },
   { id:39, cat:"Syror & baser", term:"pOH", def:"Logaritmiskt mått på hydroxidjonkoncentrationen: pOH = −log[OH⁻]. Samband: pH + pOH = 14 vid 25 °C." },
@@ -3273,7 +3273,7 @@ const CARDS = [
   { id:92, cat:"Atomens byggnad", term:"Grundämne", def:"Rent ämne som inte kan sönderdelas i enklare ämnen med kemiska metoder; definieras av atomnumret (antal protoner)." },
   { id:93, cat:"Atomens byggnad", term:"Atomradie", def:"Halvt avstånd mellan kärnorna i två bindande atomer av samma grundämne; minskar åt höger och ökar nedåt i periodiska systemet." },
   { id:94, cat:"Atomens byggnad", term:"Ädelgas-konfiguration", def:"Elektronkonfiguration med fullt yttersta skal (8 elektroner); eftersträvas vid kemisk bindning (oktettregeln)." },
-  { id:95, cat:"Atomens byggnad", term:"Molarvolym", def:"Volymen som upptas av exakt ett mol av en idealgas vid STP (0 °C, 1 atm) = 22,4 L/mol." },
+  { id:95, cat:"Atomens byggnad", term:"Molarvolym", def:"Volymen som upptas av exakt ett mol av en idealgas vid STP (0 °C, 1 atm) = 22,4 L/mol. (Modernare IUPAC-standard SATP: 25 °C, 100 kPa → 24,8 L/mol; för Kemi 1 används 22,4 L/mol.)" },
 
   // ── 2b. Kemisk bindning – utökad ──
   { id:99, cat:"Kemisk bindning", term:"Nätverkskovalent kristall", def:"Fast ämne med kovalenta bindningar genomgående i hela strukturen; t.ex. diamant och kiseldioxid (SiO₂); mycket hårda och högt smältpunkt." },
@@ -3399,20 +3399,20 @@ const CARDS = [
   { id:241, cat:"Vanliga syror & baser", term:"Ca(OH)₂ – Kalciumhydroxid", def:"Stark men svagt löslig bas. pH ≈ 12,4 (mättat). Kalkvatten. Cement och jordbruk." },
   { id:242, cat:"Vanliga syror & baser", term:"NH₃ – Ammoniak", def:"Svag bas. NH₃ + H₂O ⇌ NH₄⁺ + OH⁻. Skarp lukt. Gödningsmedel." },
 
-  // ── Redox & elektrokemi – begrepp ──
-  { id:243, cat:"Redox & elektrokemi", term:"Galvaniskt element", def:"Elektrokemisk cell som omvandlar en spontan redoxreaktion till elektrisk energi. Anod (−) = oxidation, katod (+) = reduktion. Exempel: Daniell-cellen med Zn-anod och Cu-katod." },
-  { id:244, cat:"Redox & elektrokemi", term:"Normalpotential (E°)", def:"Reduktionspotential under standardförhållanden (25 °C, 1 mol/L, 1 atm) mätt mot normalvätgaselektroden (E° = 0,00 V). Hög positiv E° = ädel metall, stark oxidant (reduceras gärna)." },
-  { id:245, cat:"Redox & elektrokemi", term:"Elektrokemisk spänningsserie", def:"Rangordning av metaller och halvreaktioner efter stigande E°. Ädla metaller (Au, Pt) längst upp; reaktiva metaller (Li, K, Na) längst ner. En metall med lägre E° reducerar joner av metaller med högre E°." },
-  { id:246, cat:"Redox & elektrokemi", term:"Normalvätgaselektrod", def:"Referenselektrod med definierat E° = 0,00 V: platinaplåt i H₂-gas (1 atm) nedsänkt i 1 mol/L H⁺-lösning. Alla normalpotentialer mäts relativt denna." },
-  { id:247, cat:"Redox & elektrokemi", term:"EMK (elektromotorisk kraft)", def:"Potentialskillnaden (spänningen) hos ett galvaniskt element: EMK = E°(katod) − E°(anod). Positiv EMK innebär spontan reaktion. Enhet: volt (V)." },
-  { id:248, cat:"Redox & elektrokemi", term:"Elektrodpotential", def:"Potential som uppkommer vid en elektrod då den oxiderade och reducerade formen är i jämvikt; mäts relativt normalvätgaselektroden under standardförhållanden." },
-  { id:249, cat:"Redox & elektrokemi", term:"Korrosion", def:"Elektrokemisk nedbrytning av en metall genom oxidation. Järnrost: 4Fe + 3O₂ → 2Fe₂O₃. Kräver fukt och syre; accelereras av kontakt med ädlare metall eller salt (galvanisk korrosion)." },
-  { id:250, cat:"Redox & elektrokemi", term:"Galvanisk korrosion", def:"Accelererad korrosion när två olika metaller är i elektrisk kontakt i en elektrolyt. Den oädlare metallen (lägre E°) oxideras snabbare. Ex: aluminium + stål i saltvatten." },
-  { id:251, cat:"Redox & elektrokemi", term:"Offeranod", def:"Mer oädel metall (Zn eller Mg) som ansluts till konstruktionen och korroderar istället för att skydda stål/järn. Används på fartygsytor, rörledningar och betongpålar." },
-  { id:252, cat:"Redox & elektrokemi", term:"Passivering", def:"Spontan bildning av ett skyddande oxidskikt på metallyta: Al₂O₃ på aluminium, Cr₂O₃ på krom/rostfritt stål. Hindrar vidare korrosion trots att metallen är oädel." },
-  { id:253, cat:"Redox & elektrokemi", term:"Cellschema", def:"Standardnotation för galvanisk cell: Zn(s)|Zn²⁺(aq)||Cu²⁺(aq)|Cu(s). Enkelt streck | = fasövergång; dubbelt streck || = saltbrygga. Vänster = anod (oxidation), höger = katod (reduktion)." },
-  { id:254, cat:"Redox & elektrokemi", term:"Redoxpar", def:"Oxiderad och reducerad form av ett ämne: Ox/Red, t.ex. Cu²⁺/Cu och Zn/Zn²⁺. I ett galvaniskt element utbyter de två redoxparen elektroner; det med lägre E° är reduktionsmedlet." },
-  { id:255, cat:"Redox & elektrokemi", term:"Elektrolys", def:"Icke-spontan kemisk reaktion driven av extern elektrisk ström. Katod (−) = reduktion (katjoner reduceras), anod (+) = oxidation. Omvänt mot galvanisk cell. Ex: framställning av Al, Cl₂, NaOH." },
+  // ── Redox & elektrokemi – begrepp (Kemi 2-nivå: galvaniska celler, potentialer) ──
+  { id:243, cat:"Elektrokemi", term:"Galvaniskt element", def:"Elektrokemisk cell som omvandlar en spontan redoxreaktion till elektrisk energi. Anod (−) = oxidation, katod (+) = reduktion. Exempel: Daniell-cellen med Zn-anod och Cu-katod." },
+  { id:244, cat:"Elektrokemi", term:"Normalpotential (E°)", def:"Reduktionspotential under standardförhållanden (25 °C, 1 mol/L, 1 atm) mätt mot normalvätgaselektroden (E° = 0,00 V). Hög positiv E° = ädel metall, stark oxidant (reduceras gärna)." },
+  { id:245, cat:"Elektrokemi", term:"Elektrokemisk spänningsserie", def:"Rangordning av metaller och halvreaktioner efter stigande E°. Ädla metaller (Au, Pt) längst upp; reaktiva metaller (Li, K, Na) längst ner. En metall med lägre E° reducerar joner av metaller med högre E°." },
+  { id:246, cat:"Elektrokemi", term:"Normalvätgaselektrod", def:"Referenselektrod med definierat E° = 0,00 V: platinaplåt i H₂-gas (1 atm) nedsänkt i 1 mol/L H⁺-lösning. Alla normalpotentialer mäts relativt denna." },
+  { id:247, cat:"Elektrokemi", term:"EMK (elektromotorisk kraft)", def:"Potentialskillnaden (spänningen) hos ett galvaniskt element: EMK = E°(katod) − E°(anod). Positiv EMK innebär spontan reaktion. Enhet: volt (V)." },
+  { id:248, cat:"Elektrokemi", term:"Elektrodpotential", def:"Potential som uppkommer vid en elektrod då den oxiderade och reducerade formen är i jämvikt; mäts relativt normalvätgaselektroden under standardförhållanden." },
+  { id:249, cat:"Elektrokemi", term:"Korrosion", def:"Elektrokemisk nedbrytning av en metall genom oxidation. Järnrost: 4Fe + 3O₂ → 2Fe₂O₃. Kräver fukt och syre; accelereras av kontakt med ädlare metall eller salt (galvanisk korrosion)." },
+  { id:250, cat:"Elektrokemi", term:"Galvanisk korrosion", def:"Accelererad korrosion när två olika metaller är i elektrisk kontakt i en elektrolyt. Den oädlare metallen (lägre E°) oxideras snabbare. Ex: aluminium + stål i saltvatten." },
+  { id:251, cat:"Elektrokemi", term:"Offeranod", def:"Mer oädel metall (Zn eller Mg) som ansluts till konstruktionen och korroderar istället för att skydda stål/järn. Används på fartygsytor, rörledningar och betongpålar." },
+  { id:252, cat:"Elektrokemi", term:"Passivering", def:"Spontan bildning av ett skyddande oxidskikt på metallyta: Al₂O₃ på aluminium, Cr₂O₃ på krom/rostfritt stål. Hindrar vidare korrosion trots att metallen är oädel." },
+  { id:253, cat:"Elektrokemi", term:"Cellschema", def:"Standardnotation för galvanisk cell: Zn(s)|Zn²⁺(aq)||Cu²⁺(aq)|Cu(s). Enkelt streck | = fasövergång; dubbelt streck || = saltbrygga. Vänster = anod (oxidation), höger = katod (reduktion)." },
+  { id:254, cat:"Elektrokemi", term:"Redoxpar", def:"Oxiderad och reducerad form av ett ämne: Ox/Red, t.ex. Cu²⁺/Cu och Zn/Zn²⁺. I ett galvaniskt element utbyter de två redoxparen elektroner; det med lägre E° är reduktionsmedlet." },
+  { id:255, cat:"Elektrokemi", term:"Elektrolys", def:"Icke-spontan kemisk reaktion driven av extern elektrisk ström. Katod (−) = reduktion (katjoner reduceras), anod (+) = oxidation. Omvänt mot galvanisk cell. Ex: framställning av Al, Cl₂, NaOH." },
   { id:402, cat:"Redox & elektrokemi", term:"Katod", def:"Elektroden där reduktion sker. Elektroner tas emot här. Minnesregel: RedKat – Reduktion vid Katoden." },
   { id:403, cat:"Redox & elektrokemi", term:"Anod", def:"Elektroden där oxidation sker. Elektroner avges här. Minnesregel: OxAn – Oxidation vid Anoden." },
   { id:404, cat:"Redox & elektrokemi", term:"Katod i galvaniskt element", def:"Reduktion sker vid katoden – katoden är positiv pol (+) och tar emot elektroner från den yttre kretsen. Exempel: Cu²⁺ + 2e⁻ → Cu i Daniell-cellen." },
@@ -3858,7 +3858,7 @@ function saveState() {
     mutedCards: [...state.mutedCards],
     selectedCats: [...state.selectedCats],
   };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave)); } catch(e) {}
 }
 
 function loadState() {
