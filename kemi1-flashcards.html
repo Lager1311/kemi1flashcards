@@ -5405,7 +5405,95 @@ const PROBLEMS = [
     hint:'Beräkna oxidationstalet för Cl i Cl₂, NaCl och NaClO. Cl i Cl₂ = 0 (fritt grundämne). När ett ämne både oxideras och reduceras kallas det disproportionering.',
     steps:['Cl i Cl₂ = 0 (fritt grundämne)','Cl i NaCl: Na = +1, summan = 0 → Cl = −I','Cl i NaClO: Na = +1, O = −2, summan = 0 → +1 + x − 2 = 0 → Cl = +I','Cl₂(0) → NaCl(−I): minskar = REDUKTION; Cl₂(0) → NaClO(+I): ökar = OXIDATION','Svar: Ja – Cl₂ oxideras och reduceras samtidigt ✓ (disproportionering, A-nivå)'] },
 
-];
+  { id:4221, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – MnO₄⁻ och Fe²⁺',
+    reaction:'MnO₄⁻ + Fe²⁺ + H⁺ → Mn²⁺ + Fe³⁺ + H₂O',
+    note:null,
+    rows:[
+      {label:'Mn i MnO₄⁻', before:'+VII', after:'+II'},
+      {label:'Fe i Fe²⁺',  before:'+II',  after:'+III'},
+      {label:'H i H⁺',     before:'+I',   after:'+I'},
+      {label:'O i MnO₄⁻',  before:'−II',  after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['MnO₄⁻','Fe²⁺','H⁺','H₂O'], correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['MnO₄⁻','Fe²⁺','H⁺','H₂O'], correct:0},
+    ],
+    hint:'Börja med Mn i MnO₄⁻: jonladdning = −1, O = −2 (×4). Sätt upp x + 4×(−2) = −1 → x = +7. Jämför varje atoms oxidationstal före/efter. Oxidation = ökar, reduktion = minskar. H och O ändras inte i denna reaktion.',
+    steps:['Mn i MnO₄⁻: x + 4×(−2) = −1 → x = +7 → +VII','Mn i Mn²⁺: +II','Mn: +VII → +II = minskar 5 steg = REDUKTION → MnO₄⁻ är oxidationsmedlet','Fe i Fe²⁺: +II; Fe i Fe³⁺: +III','Fe: +II → +III = ökar 1 steg = OXIDATION → Fe²⁺ är reduktionsmedlet','H i H⁺: +I (oförändrat); O i MnO₄⁻: −II (oförändrat)','Elektronbalans: 1 Mn tar upp 5 e⁻, 1 Fe avger 1 e⁻ → 5 Fe²⁺ per MnO₄⁻','Svar: Balanserad: MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O ✓'] },
+
+  { id:4222, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – Cr₂O₇²⁻ och SO₂',
+    reaction:'Cr₂O₇²⁻ + SO₂ → Cr³⁺ + SO₄²⁻',
+    note:null,
+    rows:[
+      {label:'Cr i Cr₂O₇²⁻', before:'+VI',  after:'+III'},
+      {label:'S i SO₂',       before:'+IV',  after:'+VI'},
+      {label:'O i Cr₂O₇²⁻',  before:'−II',  after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['Cr₂O₇²⁻','SO₂','Cr³⁺','SO₄²⁻'], correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['Cr₂O₇²⁻','SO₂','Cr³⁺','SO₄²⁻'], correct:0},
+    ],
+    hint:'Beräkna Cr i Cr₂O₇²⁻: 2 kromatomer, jonladdning = −2. Sätt upp 2x + 7×(−2) = −2. Beräkna sedan S i SO₂ (neutral molekyl) och S i SO₄²⁻ (jonladdning −2). Jämför och avgör vad som ökar respektive minskar.',
+    steps:['Cr i Cr₂O₇²⁻: 2x + 7×(−2) = −2 → 2x = 12 → x = +6 → +VI','Cr i Cr³⁺: +III; Cr: +VI → +III = minskar 3 steg = REDUKTION → Cr₂O₇²⁻ är oxidationsmedlet','S i SO₂: x + 2×(−2) = 0 → x = +4 → +IV','S i SO₄²⁻: x + 4×(−2) = −2 → x = +6 → +VI; S: +IV → +VI = ökar = OXIDATION → SO₂ är reduktionsmedlet','O i Cr₂O₇²⁻: −II (oförändrat)','Elektronbalans: varje Cr tar upp 3 e⁻ (2 Cr = 6 e⁻), varje S avger 2 e⁻ → 3 SO₂ per Cr₂O₇²⁻','Svar: Cr₂O₇²⁻ + 3SO₂ + 2H⁺ → 2Cr³⁺ + 3SO₄²⁻ + H₂O ✓'] },
+
+  { id:4223, lv:3, cat:'redox', type:'redox-table',
+    title:'Disproportionering – Cl₂ och NaOH (tabell)',
+    reaction:'Cl₂ + 2NaOH → NaCl + NaClO + H₂O',
+    note:'OBS: Cl₂ förekommer i två rader – samma ämne oxideras och reduceras (disproportionering).',
+    rows:[
+      {label:'Cl i Cl₂ → NaCl',  before:'0',   after:'−I'},
+      {label:'Cl i Cl₂ → NaClO', before:'0',   after:'+I'},
+      {label:'Na i NaOH',         before:'+I',  after:'+I'},
+      {label:'O i NaOH',          before:'−II', after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',  choices:['Cl₂','NaOH','NaCl','NaClO'], correct:0},
+      {q:'Vilket ämne reduceras?', choices:['Cl₂','NaOH','NaCl','NaClO'], correct:0},
+      {q:'Vad kallas det när samma ämne både oxideras och reduceras?', choices:['Neutralisation','Disproportionering','Kombination','Eliminering'], correct:1},
+    ],
+    hint:'Cl₂ är ett fritt grundämne → oxidationstal = 0. Beräkna Cl i NaCl (Na = +1, summan = 0) och Cl i NaClO (Na = +1, O = −2, summan = 0). Samma ämne kan både öka och minska – det kallas disproportionering.',
+    steps:['Cl i Cl₂: 0 (fritt grundämne)','Cl i NaCl: Na = +1, +1 + x = 0 → Cl = −I → REDUKTION','Cl i NaClO: Na = +1, O = −2, +1 + x − 2 = 0 → Cl = +I → OXIDATION','Cl₂ oxideras och reduceras SAMTIDIGT – kallas disproportionering (A-nivå)','Na i NaOH: +I (oförändrat); O i NaOH: −II (oförändrat)','Svar: Cl₂ disproportioneras – ett Cl⁻ och ett ClO⁻ bildas per Cl₂-molekyl ✓'] },
+
+  { id:4224, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – Cu och koncentrerad HNO₃',
+    reaction:'Cu + 4HNO₃(konc.) → Cu(NO₃)₂ + 2NO₂ + 2H₂O',
+    note:null,
+    rows:[
+      {label:'Cu',               before:'0',   after:'+II'},
+      {label:'N i HNO₃ → NO₂',  before:'+V',  after:'+IV'},
+      {label:'N i Cu(NO₃)₂',    before:'+V',  after:'+V'},
+      {label:'H i HNO₃',        before:'+I',  after:'+I'},
+      {label:'O i NO₂',         before:'−II', after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['Cu','HNO₃','Cu(NO₃)₂','NO₂'], correct:0},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['Cu','HNO₃','Cu(NO₃)₂','NO₂'], correct:1},
+    ],
+    hint:'Koppar är ett fritt grundämne → ox.tal = 0 före reaktionen. Beräkna N i HNO₃ och N i NO₂. OBS: N i Cu(NO₃)₂ ändrar INTE oxidationstal – nitratjonen är åskådare. Bara N i NO₂ deltar i redoxreaktionen.',
+    steps:['Cu: 0 → +II = ökar = OXIDATION → Cu är reduktionsmedlet','N i HNO₃: +1 + x + 3×(−2) = 0 → x = +5 → +V','N i NO₂: x + 2×(−2) = 0 → x = +4 → +IV; N: +V → +IV = minskar = REDUKTION → HNO₃ är oxidationsmedlet','N i Cu(NO₃)₂: fortfarande +V (nitratjonens N ändras ej – åskådare)','H i HNO₃: +I (åskådare); O i NO₂: −II (åskådare)','Elektronbalans: Cu avger 2 e⁻; varje N(+V→+IV) tar upp 1 e⁻ → 2 HNO₃ som ox.medel + 2 HNO₃ som syra = 4 HNO₃ totalt','Svar: Cu + 4HNO₃(konc.) → Cu(NO₃)₂ + 2NO₂ + 2H₂O ✓'] },
+
+  { id:4225, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – K₂Cr₂O₇ och HCl',
+    reaction:'K₂Cr₂O₇ + 14HCl → 2KCl + 2CrCl₃ + 3Cl₂ + 7H₂O',
+    note:'OBS: HCl förekommer i två rader – en del Cl-atomer förblir −I (i KCl/CrCl₃), en annan del oxideras till 0 (i Cl₂).',
+    rows:[
+      {label:'Cr i K₂Cr₂O₇',         before:'+VI', after:'+III'},
+      {label:'Cl i HCl → KCl/CrCl₃', before:'−I',  after:'−I'},
+      {label:'Cl i HCl → Cl₂',        before:'−I',  after:'0'},
+      {label:'K i K₂Cr₂O₇',           before:'+I',  after:'+I'},
+      {label:'H i HCl',               before:'+I',  after:'+I'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',                      choices:['K₂Cr₂O₇','HCl (Cl⁻)','KCl','Cl₂'],       correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?',           choices:['K₂Cr₂O₇','HCl (Cl⁻)','KCl','Cl₂'],       correct:0},
+      {q:'Hur många elektroner tar varje Cr-atom upp?', choices:['1 elektron','2 elektroner','3 elektroner','6 elektroner'], correct:2},
+    ],
+    hint:'Beräkna Cr i K₂Cr₂O₇: K = +1, O = −2, neutral molekyl → 2×(+1) + 2x + 7×(−2) = 0. Titta noga på Cl – inte alla Cl-atomer i HCl oxideras. Räkna ut vilka Cl som hamnar i Cl₂ och vilka som stannar som Cl⁻.',
+    steps:['K₂Cr₂O₇: 2×(+1) + 2x + 7×(−2) = 0 → 2 + 2x − 14 = 0 → x = +6 → Cr = +VI','Cr i CrCl₃: +III; Cr: +VI → +III = minskar 3 steg = REDUKTION → varje Cr tar upp 3 e⁻','2 Cr-atomer totalt = 6 e⁻ tas upp','Cl i HCl: −I; Cl i Cl₂: 0; Cl: −I → 0 = ökar = OXIDATION → varje Cl avger 1 e⁻','Totalt 6 Cl oxideras → 3 Cl₂ bildas ✓','Cl i KCl och CrCl₃: −I (åskådare); K: +I (åskådare); H: +I (åskådare)','Svar: K₂Cr₂O₇ + 14HCl → 2KCl + 2CrCl₃ + 3Cl₂ + 7H₂O ✓'] },
+
+];
 const THEORY = [
   { cat: 'Atomens byggnad', icon: '⚛️', html: `
 <h2>⚛️ Atomens byggnad &amp; periodiska systemet</h2>
@@ -9906,8 +9994,9 @@ function _probGiveUp(prob) {
   if (input) input.disabled = true;
   const sel = document.getElementById('probSelect');
   if (sel) sel.disabled = true;
-  // Lock balance inputs
+  // Lock balance inputs and redox-table selects
   document.querySelectorAll('.bal-input').forEach(inp => inp.disabled = true);
+  document.querySelectorAll('.rt-select').forEach(s => s.disabled = true);
   // Hide action buttons
   const checkBtn = document.getElementById('probCheckBtn');
   const giveUp   = document.getElementById('exGiveUpBtn');
@@ -10042,6 +10131,63 @@ function renderProblem() {
     return;
   }
 
+  if (prob.type === 'redox-table') {
+    const OX_VALS = ['−IV','−III','−II','−I','0','+I','+II','+III','+IV','+V','+VI','+VII'];
+    const oxOpts = OX_VALS.map(v => `<option value="${v}">${v}</option>`).join('');
+    const noteHtml = prob.note
+      ? `<div style="background:var(--accent-light);border-left:3px solid var(--accent);padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem;color:var(--text)">${prob.note}</div>`
+      : '';
+    const rowsHtml = prob.rows.map((row, i) => `
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:7px 10px;font-size:0.88rem;color:var(--text)">${row.label}</td>
+        <td style="padding:4px 8px"><select id="rt-before-${i}" class="rt-select prob-select" style="min-width:80px">
+          <option value="" disabled selected>–</option>${oxOpts}
+        </select></td>
+        <td style="padding:4px 8px"><select id="rt-after-${i}" class="rt-select prob-select" style="min-width:80px">
+          <option value="" disabled selected>–</option>${oxOpts}
+        </select></td>
+      </tr>`).join('');
+    const extraHtml = prob.extraQuestions.map((eq, j) => {
+      const eqOpts = eq.choices.map((c, k) => `<option value="${k}">${c}</option>`).join('');
+      return `<div style="margin-top:10px">
+        <div style="font-size:0.87rem;color:var(--text2);margin-bottom:4px">${eq.q}</div>
+        <select id="rt-extra-${j}" class="rt-select prob-select" style="min-width:180px">
+          <option value="" disabled selected>Välj svar…</option>${eqOpts}
+        </select>
+      </div>`;
+    }).join('');
+    container.innerHTML = `
+      <div class="prob-card">
+        <div class="prob-meta">
+          <span class="prob-tag">Uppgift ${_curProbIdx+1} / ${total}</span>
+          <span class="prob-lvl-tag lvl-${prob.lv}">${li.icon} ${li.name}</span>
+        </div>
+        <div class="prob-q">${prob.title}</div>
+        <p style="font-family:monospace;font-size:0.95rem;background:var(--surface2,var(--surface));border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:8px 0 12px;color:var(--text)">${prob.reaction}</p>
+        ${noteHtml}
+        <table style="width:100%;border-collapse:collapse;margin-bottom:4px">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border)">
+              <th style="text-align:left;padding:6px 10px;font-size:0.82rem;color:var(--text2);font-weight:600">Ämne</th>
+              <th style="text-align:left;padding:6px 8px;font-size:0.82rem;color:var(--text2);font-weight:600">Före (ox.tal)</th>
+              <th style="text-align:left;padding:6px 8px;font-size:0.82rem;color:var(--text2);font-weight:600">Efter (ox.tal)</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+        <div id="rt-extra" style="margin-bottom:14px">${extraHtml}</div>
+        <div style="margin-top:16px">
+          <button class="prob-check" id="probCheckBtn">Kontrollera</button>
+        </div>
+        <div class="prob-feedback" id="probFeedback"></div>
+        ${actionRow}
+      </div>`;
+    document.getElementById('probCheckBtn').addEventListener('click', () => checkRedoxTable(prob));
+    _wireHintSol(prob);
+    exUpdatePanel();
+    return;
+  }
+
   const qHtml = prob.q.replace(/\n/g, '<br>');
 
   container.innerHTML = `
@@ -10108,7 +10254,7 @@ function _buildSolutionHTML(prob) {
   }
   if (answerStep) {
     html += '<div class="sol-answer-box">&#10003; ' + answerStep + '</div>';
-  } else {
+  } else if (prob.ans !== undefined) {
     html += '<div class="sol-answer-box">&#10003; Svar: ' + prob.ans + ' ' + prob.unit + '</div>';
   }
   html += '</div>';
@@ -10312,6 +10458,50 @@ function checkDropdown(prob) {
 }
 
 
+function checkRedoxTable(prob) {
+  if (_probAnswered) return;
+  var allFilled = true;
+  prob.rows.forEach(function(row, i) {
+    var bef = document.getElementById('rt-before-' + i);
+    var aft = document.getElementById('rt-after-' + i);
+    if (!bef || !bef.value || !aft || !aft.value) allFilled = false;
+  });
+  prob.extraQuestions.forEach(function(eq, j) {
+    var sel = document.getElementById('rt-extra-' + j);
+    if (!sel || sel.value === '') allFilled = false;
+  });
+  if (!allFilled) { showToast('Fyll i alla rutor'); return; }
+  var allCorrect = true;
+  prob.rows.forEach(function(row, i) {
+    var bef = document.getElementById('rt-before-' + i);
+    var aft = document.getElementById('rt-after-' + i);
+    var befOk = bef.value === row.before;
+    var aftOk = aft.value === row.after;
+    bef.disabled = true;
+    aft.disabled = true;
+    bef.classList.add(befOk ? 'correct' : 'wrong');
+    aft.classList.add(aftOk ? 'correct' : 'wrong');
+    if (!befOk || !aftOk) allCorrect = false;
+  });
+  prob.extraQuestions.forEach(function(eq, j) {
+    var sel = document.getElementById('rt-extra-' + j);
+    var ok = parseInt(sel.value) === eq.correct;
+    sel.disabled = true;
+    sel.classList.add(ok ? 'correct' : 'wrong');
+    if (!ok) allCorrect = false;
+  });
+  _probAnswered = true;
+  var fb = document.getElementById('probFeedback');
+  fb.className = 'prob-feedback show ' + (allCorrect ? 'ok' : 'fail');
+  fb.innerHTML = allCorrect
+    ? '<strong>✅ Rätt!</strong> Alla oxidationstal och svar är korrekta.'
+    : '<strong>❌ Fel.</strong> Kontrollera de röda rutorna. Se lösningen för detaljer.';
+  if (_exProbStatuses) _exProbStatuses[_curProbIdx] = allCorrect ? 'done' : 'skipped';
+  _probRevealSolution(prob, allCorrect);
+  if (typeof exUpdatePanel === 'function') exUpdatePanel();
+}
+
+
 // ═══════════════════════════════════════════════════════
 //  LÄGESVÄXLING (Räkna / Luckor / Memorera)
 // ═══════════════════════════════════════════════════════
@@ -10331,7 +10521,7 @@ function buildExSearchIndex() {
     const catLabel = catInfo ? catInfo.label : p.cat;
     const catIcon = catInfo ? catInfo.icon : '';
     // Balancing problems use 'eq' instead of 'q'
-    const questionText = p.q || (p.eq ? p.eq.join(' → ') : '') || '';
+    const questionText = p.q || p.reaction || (p.eq ? p.eq.join(' → ') : '') || '';
     // Build searchable text from title + question + hint + category
     const searchText = [p.title || '', questionText, p.hint || '', catLabel].join(' ').toLowerCase();
     // Snippet: first meaningful line of question
@@ -10967,7 +11157,7 @@ const THEORY_QUESTIONS = [
   { id: 6085, cat: 'reduktion_oxidation', lv: 3, q: 'Forklara elektrolys med elektrolys av vatten som exempel. Vad bestammer vilka reaktioner som sker vid katod resp. anod? Vad ar overspanning?', model: 'Elektrolys: elektrisk energi driver en icke-spontan redoxreaktion. En yttre spanning tvingas pa systemet. Elektrolys av vatten (med H2SO4 som elektrolyt): Katod (negativ, reduktion): 2H+(aq) + 2e- -\u003e H2(g). E = 0,00 V. Anod (positiv, oxidation): H2O(l) -\u003e 1/2 O2(g) + 2H+ + 2e-. E = +1,23 V. Teoretisk minsta spaning: 1,23 V (= EMK for den omvanda reaktionen). I praktiken kravs overspanning (ca 1,8-2,0 V) p.g.a. kinetiska barriarer (speciellt for O2-bildning). Overspanning: extra spaning utover det termodynamiska minimum som kravs for att fa reaktionen att ske med acceptabel hastighet vid en given elektrod. Katodreaktion: vid neg. elektrod: det amne som latt reduceras (hogst E-reduction) reduceras. Anodreaktion: vid pos. elektrod: det amne som latt oxideras (lagst E-oxidation) oxideras. Valje reaktion beror pa standardpotential + koncentration + overspanning.' },
   { id: 6086, cat: 'reduktion_oxidation', lv: 3, q: 'Forklara Nernst ekvation och hur cellspanningen paverkas av koncentrationen. Berakna E for Cu/Zn-cellen om [Zn2+] = 2,0 M och [Cu2+] = 0,010 M vid 25 C.', model: 'Nernst ekvation: E = E_std - (RT/nF) * ln(Q), vid 25 C forenklat: E = E_std - (0,0592/n) * log(Q). E_std = standard-EMK (alla konc = 1 M, gasar 1 atm). n = antal overfroda elektroner. Q = reaktionskvot (som K men med aktuella konc). Cu/Zn-cellen: Zn + Cu2+ -\u003e Zn2+ + Cu. E_std = +1,10 V. n = 2. Q = [Zn2+]/[Cu2+] = 2,0/0,010 = 200. E = 1,10 - (0,0592/2) * log(200) = 1,10 - 0,0296 * 2,301 = 1,10 - 0,0681 = 1,032 V. Tolkning: hog [Zn2+] och lag [Cu2+] minskar drivkraften (jamsikt narmar sig), sa E sjunker under E_std. Nar Q = K ar E = 0 (jamsikt, cellen ar urladdat). Anvandsomrade: pH-matning med glaselektrod ar en Nernst-baserad matning.' },
   { id: 6087, cat: 'reduktion_oxidation', lv: 3, q: 'Vad ar korrosion och hur kan den forhindras? Forklara galvanisk korrosion, passivering och katodiskt skydd med konkreta exempel.', model: 'Korrosion: ofrivillig oxidation av metaller i kontakt med en oxidant (vanligast O2 och H2O/H+). For jarn: Fe -\u003e Fe2+ + 2e- (oxidation vid anod), O2 + 2H2O + 4e- -\u003e 4OH- (reduktion vid katod), Fe2+ + 2OH- -\u003e Fe(OH)2 -\u003e Fe2O3*H2O (rost). Galvanisk korrosion: nar tva olika metaller star i elektrisk kontakt i en elektrolyt bildas en galvanisk cell. Den mindre ädla metallen (lagre E) korroderar fortare (ar anod). Exempel: stal + koppar i saltvatten -\u003e stålet korroderar snabbt. Passivering: vissa metaller (Al, Cr, Ti, rostfritt stal) bildar ett tatt oxidskikt som skyddar mot vidare korrosion. Al oxideras snabbt men Al2O3-skiktet ar tatt och stoppar fortsatt reaktion. Anodisering forstarker detta skikt konstgjort. Katodiskt skydd: man gor den skyddade metallen till katod antingen med en mer aktiv metall (offeranod, t.ex. Zn pa fartyg, stal i betong) eller med palaggd negativ strom. Zinken oxideras istallet for stalet.' },
-];
+];
 
 
 const TQ_CAT_INFO = {

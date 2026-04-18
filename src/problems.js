@@ -823,4 +823,92 @@ const PROBLEMS = [
     hint:'Beräkna oxidationstalet för Cl i Cl₂, NaCl och NaClO. Cl i Cl₂ = 0 (fritt grundämne). När ett ämne både oxideras och reduceras kallas det disproportionering.',
     steps:['Cl i Cl₂ = 0 (fritt grundämne)','Cl i NaCl: Na = +1, summan = 0 → Cl = −I','Cl i NaClO: Na = +1, O = −2, summan = 0 → +1 + x − 2 = 0 → Cl = +I','Cl₂(0) → NaCl(−I): minskar = REDUKTION; Cl₂(0) → NaClO(+I): ökar = OXIDATION','Svar: Ja – Cl₂ oxideras och reduceras samtidigt ✓ (disproportionering, A-nivå)'] },
 
+  { id:4221, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – MnO₄⁻ och Fe²⁺',
+    reaction:'MnO₄⁻ + Fe²⁺ + H⁺ → Mn²⁺ + Fe³⁺ + H₂O',
+    note:null,
+    rows:[
+      {label:'Mn i MnO₄⁻', before:'+VII', after:'+II'},
+      {label:'Fe i Fe²⁺',  before:'+II',  after:'+III'},
+      {label:'H i H⁺',     before:'+I',   after:'+I'},
+      {label:'O i MnO₄⁻',  before:'−II',  after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['MnO₄⁻','Fe²⁺','H⁺','H₂O'], correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['MnO₄⁻','Fe²⁺','H⁺','H₂O'], correct:0},
+    ],
+    hint:'Börja med Mn i MnO₄⁻: jonladdning = −1, O = −2 (×4). Sätt upp x + 4×(−2) = −1 → x = +7. Jämför varje atoms oxidationstal före/efter. Oxidation = ökar, reduktion = minskar. H och O ändras inte i denna reaktion.',
+    steps:['Mn i MnO₄⁻: x + 4×(−2) = −1 → x = +7 → +VII','Mn i Mn²⁺: +II','Mn: +VII → +II = minskar 5 steg = REDUKTION → MnO₄⁻ är oxidationsmedlet','Fe i Fe²⁺: +II; Fe i Fe³⁺: +III','Fe: +II → +III = ökar 1 steg = OXIDATION → Fe²⁺ är reduktionsmedlet','H i H⁺: +I (oförändrat); O i MnO₄⁻: −II (oförändrat)','Elektronbalans: 1 Mn tar upp 5 e⁻, 1 Fe avger 1 e⁻ → 5 Fe²⁺ per MnO₄⁻','Svar: Balanserad: MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O ✓'] },
+
+  { id:4222, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – Cr₂O₇²⁻ och SO₂',
+    reaction:'Cr₂O₇²⁻ + SO₂ → Cr³⁺ + SO₄²⁻',
+    note:null,
+    rows:[
+      {label:'Cr i Cr₂O₇²⁻', before:'+VI',  after:'+III'},
+      {label:'S i SO₂',       before:'+IV',  after:'+VI'},
+      {label:'O i Cr₂O₇²⁻',  before:'−II',  after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['Cr₂O₇²⁻','SO₂','Cr³⁺','SO₄²⁻'], correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['Cr₂O₇²⁻','SO₂','Cr³⁺','SO₄²⁻'], correct:0},
+    ],
+    hint:'Beräkna Cr i Cr₂O₇²⁻: 2 kromatomer, jonladdning = −2. Sätt upp 2x + 7×(−2) = −2. Beräkna sedan S i SO₂ (neutral molekyl) och S i SO₄²⁻ (jonladdning −2). Jämför och avgör vad som ökar respektive minskar.',
+    steps:['Cr i Cr₂O₇²⁻: 2x + 7×(−2) = −2 → 2x = 12 → x = +6 → +VI','Cr i Cr³⁺: +III; Cr: +VI → +III = minskar 3 steg = REDUKTION → Cr₂O₇²⁻ är oxidationsmedlet','S i SO₂: x + 2×(−2) = 0 → x = +4 → +IV','S i SO₄²⁻: x + 4×(−2) = −2 → x = +6 → +VI; S: +IV → +VI = ökar = OXIDATION → SO₂ är reduktionsmedlet','O i Cr₂O₇²⁻: −II (oförändrat)','Elektronbalans: varje Cr tar upp 3 e⁻ (2 Cr = 6 e⁻), varje S avger 2 e⁻ → 3 SO₂ per Cr₂O₇²⁻','Svar: Cr₂O₇²⁻ + 3SO₂ + 2H⁺ → 2Cr³⁺ + 3SO₄²⁻ + H₂O ✓'] },
+
+  { id:4223, lv:3, cat:'redox', type:'redox-table',
+    title:'Disproportionering – Cl₂ och NaOH (tabell)',
+    reaction:'Cl₂ + 2NaOH → NaCl + NaClO + H₂O',
+    note:'OBS: Cl₂ förekommer i två rader – samma ämne oxideras och reduceras (disproportionering).',
+    rows:[
+      {label:'Cl i Cl₂ → NaCl',  before:'0',   after:'−I'},
+      {label:'Cl i Cl₂ → NaClO', before:'0',   after:'+I'},
+      {label:'Na i NaOH',         before:'+I',  after:'+I'},
+      {label:'O i NaOH',          before:'−II', after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',  choices:['Cl₂','NaOH','NaCl','NaClO'], correct:0},
+      {q:'Vilket ämne reduceras?', choices:['Cl₂','NaOH','NaCl','NaClO'], correct:0},
+      {q:'Vad kallas det när samma ämne både oxideras och reduceras?', choices:['Neutralisation','Disproportionering','Kombination','Eliminering'], correct:1},
+    ],
+    hint:'Cl₂ är ett fritt grundämne → oxidationstal = 0. Beräkna Cl i NaCl (Na = +1, summan = 0) och Cl i NaClO (Na = +1, O = −2, summan = 0). Samma ämne kan både öka och minska – det kallas disproportionering.',
+    steps:['Cl i Cl₂: 0 (fritt grundämne)','Cl i NaCl: Na = +1, +1 + x = 0 → Cl = −I → REDUKTION','Cl i NaClO: Na = +1, O = −2, +1 + x − 2 = 0 → Cl = +I → OXIDATION','Cl₂ oxideras och reduceras SAMTIDIGT – kallas disproportionering (A-nivå)','Na i NaOH: +I (oförändrat); O i NaOH: −II (oförändrat)','Svar: Cl₂ disproportioneras – ett Cl⁻ och ett ClO⁻ bildas per Cl₂-molekyl ✓'] },
+
+  { id:4224, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – Cu och koncentrerad HNO₃',
+    reaction:'Cu + 4HNO₃(konc.) → Cu(NO₃)₂ + 2NO₂ + 2H₂O',
+    note:null,
+    rows:[
+      {label:'Cu',               before:'0',   after:'+II'},
+      {label:'N i HNO₃ → NO₂',  before:'+V',  after:'+IV'},
+      {label:'N i Cu(NO₃)₂',    before:'+V',  after:'+V'},
+      {label:'H i HNO₃',        before:'+I',  after:'+I'},
+      {label:'O i NO₂',         before:'−II', after:'−II'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',            choices:['Cu','HNO₃','Cu(NO₃)₂','NO₂'], correct:0},
+      {q:'Vilket ämne är oxidationsmedlet?', choices:['Cu','HNO₃','Cu(NO₃)₂','NO₂'], correct:1},
+    ],
+    hint:'Koppar är ett fritt grundämne → ox.tal = 0 före reaktionen. Beräkna N i HNO₃ och N i NO₂. OBS: N i Cu(NO₃)₂ ändrar INTE oxidationstal – nitratjonen är åskådare. Bara N i NO₂ deltar i redoxreaktionen.',
+    steps:['Cu: 0 → +II = ökar = OXIDATION → Cu är reduktionsmedlet','N i HNO₃: +1 + x + 3×(−2) = 0 → x = +5 → +V','N i NO₂: x + 2×(−2) = 0 → x = +4 → +IV; N: +V → +IV = minskar = REDUKTION → HNO₃ är oxidationsmedlet','N i Cu(NO₃)₂: fortfarande +V (nitratjonens N ändras ej – åskådare)','H i HNO₃: +I (åskådare); O i NO₂: −II (åskådare)','Elektronbalans: Cu avger 2 e⁻; varje N(+V→+IV) tar upp 1 e⁻ → 2 HNO₃ som ox.medel + 2 HNO₃ som syra = 4 HNO₃ totalt','Svar: Cu + 4HNO₃(konc.) → Cu(NO₃)₂ + 2NO₂ + 2H₂O ✓'] },
+
+  { id:4225, lv:3, cat:'redox', type:'redox-table',
+    title:'Redoxreaktion – K₂Cr₂O₇ och HCl',
+    reaction:'K₂Cr₂O₇ + 14HCl → 2KCl + 2CrCl₃ + 3Cl₂ + 7H₂O',
+    note:'OBS: HCl förekommer i två rader – en del Cl-atomer förblir −I (i KCl/CrCl₃), en annan del oxideras till 0 (i Cl₂).',
+    rows:[
+      {label:'Cr i K₂Cr₂O₇',         before:'+VI', after:'+III'},
+      {label:'Cl i HCl → KCl/CrCl₃', before:'−I',  after:'−I'},
+      {label:'Cl i HCl → Cl₂',        before:'−I',  after:'0'},
+      {label:'K i K₂Cr₂O₇',           before:'+I',  after:'+I'},
+      {label:'H i HCl',               before:'+I',  after:'+I'},
+    ],
+    extraQuestions:[
+      {q:'Vilket ämne oxideras?',                      choices:['K₂Cr₂O₇','HCl (Cl⁻)','KCl','Cl₂'],       correct:1},
+      {q:'Vilket ämne är oxidationsmedlet?',           choices:['K₂Cr₂O₇','HCl (Cl⁻)','KCl','Cl₂'],       correct:0},
+      {q:'Hur många elektroner tar varje Cr-atom upp?', choices:['1 elektron','2 elektroner','3 elektroner','6 elektroner'], correct:2},
+    ],
+    hint:'Beräkna Cr i K₂Cr₂O₇: K = +1, O = −2, neutral molekyl → 2×(+1) + 2x + 7×(−2) = 0. Titta noga på Cl – inte alla Cl-atomer i HCl oxideras. Räkna ut vilka Cl som hamnar i Cl₂ och vilka som stannar som Cl⁻.',
+    steps:['K₂Cr₂O₇: 2×(+1) + 2x + 7×(−2) = 0 → 2 + 2x − 14 = 0 → x = +6 → Cr = +VI','Cr i CrCl₃: +III; Cr: +VI → +III = minskar 3 steg = REDUKTION → varje Cr tar upp 3 e⁻','2 Cr-atomer totalt = 6 e⁻ tas upp','Cl i HCl: −I; Cl i Cl₂: 0; Cl: −I → 0 = ökar = OXIDATION → varje Cl avger 1 e⁻','Totalt 6 Cl oxideras → 3 Cl₂ bildas ✓','Cl i KCl och CrCl₃: −I (åskådare); K: +I (åskådare); H: +I (åskådare)','Svar: K₂Cr₂O₇ + 14HCl → 2KCl + 2CrCl₃ + 3Cl₂ + 7H₂O ✓'] },
+
 ];
