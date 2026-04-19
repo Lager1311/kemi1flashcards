@@ -2800,8 +2800,7 @@
           <button class="chem-cat-card" onclick="chemShowCat('dil')"><span class="chem-cat-card-icon">💧</span><span class="chem-cat-card-name">Utspädning</span><span class="chem-cat-card-desc">c₁V₁ = c₂V₂</span></button>
           <button class="chem-cat-card" onclick="chemShowCat('gas')"><span class="chem-cat-card-icon">💨</span><span class="chem-cat-card-name">Gas</span><span class="chem-cat-card-desc">pV=nRT, gaslagarna</span></button>
           <button class="chem-cat-card" onclick="chemShowCat('enthalpy')"><span class="chem-cat-card-icon">🔥</span><span class="chem-cat-card-name">Entalpi</span><span class="chem-cat-card-desc">Q, ΔH°rxn</span></button>
-          <button class="chem-cat-card" onclick="chemShowCat('elektro')"><span class="chem-cat-card-icon">⚡</span><span class="chem-cat-card-name">Elektrokemi</span><span class="chem-cat-card-desc">E°cell, laddning</span></button>
-          <button class="chem-cat-card" onclick="chemShowCat('jmvkt')"><span class="chem-cat-card-icon">⚖️</span><span class="chem-cat-card-name">Jämvikt</span><span class="chem-cat-card-desc">Q vs K, Le Chatelier</span></button>
+          <button class="chem-cat-card" onclick="chemShowCat('elektro')"><span class="chem-cat-card-icon">⚡</span><span class="chem-cat-card-name">Elektrokemi</span><span class="chem-cat-card-desc">E°cell</span></button>
           <button class="chem-cat-card" onclick="chemShowCat('stoik')"><span class="chem-cat-card-icon">📐</span><span class="chem-cat-card-name">Stökiometri</span><span class="chem-cat-card-desc">Molförhållande, utbyte</span></button>
           <button class="chem-cat-card" onclick="chemShowCat('molar')"><span class="chem-cat-card-icon">⚗️</span><span class="chem-cat-card-name">Molmassa</span><span class="chem-cat-card-desc">Formelräknare</span></button>
         </div>
@@ -13447,48 +13446,6 @@ function _buildChemPanels() {
     '</div>'+
     '<div class="chem-result" id="elResult"></div>'+
     '<div class="chem-error" id="elError"></div>'+
-    '<div class="chem-sub-section">'+
-      '<div class="chem-formula">Q = n\u2091 \u00d7 F = I \u00d7 t</div>'+
-      '<div class="chem-const-note">F = 96 485 C/mol (Faradays konstant)</div>'+
-      _cfr('elQ','Laddning (Q)','C')+
-      _cfr('elNe','Elektroner (n\u2091)','mol')+
-      _cfr('elI','Ström (I)','A')+
-      _cfr('elT','Tid (t)','s')+
-      '<div class="chem-btn-row">'+
-        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'Q\')">Beräkna Q</button>'+
-        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'ne\')">Beräkna n\u2091</button>'+
-        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'I\')">Beräkna I</button>'+
-        '<button class="chem-calc-btn" onclick="chemCalcCharge(\'t\')">Beräkna t</button>'+
-        '<button class="chem-clear-btn" onclick="chemClear(\'elC\')">Rensa</button>'+
-      '</div>'+
-      '<div class="chem-result" id="elCResult"></div>'+
-      '<div class="chem-error" id="elCError"></div>'+
-    '</div>'+
-    '</div>'+
-  '</div>'+
-  // ── JÄMVIKT
-  '<div class="chem-panel" id="chemTool-jmvkt">'+
-    _BACK+
-    '<div style="padding:18px 20px">'+
-    '<div class="chem-formula">Q vs K \u2014 reaktionsriktning</div>'+
-    _cfr('qkQ','Reaktionskvot (Q)','')+
-    _cfr('qkK','Jämviktskonstant (K)','')+
-    '<div class="chem-btn-row">'+
-      '<button class="chem-calc-btn" onclick="chemCalcQK()">Bestäm riktning</button>'+
-      '<button class="chem-clear-btn" onclick="chemClear(\'qk\')">Rensa</button>'+
-    '</div>'+
-    '<div class="chem-result" id="qkResult"></div>'+
-    '<div class="chem-error" id="qkError"></div>'+
-    '<div class="chem-sub-section">'+
-      '<div class="chem-info-box">'+
-        '<strong>Le Chateliers princip</strong><br>'+
-        'Om ett system i jämvikt utsätts för en störning, förskjuts jämvikten för att motverka störningen.<br><br>'+
-        '<strong>Koncentration \u2191 (reaktant):</strong> Jämvikt förskjuts fram\u00e5t<br>'+
-        '<strong>Koncentration \u2191 (produkt):</strong> Jämvikt förskjuts bak\u00e5t<br>'+
-        '<strong>Tryck \u2191 (gas):</strong> F\u00f6rskjuts mot f\u00e4rre mol gas<br>'+
-        '<strong>Temperatur \u2191:</strong> F\u00f6rskjuts \u00e5t det endoterma h\u00e5llet'+
-      '</div>'+
-    '</div>'+
     '</div>'+
   '</div>'+
   // ── STÖKIOMETRI
