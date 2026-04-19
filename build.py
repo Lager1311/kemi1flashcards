@@ -11,6 +11,7 @@ template_path = os.path.join(src, 'main-template.html')
 tq_path       = os.path.join(src, 'theory-questions.js')
 prob_path     = os.path.join(src, 'problems.js')
 out_path      = os.path.join(base, 'kemi1-flashcards.html')
+index_path    = os.path.join(base, 'index.html')
 
 def read(path):
     with open(path, 'r', encoding='utf-8') as f:
@@ -33,7 +34,9 @@ result = result.replace('/* @@THEORY_QUESTIONS@@ */', tq_text)
 
 with open(out_path, 'w', encoding='utf-8') as f:
     f.write(result)
+with open(index_path, 'w', encoding='utf-8') as f:
+    f.write(result)
 
-print(f'Byggd: {out_path}')
+print(f'Byggd: {out_path} + {index_path}')
 print(f'Storlek: {len(result):,} tecken')
 print('Klar!')
