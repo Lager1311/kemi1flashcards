@@ -856,27 +856,31 @@
 
   /* ── Periodic table screen ── */
   .periodic-wrap {
-    overflow-x: auto; padding-bottom: 12px; -webkit-overflow-scrolling: touch;
+    overflow-x: auto; padding-bottom: 16px; -webkit-overflow-scrolling: touch;
   }
+  .periodic-wrap::-webkit-scrollbar { height: 5px; }
+  .periodic-wrap::-webkit-scrollbar-track { background: transparent; }
+  .periodic-wrap::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
   .periodic-grid {
-    display: grid; grid-template-columns: repeat(18, 44px);
-    grid-template-rows: repeat(9, 54px); gap: 2px;
-    min-width: 808px; padding: 4px;
+    display: grid; grid-template-columns: repeat(18, 56px);
+    grid-template-rows: repeat(9, 66px); gap: 3px;
+    min-width: 1026px; padding: 4px;
   }
   .el-cell {
-    border-radius: 6px; cursor: pointer; padding: 2px 3px;
+    border-radius: 8px; cursor: pointer; padding: 3px 4px;
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; transition: all 0.15s; border: 1px solid rgba(0,0,0,0.1);
-    font-size: 0.7rem; position: relative; user-select: none;
+    justify-content: center; transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1); font-size: 0.8rem; position: relative; user-select: none;
   }
-  .el-cell:hover { transform: scale(1.12); z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
-  .el-z { font-size: 0.55rem; color: rgba(0,0,0,0.55); line-height: 1; align-self: flex-start; }
-  .el-sym { font-size: 0.95rem; font-weight: 800; line-height: 1; }
-  .el-name { font-size: 0.48rem; line-height: 1.1; text-align: center; opacity: 0.8; }
-  .el-mass { font-size: 0.48rem; opacity: 0.7; }
+  .el-cell:hover { transform: translateY(-3px); z-index: 10; box-shadow: 0 6px 16px rgba(0,0,0,0.2), 0 0 0 2px var(--cat-glow, #6366f1); }
+  .el-cell.dimmed { opacity: 0.25; }
+  .el-z { font-size: 0.6rem; font-weight: 700; color: rgba(0,0,0,0.6); line-height: 1; align-self: flex-start; }
+  .el-sym { font-size: 1.1rem; font-weight: 800; line-height: 1; }
+  .el-name { font-size: 0.52rem; line-height: 1.1; text-align: center; opacity: 0.8; }
+  .el-mass { font-size: 0.52rem; opacity: 0.7; }
   .el-placeholder {
-    border-radius: 6px; display: flex; align-items: center; justify-content: center;
-    font-size: 0.62rem; font-weight: 700; color: var(--text2); background: var(--surface2);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; color: var(--text2); background: var(--surface2);
     border: 1px dashed var(--border); cursor: default;
   }
   .cat-al  { background: #fecaca; } .cat-ae { background: #fed7aa; }
@@ -896,36 +900,63 @@
   [data-theme="dark"] .cat-la { background: #3b0764; }
   [data-theme="dark"] .cat-ac { background: #1e1b4b; }
   [data-theme="dark"] .cat-un { background: #1e293b; }
-  [data-theme="dark"] .el-z  { color: rgba(255,255,255,0.5); }
+  [data-theme="dark"] .el-z  { color: rgba(255,255,255,0.55); }
 
   .periodic-legend {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;
   }
-  .legend-item {
-    display: flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 500;
+  .legend-tag {
+    padding: 4px 12px; border-radius: 20px; border: 2px solid transparent;
+    cursor: pointer; font-size: 0.72rem; font-weight: 600;
+    transition: filter 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    background-clip: padding-box;
   }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .legend-tag:hover { filter: brightness(0.88); }
+  .legend-tag.active { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
+
+  .periodic-search {
+    width: 100%; padding: 10px 16px; border-radius: 12px;
+    border: 2px solid var(--border); background: var(--surface2);
+    color: var(--text); font-size: 1rem;
+    outline: none; transition: border-color 0.2s ease; box-sizing: border-box;
+    margin-bottom: 12px; display: block;
+  }
+  .periodic-search:focus { border-color: var(--accent); }
 
   /* Element modal */
+  @keyframes elModalIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
   .el-modal-backdrop {
     position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 500;
     display: flex; align-items: center; justify-content: center; padding: 20px;
     display: none;
   }
   .el-modal-backdrop.open { display: flex; }
+  .el-modal-backdrop.open .el-modal { animation: elModalIn 0.2s ease; }
   .el-modal {
     background: var(--surface); border-radius: 20px; padding: 28px;
     max-width: 380px; width: 100%; box-shadow: var(--shadow-lg); position: relative;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border); overflow: hidden;
   }
+  @media (max-width: 600px) { .el-modal { max-width: 90vw; } }
   .el-modal-close {
-    position: absolute; top: 14px; right: 14px; background: var(--surface2);
+    position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.25);
     border: none; border-radius: 8px; cursor: pointer;
-    font-size: 0.85rem; color: var(--text2);
+    font-size: 0.85rem; color: var(--text);
     min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease; z-index: 2;
   }
-  .el-modal-sym { font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1; }
-  .el-modal-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 4px; }
+  .el-modal-close:hover { background: rgba(255,255,255,0.4); }
+  .el-modal-header {
+    margin: -28px -28px 20px -28px; padding: 28px 28px 20px;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .el-modal-sym { font-size: 5rem; font-weight: 900; line-height: 1; color: rgba(0,0,0,0.75); }
+  .el-modal-name { font-size: 1.15rem; font-weight: 700; color: rgba(0,0,0,0.7); margin-top: 4px; }
+  [data-theme="dark"] .el-modal-sym { color: rgba(255,255,255,0.85); }
+  [data-theme="dark"] .el-modal-name { color: rgba(255,255,255,0.75); }
   .el-modal-z { font-size: 0.85rem; color: var(--text2); margin-bottom: 16px; }
   .el-modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .el-modal-item { background: var(--surface2); border-radius: 10px; padding: 10px 12px; }
@@ -936,10 +967,10 @@
     font-weight: 600; margin-top: 12px;
   }
   .period-group-labels {
-    display: flex; gap: 2px; min-width: 808px; padding: 0 4px; margin-bottom: 2px;
+    display: flex; gap: 3px; min-width: 1026px; padding: 0 4px; margin-bottom: 2px;
   }
   .pg-label {
-    width: 44px; text-align: center; font-size: 0.6rem; font-weight: 600;
+    width: 56px; text-align: center; font-size: 0.6rem; font-weight: 600;
     color: var(--text2); flex-shrink: 0;
   }
 
@@ -2816,6 +2847,9 @@
       <div class="section-header-text">Periodiska systemet</div>
     </div>
     <div class="periodic-legend" id="periodicLegend"></div>
+    <input type="search" class="periodic-search" id="periodicSearch"
+      placeholder="Sök grundämne (namn eller symbol)…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
     <div class="periodic-wrap">
       <div class="period-group-labels" id="groupLabels"></div>
       <div class="periodic-grid" id="periodicGrid"></div>
@@ -9086,21 +9120,61 @@ ELEMENTS_RAW.forEach(([z,sym,name,mass,en,cat,row,col]) => {
   ELEMENTS_MAP[z] = {z,sym,name,mass,en,cat,row,col};
 });
 
+const CAT_GLOW = {
+  nm:'#ca8a04', nb:'#e11d48', ak:'#dc2626', ae:'#ea580c',
+  ml:'#16a34a', hl:'#7c3aed', tr:'#1d4ed8', pt:'#0891b2',
+  ln:'#7c3aed', ac:'#4338ca'
+};
+
 function initPeriodic() {
   const grid = document.getElementById('periodicGrid');
   if (!grid || grid.children.length > 0) return;
 
+  let _activeCat = null;
+
+  function _applyFilters() {
+    const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+    grid.querySelectorAll('.el-cell:not(.el-placeholder)').forEach(cell => {
+      const cat = cell.dataset.cat;
+      const z = parseInt(cell.querySelector('.el-z') && cell.querySelector('.el-z').textContent);
+      const el = ELEMENTS_MAP[z];
+      const matchCat = !_activeCat || cat === _activeCat;
+      const matchSearch = !q || (el && (
+        el.sym.toLowerCase().startsWith(q) ||
+        el.name.toLowerCase().includes(q)
+      ));
+      cell.classList.toggle('dimmed', !(matchCat && matchSearch));
+    });
+  }
+
   const legend = document.getElementById('periodicLegend');
   if (legend) {
-    legend.innerHTML = Object.values(EL_CAT).map(v =>
-      `<span class="legend-item"><span class="legend-dot ${v.cls}"></span>${v.label}</span>`
+    legend.innerHTML = Object.entries(EL_CAT).map(([k,v]) =>
+      `<button class="legend-tag ${v.cls}" data-cat="${k}">${v.label}</button>`
     ).join('');
+    legend.addEventListener('click', e => {
+      const btn = e.target.closest('.legend-tag');
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      _activeCat = _activeCat === cat ? null : cat;
+      legend.querySelectorAll('.legend-tag').forEach(b =>
+        b.classList.toggle('active', b.dataset.cat === _activeCat));
+      _applyFilters();
+    });
   }
 
   const grpLabels = document.getElementById('groupLabels');
   if (grpLabels) {
     grpLabels.innerHTML = Array.from({length:18},(_,i) =>
       `<div class="pg-label">${i+1}</div>`).join('');
+  }
+
+  const searchInput = document.getElementById('periodicSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', _applyFilters);
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { searchInput.value = ''; _applyFilters(); }
+    });
   }
 
   // f-block placeholders in main table
@@ -9121,6 +9195,8 @@ function initPeriodic() {
     const cell = document.createElement('div');
     cell.className = `el-cell ${c.cls}`;
     cell.style.cssText = `grid-column:${col};grid-row:${row};`;
+    cell.dataset.cat = cat;
+    cell.style.setProperty('--cat-glow', CAT_GLOW[cat] || '#6366f1');
     cell.innerHTML = `<span class="el-z">${z}</span><span class="el-sym">${sym}</span>` +
       `<span class="el-name">${name}</span>` +
       (en != null ? `<span class="el-mass">${en}</span>` : '');
@@ -9136,8 +9212,10 @@ function showElementModal(z) {
   const period = el.row <= 7 ? el.row : el.row === 8 ? 6 : 7;
   const content = document.getElementById('elModalContent');
   content.innerHTML = `
-    <div class="el-modal-sym">${el.sym}</div>
-    <div class="el-modal-name">${el.name}</div>
+    <div class="el-modal-header ${c.cls}">
+      <div class="el-modal-sym">${el.sym}</div>
+      <div class="el-modal-name">${el.name}</div>
+    </div>
     <div class="el-modal-z">Atomnummer ${el.z} &bull; Atommassa ${el.mass} u</div>
     <div class="el-modal-grid">
       <div class="el-modal-item"><div class="el-modal-label">Period</div><div class="el-modal-value">${period}</div></div>
@@ -9147,10 +9225,10 @@ function showElementModal(z) {
     </div>
     ${el.en != null ? `<div style="margin-top:14px">
       <div class="el-modal-label" style="margin-bottom:6px">EN-skala (Pauling, 0\u20134,0)</div>
-      <div style="background:var(--surface2);border-radius:8px;height:14px;overflow:hidden">
-        <div style="height:100%;width:${(el.en/4)*100}%;background:linear-gradient(90deg,#3b82f6,#ef4444)"></div>
+      <div style="background:var(--surface2);border-radius:8px;height:16px;overflow:hidden">
+        <div style="height:100%;width:${(el.en/4)*100}%;background:linear-gradient(90deg,#3b82f6,#a855f7,#ef4444);border-radius:8px"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text2);margin-top:3px"><span>0</span><span>4,0 (F)</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text2);margin-top:3px"><span>0 (låg)</span><span>4,0 – F (hög)</span></div>
     </div>` : ''}
     <span class="el-modal-cat-badge ${c.cls}" style="margin-top:14px;display:inline-block">${c.label}</span>`;
 
