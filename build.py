@@ -10,6 +10,7 @@ src  = os.path.join(base, 'src')
 template_path = os.path.join(src, 'main-template.html')
 tq_path       = os.path.join(src, 'theory-questions.js')
 prob_path     = os.path.join(src, 'problems.js')
+tg_path       = os.path.join(src, 'teori-fran-grunden-content.js')
 out_path      = os.path.join(base, 'kemi1-flashcards.html')
 index_path    = os.path.join(base, 'index.html')
 
@@ -20,6 +21,7 @@ def read(path):
 template   = read(template_path)
 tq_text    = read(tq_path).rstrip('\n')
 prob_text  = read(prob_path).rstrip('\n')
+tg_text    = read(tg_path).rstrip('\n')
 
 # Ersätt platshållare
 if '/* @@PROBLEMS@@ */' not in template:
@@ -28,9 +30,13 @@ if '/* @@PROBLEMS@@ */' not in template:
 if '/* @@THEORY_QUESTIONS@@ */' not in template:
     print('FEL: Platshållare @@THEORY_QUESTIONS@@ saknas i mallen!')
     sys.exit(1)
+if '/* @@TEORI_GRUND_CONTENT@@ */' not in template:
+    print('FEL: Platshållare @@TEORI_GRUND_CONTENT@@ saknas i mallen!')
+    sys.exit(1)
 
 result = template.replace('/* @@PROBLEMS@@ */',          prob_text)
 result = result.replace('/* @@THEORY_QUESTIONS@@ */', tq_text)
+result = result.replace('/* @@TEORI_GRUND_CONTENT@@ */', tg_text)
 
 with open(out_path, 'w', encoding='utf-8') as f:
     f.write(result)

@@ -2313,6 +2313,55 @@
   .calc-btn { height:44px; font-size:0.88rem; }
 }
 
+/* ── Teori undertabs ── */
+.theory-subtabs { display:flex; gap:0; background:var(--surface2); border-radius:var(--radius-sm); overflow:hidden; margin:0 16px 16px; }
+.theory-subtab { flex:1; padding:12px 8px; border:none; background:transparent; color:var(--text2); font-weight:600; font-size:0.9rem; cursor:pointer; transition:var(--transition); font-family:inherit; }
+.theory-subtab.active { background:var(--accent-grad); color:#fff; }
+.theory-subpanel { display:none; }
+.theory-subpanel.active { display:block; }
+
+/* ── Teori från grunden (tg-) ── */
+.tg-search-wrap { display:flex; align-items:center; gap:8px; padding:10px 16px; border-bottom:1px solid var(--border); background:var(--surface); }
+.tg-search-input { flex:1; padding:8px 12px; border:1.5px solid var(--border); border-radius:var(--radius-sm); background:var(--surface2); color:var(--text); font-family:inherit; font-size:0.9rem; outline:none; transition:border-color var(--transition); }
+.tg-search-input:focus { border-color:var(--accent); }
+.tg-search-count { font-size:0.8rem; color:var(--text2); white-space:nowrap; min-width:60px; text-align:right; }
+.tg-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:199; }
+.tg-overlay.active { display:block; }
+.tg-mobile-btn { display:none; align-items:center; gap:6px; padding:7px 12px; background:var(--surface2); border:1.5px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-size:0.82rem; font-weight:600; cursor:pointer; white-space:nowrap; font-family:inherit; flex-shrink:0; }
+.tg-wrap { display:flex; height:calc(100dvh - 230px); overflow:hidden; }
+.tg-sidebar { width:250px; flex-shrink:0; overflow-y:auto; border-right:1px solid var(--border); padding:12px 0; background:var(--surface); }
+.tg-sidebar-label { padding:10px 14px 3px; font-size:0.68rem; font-weight:700; text-transform:uppercase; color:var(--text2); letter-spacing:0.06em; }
+.tg-sidebar a { display:block; padding:5px 14px; color:var(--text2); text-decoration:none; font-size:0.82rem; border-radius:6px; margin:1px 6px; transition:background var(--transition),color var(--transition); }
+.tg-sidebar a:hover { background:var(--accent-light); color:var(--accent); }
+.tg-sidebar a.active { background:var(--accent-light); color:var(--accent); font-weight:600; }
+.tg-sidebar a.sub { padding-left:24px; font-size:0.78rem; }
+.tg-main { flex:1; overflow-y:auto; padding:24px 28px 100px; }
+.tg-progress { position:sticky; top:0; left:0; right:0; height:3px; background:var(--accent-grad); width:0%; z-index:5; margin:-24px -28px 20px; transition:width 0.1s linear; }
+.tg-main h1 { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:1.6rem; color:var(--accent); margin-bottom:8px; }
+.tg-main h2 { font-family:'Plus Jakarta Sans','Inter',sans-serif; font-size:1.25rem; color:var(--accent2); border-bottom:2px solid var(--border); padding-bottom:6px; margin-top:36px; scroll-margin-top:16px; }
+.tg-main h3 { font-size:1.05rem; color:var(--accent-dark); margin-top:24px; scroll-margin-top:16px; }
+.tg-main h4 { font-size:0.95rem; color:var(--text); font-weight:700; margin-top:16px; }
+.tg-main p { line-height:1.7; color:var(--text); margin-bottom:12px; }
+.tg-main ul,.tg-main ol { padding-left:20px; line-height:1.7; color:var(--text); margin-bottom:12px; }
+.tg-main blockquote { border-left:4px solid var(--accent2); background:var(--accent-light); padding:12px 16px; border-radius:0 var(--radius-sm) var(--radius-sm) 0; margin:16px 0; }
+.tg-main blockquote h3 { color:var(--accent2); margin-top:0; }
+.tg-main table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.88rem; }
+.tg-main th { background:var(--accent-grad); color:#fff; padding:8px 12px; text-align:left; font-weight:600; }
+.tg-main td { border:1px solid var(--border); padding:8px 12px; color:var(--text); }
+.tg-main tr:nth-child(even) td { background:var(--surface2); }
+.tg-main code { background:var(--surface2); border:1px solid var(--border); padding:2px 5px; border-radius:4px; font-family:'Courier New',monospace; font-size:0.87em; }
+.tg-main pre { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; overflow-x:auto; margin:12px 0; }
+.tg-main pre code { border:none; padding:0; background:transparent; }
+.tg-main mark { background:#fef08a; border-radius:2px; padding:0 2px; color:#000; }
+@media(max-width:680px){
+  .tg-mobile-btn { display:flex; }
+  .tg-sidebar { position:fixed; left:-270px; top:0; height:100dvh; width:250px; z-index:200; background:var(--surface); transition:left 0.25s cubic-bezier(0.4,0,0.2,1); box-shadow:var(--shadow-lg); padding-top:env(safe-area-inset-top,0px); }
+  .tg-sidebar.open { left:0; }
+  .tg-wrap { height:calc(100dvh - 200px); }
+  .tg-main { padding:16px 14px 100px; }
+  .tg-progress { margin:-16px -14px 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -2870,16 +2919,84 @@
       <button class="back-btn" id="theoryBackBtn">← Hem</button>
       <div style="font-weight:700;font-size:1.1rem;">📖 Teorigenomgång</div>
     </div>
-    <div class="theory-nav" id="theoryNav"></div>
-    <div class="theory-search-wrap">
-      <div class="theory-search-box">
-        <span class="theory-search-icon">🔍</span>
-        <input type="text" id="theorySearchInput" class="theory-search-input" placeholder="Sök efter begrepp eller ämne... ex: oxidationstal, pH, alkaner" autocomplete="off">
-        <button class="theory-search-clear" id="theorySearchClear" style="display:none" title="Rensa sökning">✕</button>
-      </div>
-      <div class="theory-search-results" id="theorySearchResults" style="display:none"></div>
+    <div class="theory-subtabs">
+      <button class="theory-subtab active" onclick="tgSwitchTab('snabb')">Snabbreferens</button>
+      <button class="theory-subtab" onclick="tgSwitchTab('grund')">Teori från grunden</button>
     </div>
-    <div class="theory-content" id="theoryContent"></div>
+    <div class="theory-subpanel active" id="teorypanel-snabb">
+      <div class="theory-nav" id="theoryNav"></div>
+      <div class="theory-search-wrap">
+        <div class="theory-search-box">
+          <span class="theory-search-icon">🔍</span>
+          <input type="text" id="theorySearchInput" class="theory-search-input" placeholder="Sök efter begrepp eller ämne... ex: oxidationstal, pH, alkaner" autocomplete="off">
+          <button class="theory-search-clear" id="theorySearchClear" style="display:none" title="Rensa sökning">✕</button>
+        </div>
+        <div class="theory-search-results" id="theorySearchResults" style="display:none"></div>
+      </div>
+      <div class="theory-content" id="theoryContent"></div>
+    </div>
+    <div class="theory-subpanel" id="teorypanel-grund">
+      <div class="tg-search-wrap">
+        <button class="tg-mobile-btn" onclick="tgToggleSidebar()">☰ Innehåll</button>
+        <input class="tg-search-input" id="tgSearchInput" placeholder="Sök i teorin… ex: pH, oxidation, mol" oninput="tgSearch(this.value)" autocomplete="off">
+        <span class="tg-search-count" id="tgSearchCount"></span>
+      </div>
+      <div class="tg-overlay" id="tgOverlay" onclick="tgCloseSidebar()"></div>
+      <div class="tg-wrap">
+        <nav class="tg-sidebar" id="tgSidebar">
+          <div class="tg-sidebar-label">Översikt</div>
+          <a href="#rd-trd--din-mentala-karta-innan-du-brjar" onclick="tgScrollTo(this)">🗺️ Röd tråd</a>
+          <a href="#kursversikt--hur-delarna-hnger-ihop" onclick="tgScrollTo(this)">🔗 Kursöversikt</a>
+          <div class="tg-sidebar-label">Del 1 – Atomer & periodiska systemet</div>
+          <a href="#del-1-grunderna--atomer-mnen-och-periodiska-systemet" onclick="tgScrollTo(this)">Del 1: Introduktion</a>
+          <a href="#1-vad-r-materia" class="sub" onclick="tgScrollTo(this)">1. Vad är materia?</a>
+          <a href="#2-atomens-uppbyggnad" class="sub" onclick="tgScrollTo(this)">2. Atomens uppbyggnad</a>
+          <a href="#3-grundmnen-kemiska-freningar-och-blandningar" class="sub" onclick="tgScrollTo(this)">3. Grundämnen &amp; föreningar</a>
+          <a href="#4-periodiska-systemet" class="sub" onclick="tgScrollTo(this)">4. Periodiska systemet</a>
+          <a href="#5-elektronskal-och-valenselektroner" class="sub" onclick="tgScrollTo(this)">5. Elektronskal &amp; valenselektroner</a>
+          <a href="#6-delgasregeln-och-oktettregeln" class="sub" onclick="tgScrollTo(this)">6. Oktettregeln</a>
+          <a href="#7-elektronkonfiguration" class="sub" onclick="tgScrollTo(this)">7. Elektronkonfiguration</a>
+          <a href="#8-isotoper-och-atommassa" class="sub" onclick="tgScrollTo(this)">8. Isotoper &amp; atommassa</a>
+          <div class="tg-sidebar-label">Del 2 – Kemiska bindningar</div>
+          <a href="#del-2-kemiska-bindningar--alla-typer" onclick="tgScrollTo(this)">Del 2: Introduktion</a>
+          <a href="#1-jonbindning" class="sub" onclick="tgScrollTo(this)">1. Jonbindning</a>
+          <a href="#2-kovalent-bindning" class="sub" onclick="tgScrollTo(this)">2. Kovalent bindning</a>
+          <a href="#3-metallbindning" class="sub" onclick="tgScrollTo(this)">3. Metallbindning</a>
+          <a href="#4-intermolekylra-krafter" class="sub" onclick="tgScrollTo(this)">4. Intermolekylära krafter</a>
+          <a href="#5-jmfrelsetabell-alla-bindningstyper" class="sub" onclick="tgScrollTo(this)">5. Jämförelsetabell</a>
+          <div class="tg-sidebar-label">Del 3 – Kemiska reaktioner</div>
+          <a href="#del-3-kemiska-reaktioner--alla-typer-och-mekanismer" onclick="tgScrollTo(this)">Del 3: Introduktion</a>
+          <a href="#1-vad-r-en-kemisk-reaktion" class="sub" onclick="tgScrollTo(this)">1. Vad är en kemisk reaktion?</a>
+          <a href="#2-syntesreaktioner-kombinationsreaktioner-a--b--ab" class="sub" onclick="tgScrollTo(this)">2. Syntesreaktioner</a>
+          <a href="#3-snderfall-decomposition-ab--a--b" class="sub" onclick="tgScrollTo(this)">3. Sönderfall</a>
+          <a href="#4-substitutionsreaktioner-enkla-och-dubbla" class="sub" onclick="tgScrollTo(this)">4. Substitution</a>
+          <a href="#5-frbrnning" class="sub" onclick="tgScrollTo(this)">5. Förbränning</a>
+          <a href="#6-neutralisationsreaktioner" class="sub" onclick="tgScrollTo(this)">6. Neutralisation</a>
+          <a href="#7-syra-bas-kemi" class="sub" onclick="tgScrollTo(this)">7. Syra-bas &amp; pH</a>
+          <a href="#8-redoxreaktioner" class="sub" onclick="tgScrollTo(this)">8. Redoxreaktioner</a>
+          <a href="#9-kemisk-jmvikt-och-le-chateliers-princip" class="sub" onclick="tgScrollTo(this)">9. Jämvikt &amp; Le Chatelier</a>
+          <div class="tg-sidebar-label">Del 4 – Beräkningar</div>
+          <a href="#del-4-berkningar-stökiometri-och-laborationsskerhet" onclick="tgScrollTo(this)">Del 4: Introduktion</a>
+          <a href="#1-mol-avogadros-tal-och-molmassa" class="sub" onclick="tgScrollTo(this)">1. Mol &amp; molmassa</a>
+          <a href="#2-stökiometri" class="sub" onclick="tgScrollTo(this)">2. Stökiometri</a>
+          <a href="#3-koncentration-och-spädning" class="sub" onclick="tgScrollTo(this)">3. Koncentration &amp; spädning</a>
+          <a href="#4-gaslagar" class="sub" onclick="tgScrollTo(this)">4. Gaslagar</a>
+          <a href="#5-termokemi" class="sub" onclick="tgScrollTo(this)">5. Termokemi</a>
+          <a href="#6-laborationsskerhet-och-ghs" class="sub" onclick="tgScrollTo(this)">6. Laborationssäkerhet</a>
+          <div class="tg-sidebar-label">Avslutning</div>
+          <a href="#nyckelbegrepp--ordlista" onclick="tgScrollTo(this)">📖 Ordlista</a>
+          <a href="#s-hnger-allt-ihop" onclick="tgScrollTo(this)">🔗 Hur allt hänger ihop</a>
+        </nav>
+        <div class="tg-main" id="tgMain">
+          <div class="tg-progress" id="tgProgress"></div>
+          <div id="tgContentArea"></div>
+          <div id="tgNoResults" style="display:none;text-align:center;padding:48px 16px;color:var(--text2);">
+            <div style="font-size:2rem">🔍</div>
+            <p>Inga resultat för din sökning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -12507,6 +12624,122 @@ function _buildChemPanels() {
     '</div>'+
   '</div>'
   );
+}
+</script>
+
+<script>
+// ── Teori från grunden ──
+/* @@TEORI_GRUND_CONTENT@@ */
+
+let _tgInited = false;
+
+function tgSwitchTab(name) {
+  document.querySelectorAll('.theory-subtab').forEach(function(t) {
+    t.classList.toggle('active', t.textContent.trim() === (name === 'snabb' ? 'Snabbreferens' : 'Teori från grunden'));
+  });
+  document.querySelectorAll('.theory-subpanel').forEach(function(p) {
+    p.classList.toggle('active', p.id === 'teorypanel-' + name);
+  });
+  if (name === 'grund' && !_tgInited) tgInit();
+}
+
+function tgInit() {
+  _tgInited = true;
+  document.getElementById('tgContentArea').innerHTML = TG_RAW_HTML;
+  tgSetupObserver();
+  tgSetupScroll();
+}
+
+function tgScrollTo(el) {
+  var href = el.getAttribute('href');
+  var id = href.replace('#', '');
+  var target = document.getElementById('tgContentArea').querySelector('[id="' + id + '"]');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (window.innerWidth <= 680) tgCloseSidebar();
+  }
+  return false;
+}
+
+var _tgSearchTimer;
+function tgSearch(q) {
+  clearTimeout(_tgSearchTimer);
+  _tgSearchTimer = setTimeout(function() { tgRunSearch(q); }, 200);
+}
+
+function tgRunSearch(q) {
+  var area = document.getElementById('tgContentArea');
+  var noRes = document.getElementById('tgNoResults');
+  area.innerHTML = TG_RAW_HTML;
+  var countEl = document.getElementById('tgSearchCount');
+  if (!q.trim()) {
+    area.style.display = '';
+    noRes.style.display = 'none';
+    countEl.textContent = '';
+    return;
+  }
+  var re = new RegExp(tgEscRe(q), 'gi');
+  var hits = 0;
+  function walk(node) {
+    if (node.nodeType === 3) {
+      var m = node.textContent.match(re);
+      if (m) {
+        hits += m.length;
+        var s = document.createElement('span');
+        s.innerHTML = node.textContent.replace(re, function(t) { return '<mark>' + t + '</mark>'; });
+        node.parentNode.replaceChild(s, node);
+      }
+    } else if (!['SCRIPT','STYLE','MARK'].includes(node.nodeName)) {
+      Array.from(node.childNodes).forEach(walk);
+    }
+  }
+  walk(area);
+  countEl.textContent = hits ? hits + ' träffar' : '';
+  noRes.style.display = hits ? 'none' : '';
+  area.style.display = hits ? '' : 'none';
+  if (hits) {
+    var first = area.querySelector('mark');
+    if (first) first.scrollIntoView({ block: 'center' });
+  }
+}
+
+function tgEscRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function tgToggleSidebar() {
+  document.getElementById('tgSidebar').classList.toggle('open');
+  document.getElementById('tgOverlay').classList.toggle('active');
+}
+function tgCloseSidebar() {
+  document.getElementById('tgSidebar').classList.remove('open');
+  document.getElementById('tgOverlay').classList.remove('active');
+}
+
+function tgSetupObserver() {
+  var links = document.querySelectorAll('.tg-sidebar a');
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var id = e.target.id;
+        links.forEach(function(a) {
+          var href = a.getAttribute('href') || '';
+          a.classList.toggle('active', href === '#' + id);
+        });
+      }
+    });
+  }, { root: document.getElementById('tgMain'), rootMargin: '-10% 0px -75% 0px' });
+  document.querySelectorAll('#tgContentArea h2[id], #tgContentArea h3[id]').forEach(function(h) {
+    obs.observe(h);
+  });
+}
+
+function tgSetupScroll() {
+  var main = document.getElementById('tgMain');
+  var bar = document.getElementById('tgProgress');
+  main.addEventListener('scroll', function() {
+    var pct = main.scrollHeight - main.clientHeight;
+    bar.style.width = (pct > 0 ? (main.scrollTop / pct * 100) : 0) + '%';
+  });
 }
 </script>
 
