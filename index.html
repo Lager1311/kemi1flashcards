@@ -80,8 +80,14 @@
   }
 
   /* ── Layout ── */
-  .app { max-width: 800px; margin: 0 auto; padding: 16px; }
-  body:has(#periodicScreen.active) .app { max-width: 100%; }
+  .app { max-width: 100%; width: 100%; padding: 16px 32px; }
+  body:has(#periodicScreen.active) .app { padding: 16px; }
+  @media (max-width: 768px) { .app { padding: 16px; } }
+
+  /* ── Global overflow protection ── */
+  .screen table { display: block; overflow-x: auto; max-width: 100%; }
+  .screen p, .screen li, .screen td, .screen th { word-break: break-word; }
+  img { max-width: 100%; height: auto; }
 
   /* ── Header ── */
   header {
