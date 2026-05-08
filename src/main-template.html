@@ -254,15 +254,23 @@
 
   /* ── Category grid ── */
   .category-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 10px; margin-bottom: 20px;
+  }
+  @media (max-width: 480px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
   }
   .cat-card {
     background: var(--bg-card); border: 1px solid var(--border);
     border-radius: var(--radius-sm); padding: 12px 14px; cursor: pointer;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; flex-direction: column; align-items: stretch; gap: 0;
+    position: relative;
     transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
   }
+  .cat-card-top {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+  .cat-card-top .cat-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cat-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-1px); }
   .cat-card.selected { border-color: var(--accent); background: var(--accent-bg); }
   .cat-card.all-selected { border-color: var(--green); background: var(--green-light); }
@@ -575,7 +583,7 @@
 
   /* ── Category manage button ── */
   .cat-manage-btn {
-    display: block; width: 100%; margin-top: 10px;
+    display: block; width: 100%; margin-top: 0;
     padding: 6px 0; border: 1px solid var(--border); border-radius: 8px;
     background: var(--surface2); color: var(--text2); font-size: 0.78rem;
     font-weight: 600; cursor: pointer; transition: all var(--transition);
@@ -2738,7 +2746,6 @@
       <div class="wrong-list" id="wrongList"></div>
     </div>
   </div>
-</div>
 
 
   <!-- PROFILE & STATS SCREEN -->
@@ -4222,9 +4229,11 @@ function buildCategoryGrid() {
   allCard.dataset.cat = '__all__';
   const allActive = CARDS.filter(c => !state.mutedCards.has(c.id)).length;
   allCard.innerHTML = `
-    <div class="cat-check">✓</div>
-    <div class="cat-name">🌟 Alla kategorier</div>
-    <div class="cat-count">${allActive} kort</div>`;
+    <div class="cat-card-top">
+      <div class="cat-check">✓</div>
+      <div class="cat-name">🌟 Alla kategorier</div>
+      <div class="cat-count">${allActive} kort</div>
+    </div>`;
   allCard.addEventListener('click', () => {
     if (state.selectedCats.size > 0) {
       state.selectedCats = new Set();   // reset – "Alla" = ingen specifik filtrering
@@ -4244,9 +4253,11 @@ function buildCategoryGrid() {
     div.className = 'cat-card' + (state.selectedCats.has(cat) ? ' selected' : '');
     div.dataset.cat = cat;
     div.innerHTML = `
-      <div class="cat-check">✓</div>
-      <div class="cat-name">${cat}</div>
-      <div class="cat-count">${cards.length} kort${mutedCount ? ' • <span style="color:var(--text2)">'+mutedCount+' tysta</span>' : ''}</div>
+      <div class="cat-card-top">
+        <div class="cat-check">✓</div>
+        <div class="cat-name">${cat}</div>
+        <div class="cat-count">${cards.length} kort${mutedCount ? ' • <span style="color:var(--text2)">'+mutedCount+' tysta</span>' : ''}</div>
+      </div>
       <button class="cat-manage-btn" data-cat="${cat}" title="Hantera kort i denna kategori">⚙️ Hantera</button>`;
     div.addEventListener('click', (e) => {
       if (e.target.closest('.cat-manage-btn')) return;
@@ -9331,7 +9342,7 @@ function selectLevel(lv) {
   _curProbIdx = 0;
   _exProbStatuses = _probList.map(function() { return 'pending'; });
   _exSkippedQueue = [];
-  document.querySelectorAll('.level-btn').forEach(btn => {
+  document.querySelectorAll('#levelRow .level-btn').forEach(btn => {
     btn.classList.toggle('active', parseInt(btn.dataset.level) === lv);
   });
   renderProblem();
@@ -10056,7 +10067,7 @@ function exSearchNavigate(probId) {
 
   // Set level
   _curLevel = prob.lv;
-  document.querySelectorAll('.level-btn').forEach(btn => {
+  document.querySelectorAll('#levelRow .level-btn').forEach(btn => {
     btn.classList.toggle('active', parseInt(btn.dataset.level) === prob.lv);
   });
 
@@ -10393,7 +10404,7 @@ function tqUpdatePanel() {
 function tqToggleList() {
   _tqListOpen = !_tqListOpen;
   const el = document.getElementById('tqProbList');
-  if (el) el.style.display = _tqListOpen ? '' : 'none';
+  if (el) el.classList.toggle('open', _tqListOpen);
   tqUpdateList();
 }
 
