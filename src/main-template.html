@@ -229,6 +229,21 @@
   }
   .sidebar-toggle:hover { background: var(--bg-card); }
 
+  /* ── Desktop sidebar collapse button ── */
+  .sidebar-collapse-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; margin-left: auto;
+    background: none; border: 1px solid var(--border);
+    border-radius: 6px; cursor: pointer;
+    color: var(--text-muted); font-size: 0.75rem;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+    flex-shrink: 0;
+  }
+  .sidebar-collapse-btn:hover {
+    background: var(--bg-card); color: var(--text-primary); border-color: var(--border-hover);
+  }
+  .sidebar--collapsed .sidebar-collapse-btn { margin-left: 0; }
+
   /* ── Content area ── */
   .app-content {
     flex: 1; padding: 24px; max-width: 1100px; width: 100%; margin: 0 auto;
@@ -2544,44 +2559,45 @@
   <div class="sidebar-logo">
     <span class="sidebar-logo-icon">⚗️</span>
     <span class="sidebar-logo-text">Kemi<span class="sidebar-logo-dim">1</span></span>
+    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Dölj meny">&#8592;</button>
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section">
       <span class="nav-section-label">Studera</span>
-      <button class="nav-btn active" data-target="homeScreen">
+      <button class="nav-btn active" data-target="homeScreen" data-label="Flashcards">
         <span class="nav-btn-icon">🃏</span><span class="nav-btn-label">Flashcards</span>
       </button>
-      <button class="nav-btn" data-target="tqScreen">
+      <button class="nav-btn" data-target="tqScreen" data-label="Frågor">
         <span class="nav-btn-icon">❓</span><span class="nav-btn-label">Frågor</span>
       </button>
-      <button class="nav-btn" data-target="examScreen">
+      <button class="nav-btn" data-target="examScreen" data-label="Inför prov">
         <span class="nav-btn-icon">📋</span><span class="nav-btn-label">Inför prov</span>
       </button>
-      <button class="nav-btn" data-target="theoryScreen">
+      <button class="nav-btn" data-target="theoryScreen" data-label="Teori">
         <span class="nav-btn-icon">📖</span><span class="nav-btn-label">Teori</span>
       </button>
-      <button class="nav-btn" data-target="exerciseScreen">
+      <button class="nav-btn" data-target="exerciseScreen" data-label="Räkna">
         <span class="nav-btn-icon">🧮</span><span class="nav-btn-label">Räkna</span>
       </button>
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Verktyg</span>
-      <button class="nav-btn" data-target="formulaScreen">
+      <button class="nav-btn" data-target="formulaScreen" data-label="Formler">
         <span class="nav-btn-icon">📐</span><span class="nav-btn-label">Formler</span>
       </button>
-      <button class="nav-btn" data-target="calcScreen">
+      <button class="nav-btn" data-target="calcScreen" data-label="Kalkylator">
         <span class="nav-btn-icon">🔢</span><span class="nav-btn-label">Kalkylator</span>
       </button>
-      <button class="nav-btn" data-target="planScreen">
+      <button class="nav-btn" data-target="planScreen" data-label="Plan">
         <span class="nav-btn-icon">📅</span><span class="nav-btn-label">Plan</span>
       </button>
-      <button class="nav-btn" data-target="periodicScreen">
+      <button class="nav-btn" data-target="periodicScreen" data-label="PT">
         <span class="nav-btn-icon">⚗️</span><span class="nav-btn-label">PT</span>
       </button>
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Övrigt</span>
-      <button class="nav-btn" data-target="profileScreen">
+      <button class="nav-btn" data-target="profileScreen" data-label="Profil">
         <span class="nav-btn-icon">👤</span><span class="nav-btn-label">Profil</span>
       </button>
     </div>
