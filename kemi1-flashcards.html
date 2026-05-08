@@ -64,24 +64,24 @@
     --border:        #dbd8f5;
     --border-hover:  #b8b0ef;
     --accent:        #5b4fe0;
-    --accent-light:  #7c6af7;
+    --accent-light:  #ede9fe;
     --accent-bg:     #ede9fe;
     --text-primary:  #1a1730;
     --text-secondary:#5a5280;
-    --text-muted:    #b0accc;
-    --text-hint:     #c8c4e0;
+    --text-muted:    #6b6892;
+    --text-hint:     #9996b8;
     --green:         #059669;
     --green-light:   rgba(5,150,105,0.10);
     --red:           #dc2626;
     --red-light:     rgba(220,38,38,0.10);
-    --yellow:        #d97706;
+    --yellow:        #b45309;
     --yellow-light:  rgba(217,119,6,0.12);
     --shadow:        0 4px 24px rgba(79,70,229,0.10);
     --shadow-lg:     0 12px 48px rgba(79,70,229,0.18);
     --shadow-card:   0 2px 16px rgba(0,0,0,0.06);
     --glow:          0 0 24px rgba(91,79,224,0.18);
     --accent-dark:   #4338ca;
-    --accent-grad:   linear-gradient(135deg, #5b4fe0, #7c6af7);
+    --accent-grad:   linear-gradient(135deg, #5b4fe0, #4338ca);
     --bg:            var(--bg-app);
     --bg-grad:       var(--bg-app);
     --surface:       var(--bg-card);
@@ -90,8 +90,9 @@
     --text:          var(--text-primary);
     --text1:         var(--text-primary);
     --text2:         var(--text-secondary);
-    --accent2:       var(--accent-light);
+    --accent2:       var(--accent);
   }
+  [data-theme="light"] .mode-btn.active .mode-desc { color: var(--accent); }
   h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
