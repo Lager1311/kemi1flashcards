@@ -12908,17 +12908,25 @@ function tgSetupObserver() {
   var toggleBtn = document.getElementById('sidebarToggleBtn');
   var overlay = document.getElementById('sidebarOverlay');
 
+  if (!sidebar || !appMain) return;
+
   function isDesktop() { return window.innerWidth > 768; }
 
   function applyCollapsed(collapsed) {
     if (collapsed) {
       sidebar.classList.add('sidebar--collapsed');
       appMain.classList.add('app-main--collapsed');
-      if (collapseBtn) collapseBtn.innerHTML = '&#8594;';
+      if (collapseBtn) {
+        collapseBtn.innerHTML = '&#8594;';
+        collapseBtn.setAttribute('aria-label', 'Visa meny');
+      }
     } else {
       sidebar.classList.remove('sidebar--collapsed');
       appMain.classList.remove('app-main--collapsed');
-      if (collapseBtn) collapseBtn.innerHTML = '&#8592;';
+      if (collapseBtn) {
+        collapseBtn.innerHTML = '&#8592;';
+        collapseBtn.setAttribute('aria-label', 'Dölj meny');
+      }
     }
   }
 
@@ -12952,15 +12960,19 @@ function tgSetupObserver() {
   }
 
   // On resize: re-apply desktop state, clear mobile open state
+  var resizeTimer;
   window.addEventListener('resize', function() {
-    if (isDesktop()) {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('active');
-      var saved = localStorage.getItem(SIDEBAR_KEY);
-      applyCollapsed(saved === 'collapsed');
-    } else {
-      applyCollapsed(false);
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (isDesktop()) {
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        var saved = localStorage.getItem(SIDEBAR_KEY);
+        applyCollapsed(saved === 'collapsed');
+      } else {
+        applyCollapsed(false);
+      }
+    }, 100);
   });
 })();
 </script>
