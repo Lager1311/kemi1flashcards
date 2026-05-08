@@ -12899,18 +12899,68 @@ function tgSetupObserver() {
   });
 }
 
-// Sidebar mobile toggle
+// Sidebar toggle (mobile + desktop collapse)
 (function() {
+  var SIDEBAR_KEY = 'kemi1_sidebar_state';
+  var sidebar = document.querySelector('.sidebar');
+  var appMain = document.querySelector('.app-main');
+  var collapseBtn = document.getElementById('sidebarCollapseBtn');
   var toggleBtn = document.getElementById('sidebarToggleBtn');
   var overlay = document.getElementById('sidebarOverlay');
-  var sidebar = document.querySelector('.sidebar');
-  if (toggleBtn) toggleBtn.addEventListener('click', function() {
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('active');
-  });
-  if (overlay) overlay.addEventListener('click', function() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
+
+  function isDesktop() { return window.innerWidth > 768; }
+
+  function applyCollapsed(collapsed) {
+    if (collapsed) {
+      sidebar.classList.add('sidebar--collapsed');
+      appMain.classList.add('app-main--collapsed');
+      if (collapseBtn) collapseBtn.innerHTML = '&#8594;';
+    } else {
+      sidebar.classList.remove('sidebar--collapsed');
+      appMain.classList.remove('app-main--collapsed');
+      if (collapseBtn) collapseBtn.innerHTML = '&#8592;';
+    }
+  }
+
+  // Restore desktop state from localStorage
+  if (isDesktop()) {
+    var saved = localStorage.getItem(SIDEBAR_KEY);
+    applyCollapsed(saved === 'collapsed');
+  }
+
+  // Desktop collapse button
+  if (collapseBtn) {
+    collapseBtn.addEventListener('click', function() {
+      var willCollapse = !sidebar.classList.contains('sidebar--collapsed');
+      applyCollapsed(willCollapse);
+      localStorage.setItem(SIDEBAR_KEY, willCollapse ? 'collapsed' : 'expanded');
+    });
+  }
+
+  // Mobile hamburger
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+  }
+
+  // On resize: re-apply desktop state, clear mobile open state
+  window.addEventListener('resize', function() {
+    if (isDesktop()) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      var saved = localStorage.getItem(SIDEBAR_KEY);
+      applyCollapsed(saved === 'collapsed');
+    } else {
+      applyCollapsed(false);
+    }
   });
 })();
 </script>
