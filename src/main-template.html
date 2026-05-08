@@ -2524,6 +2524,9 @@
       <button class="nav-btn" data-target="theoryScreen">
         <span class="nav-btn-icon">📖</span><span class="nav-btn-label">Teori</span>
       </button>
+      <button class="nav-btn" data-target="exerciseScreen">
+        <span class="nav-btn-icon">🧮</span><span class="nav-btn-label">Räkna</span>
+      </button>
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Verktyg</span>
@@ -2542,9 +2545,6 @@
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Övrigt</span>
-      <button class="nav-btn" data-target="exerciseScreen">
-        <span class="nav-btn-icon">🧮</span><span class="nav-btn-label">Räkna</span>
-      </button>
       <button class="nav-btn" data-target="profileScreen">
         <span class="nav-btn-icon">👤</span><span class="nav-btn-label">Profil</span>
       </button>
@@ -2868,10 +2868,6 @@
 
   <!-- EXERCISE SCREEN -->
   <div class="screen" id="exerciseScreen">
-    <div class="section-header" style="margin-top:0">
-      <div class="section-header-icon">🧮</div>
-      <div class="section-header-text">Övningar</div>
-    </div>
     <div class="ex-mode-row" id="exModeRow"></div>
     <div id="exRaknaSection">
       <div class="ex-search-wrap">
@@ -4395,7 +4391,8 @@ document.getElementById('startBtn').addEventListener('click', () => {
       b.classList.toggle('active', b.dataset.target === 'homeScreen');
     });
     // Hide Räkna-specific UI
-    document.querySelector('#exerciseScreen > .section-header').style.display = 'none';
+    var _exHdr = document.querySelector('#exerciseScreen > .section-header');
+    if (_exHdr) _exHdr.style.display = 'none';
     document.getElementById('exModeRow').style.display = 'none';
     if (!_exInited) { _exInited = true; initExercise(); }
     switchExMode('luckor');
