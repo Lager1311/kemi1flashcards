@@ -32,6 +32,7 @@
     --yellow:        #fbbf24;
     --yellow-light:  rgba(251,191,36,0.15);
     --sidebar-width: 220px;
+    --sidebar-collapsed-width: 52px;
     --topbar-height: 56px;
     --radius:        16px;
     --radius-sm:     10px;
@@ -120,7 +121,7 @@
     left: 0; top: 0; bottom: 0;
     z-index: 200;
     overflow-y: auto;
-    transition: transform var(--transition), box-shadow var(--transition);
+    transition: width 220ms cubic-bezier(0.4,0,0.2,1), transform var(--transition), box-shadow var(--transition);
   }
   .sidebar-logo {
     display: flex; align-items: center; gap: 10px;
@@ -169,10 +170,47 @@
   }
   .sidebar-overlay.active { display: block; }
 
+  /* ── Sidebar collapsed (desktop) ── */
+  .sidebar--collapsed {
+    width: var(--sidebar-collapsed-width);
+  }
+  .sidebar--collapsed .sidebar-logo-icon,
+  .sidebar--collapsed .sidebar-logo-text,
+  .sidebar--collapsed .sidebar-logo-dim,
+  .sidebar--collapsed .nav-section-label,
+  .sidebar--collapsed .nav-btn-label,
+  .sidebar--collapsed .sidebar-footer { display: none; }
+  .sidebar--collapsed .sidebar-logo {
+    justify-content: center; padding: 20px 0 16px;
+  }
+  .sidebar--collapsed .nav-btn {
+    justify-content: center; padding: 9px 0;
+    position: relative;
+  }
+  .sidebar--collapsed .sidebar-nav { padding: 12px 4px; }
+  /* tooltip for collapsed icons */
+  .sidebar--collapsed .nav-btn::after {
+    content: attr(data-label);
+    position: absolute; left: calc(100% + 10px); top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-primary); font-size: 0.8rem; font-weight: 500;
+    padding: 4px 10px; border-radius: 8px;
+    white-space: nowrap; pointer-events: none;
+    opacity: 0; transition: opacity 120ms ease;
+    box-shadow: var(--shadow-card);
+    z-index: 300;
+  }
+  .sidebar--collapsed .nav-btn:hover::after { opacity: 1; }
+
   /* ── Main area ── */
   .app-main {
     flex: 1; margin-left: var(--sidebar-width);
     display: flex; flex-direction: column; min-height: 100vh; min-width: 0;
+    transition: margin-left 220ms cubic-bezier(0.4,0,0.2,1);
+  }
+  @media (min-width: 769px) {
+    .app-main--collapsed { margin-left: var(--sidebar-collapsed-width); }
   }
 
   /* ── Topbar ── */
@@ -191,6 +229,21 @@
     padding: 4px 8px; border-radius: 8px; transition: background var(--transition);
   }
   .sidebar-toggle:hover { background: var(--bg-card); }
+
+  /* ── Desktop sidebar collapse button ── */
+  .sidebar-collapse-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; margin-left: auto;
+    background: none; border: 1px solid var(--border);
+    border-radius: 6px; cursor: pointer;
+    color: var(--text-muted); font-size: 0.75rem;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+    flex-shrink: 0;
+  }
+  .sidebar-collapse-btn:hover {
+    background: var(--bg-card); color: var(--text-primary); border-color: var(--border-hover);
+  }
+  .sidebar--collapsed .sidebar-collapse-btn { margin-left: 0; }
 
   /* ── Content area ── */
   .app-content {
@@ -544,11 +597,12 @@
 
   /* ── Responsive: sidebar collapses on mobile ── */
   @media (max-width: 768px) {
-    .sidebar { transform: translateX(-100%); box-shadow: none; }
+    .sidebar { transform: translateX(-100%); box-shadow: none; max-width: 75vw; }
     .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
     .app-main { margin-left: 0; }
     .sidebar-toggle { display: flex; }
     .app-content { padding: 16px; }
+    .sidebar-collapse-btn { display: none; }
   }
   @media (max-width: 480px) {
     .stats-row { grid-template-columns: repeat(2,1fr); }
@@ -833,6 +887,127 @@
   }
   /* ============ END INFÖR PROV ============ */
 
+  /* ============ TABELLER ============ */
+  .tbl-intro { font-size: 0.9rem; color: var(--text2); line-height: 1.55; margin: 0 0 18px; padding: 0 2px; }
+  .tbl-detail-head { display: flex; align-items: center; margin-bottom: 14px; }
+  .tbl-usage {
+    display: inline-flex; align-items: flex-start; gap: 6px;
+    background: var(--accent-bg); color: var(--accent);
+    border-radius: 999px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 14px; line-height: 1.5; max-width: 100%;
+  }
+  .tbl-search-wrap { position: relative; margin-bottom: 14px; }
+  .tbl-search-input {
+    width: 100%; padding: 10px 40px 10px 16px;
+    border: 2px solid var(--border); background: var(--surface2);
+    color: var(--text); border-radius: 12px; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .tbl-search-input:focus { border-color: var(--accent); }
+  .tbl-search-clear {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-size: 1rem; padding: 4px; display: none; line-height: 1;
+  }
+  .tbl-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; border: 2px solid var(--border); }
+  .tbl-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .tbl-table th {
+    background: var(--bg-active); color: var(--accent);
+    font-weight: 700; text-align: left; padding: 10px 14px;
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;
+    white-space: nowrap; border-bottom: 2px solid var(--border);
+  }
+  .tbl-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .tbl-table tbody tr:nth-child(even) td { background: rgba(124,106,247,0.04); }
+  .tbl-table tbody tr:hover td { background: var(--bg-card-hover); }
+  .tbl-table tbody tr.tbl-dimmed { opacity: 0.3; transition: opacity 0.2s; }
+  .tbl-table tbody tr { transition: opacity 0.2s; }
+  .tbl-table tr.tbl-strong-acid td { background: rgba(248,113,113,0.1); }
+  .tbl-table tr.tbl-pos-dh td { background: rgba(248,113,113,0.08); }
+  .tbl-table tr.tbl-neg-dh td { background: rgba(52,211,153,0.06); }
+  .tbl-table tr.tbl-bond-double td { background: rgba(59,130,246,0.07); }
+  .tbl-table tr.tbl-bond-triple td { background: rgba(139,92,246,0.09); }
+  .tbl-table tr.tbl-h-ref td { background: var(--accent-bg) !important; font-weight: 700; }
+  .tbl-phase {
+    display: inline-block; padding: 2px 9px; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .tbl-phase-g { background: rgba(59,130,246,0.15); color: #3b82f6; }
+  .tbl-phase-l { background: rgba(16,185,129,0.15); color: #10b981; }
+  .tbl-phase-s { background: rgba(245,158,11,0.15); color: #f59e0b; }
+  /* Bond type legend */
+  .tbl-bond-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .tbl-bond-leg { padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+  .tbl-bond-leg-s { background: rgba(124,106,247,0.1); color: var(--accent); }
+  .tbl-bond-leg-d { background: rgba(59,130,246,0.12); color: #3b82f6; }
+  .tbl-bond-leg-t { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+  .tbl-bond-leg-neg { background: rgba(52,211,153,0.12); color: var(--green); }
+  .tbl-bond-leg-pos { background: rgba(248,113,113,0.12); color: var(--red); }
+  /* Voltage scale */
+  .tbl-vs-wrap {
+    margin-bottom: 16px; padding: 16px; background: var(--bg-card);
+    border: 2px solid var(--border); border-radius: 14px; overflow: hidden;
+  }
+  .tbl-vs-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .tbl-vs-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text2); margin-bottom: 6px; }
+  .tbl-vs-track { position: relative; height: 42px; }
+  .tbl-vs-bar {
+    position: absolute; top: 18px; left: 0; right: 0; height: 6px; border-radius: 3px;
+    background: linear-gradient(to right, #ef4444, #f97316, #fbbf24, #a3e635, #34d399, #22d3ee, #3b82f6);
+  }
+  .tbl-vs-h-line {
+    position: absolute; top: 6px; width: 2px; height: 30px;
+    background: var(--text-primary); opacity: 0.85; transform: translateX(-50%);
+  }
+  .tbl-vs-h-label {
+    position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    font-size: 0.68rem; font-weight: 800; color: var(--text-primary);
+    white-space: nowrap; background: var(--bg-card); padding: 0 4px; border-radius: 4px;
+  }
+  .tbl-vs-dot {
+    position: absolute; top: 14px; width: 10px; height: 10px;
+    border-radius: 50%; transform: translateX(-50%);
+    cursor: pointer; z-index: 2; transition: transform 0.15s;
+  }
+  .tbl-vs-dot:hover { transform: translateX(-50%) scale(1.6); }
+  .tbl-vs-dot:hover .tbl-vs-tooltip { opacity: 1; visibility: visible; }
+  .tbl-vs-dot.tbl-dot-noble { background: #22d3ee; border: 2px solid #0891b2; }
+  .tbl-vs-dot.tbl-dot-base  { background: #f87171; border: 2px solid #dc2626; }
+  .tbl-vs-dot.tbl-dot-ref   { background: var(--text-primary); width: 12px; height: 12px; top: 13px; }
+  .tbl-vs-tooltip {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-primary); font-size: 0.72rem; font-weight: 600;
+    padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+    pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 0.12s; z-index: 10;
+  }
+  /* pKa thermometer layout */
+  .tbl-syror-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .tbl-thermo { width: 70px; flex-shrink: 0; display: none; flex-direction: column; align-items: center; }
+  @media (min-width: 640px) { .tbl-thermo { display: flex; } }
+  .tbl-thermo-title { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; text-align: center; }
+  .tbl-thermo-track { position: relative; width: 16px; height: 320px; margin: 0 auto; }
+  .tbl-thermo-bar {
+    position: absolute; left: 50%; top: 0; bottom: 0; width: 6px;
+    transform: translateX(-50%); border-radius: 3px;
+    background: linear-gradient(to bottom, #ef4444, #f97316, #fbbf24, #34d399, #3b82f6, #6366f1);
+  }
+  .tbl-thermo-dot {
+    position: absolute; left: 50%; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg-card);
+    transform: translate(-50%, -50%); cursor: default;
+  }
+  .tbl-thermo-dot-label {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 0.62rem; white-space: nowrap; color: var(--text2); font-weight: 600;
+  }
+  .tbl-thermo-tick {
+    position: absolute; right: calc(100% + 4px);
+    transform: translateY(-50%);
+    font-size: 0.68rem; font-weight: 700; color: var(--text-muted); white-space: nowrap;
+  }
+  /* ============ END TABELLER ============ */
+
   .prob-unit { font-size: 0.88rem; color: var(--text2); font-weight: 500; white-space: nowrap; }
   .prob-check {
     padding: 11px 20px; background: var(--accent); color: #fff; border: none;
@@ -873,6 +1048,13 @@
   .sol-section-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.06em; opacity: 0.65; margin: 10px 0 4px; display: block; }
   .ex-cat-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  @media (max-width: 1023px) {
+    .ex-cat-row { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:4px;
+      -webkit-mask-image:linear-gradient(to right,black calc(100% - 48px),transparent 100%);
+      mask-image:linear-gradient(to right,black calc(100% - 48px),transparent 100%); }
+    .ex-cat-row::-webkit-scrollbar { display:none; }
+    .ex-cat-row.scroll-end { -webkit-mask-image:none; mask-image:none; }
+  }
   .ex-cat-filter-btn { padding:6px 13px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface); color:var(--text); font-size:0.82rem; cursor:pointer; transition:all var(--transition); white-space:nowrap; }
   .ex-cat-filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
   .prob-formula-badge { font-size:0.75rem; color:var(--accent); background:var(--accent-light); padding:3px 10px; border-radius:20px; font-family:'Courier New',monospace; margin-bottom:10px; display:inline-block; }
@@ -1483,6 +1665,14 @@
   border-radius: 14px;
   padding: 4px;
   box-shadow: var(--shadow-card);
+}
+@media (max-width: 1023px) {
+  .sp-tabs { overflow-x:auto; scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(to right,black calc(100% - 40px),transparent 100%);
+    mask-image:linear-gradient(to right,black calc(100% - 40px),transparent 100%); }
+  .sp-tabs::-webkit-scrollbar { display:none; }
+  .sp-tabs.scroll-end { -webkit-mask-image:none; mask-image:none; }
+  .sp-tab { flex:0 0 auto; white-space:nowrap; }
 }
 .sp-tab {
   flex: 1;
@@ -2507,44 +2697,48 @@
   <div class="sidebar-logo">
     <span class="sidebar-logo-icon">⚗️</span>
     <span class="sidebar-logo-text">Kemi<span class="sidebar-logo-dim">1</span></span>
+    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Dölj meny">&#8592;</button>
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section">
       <span class="nav-section-label">Studera</span>
-      <button class="nav-btn active" data-target="homeScreen">
+      <button class="nav-btn active" data-target="homeScreen" data-label="Flashcards">
         <span class="nav-btn-icon">🃏</span><span class="nav-btn-label">Flashcards</span>
       </button>
-      <button class="nav-btn" data-target="tqScreen">
+      <button class="nav-btn" data-target="tqScreen" data-label="Frågor">
         <span class="nav-btn-icon">❓</span><span class="nav-btn-label">Frågor</span>
       </button>
-      <button class="nav-btn" data-target="examScreen">
+      <button class="nav-btn" data-target="examScreen" data-label="Inför prov">
         <span class="nav-btn-icon">📋</span><span class="nav-btn-label">Inför prov</span>
       </button>
-      <button class="nav-btn" data-target="theoryScreen">
+      <button class="nav-btn" data-target="theoryScreen" data-label="Teori">
         <span class="nav-btn-icon">📖</span><span class="nav-btn-label">Teori</span>
       </button>
-      <button class="nav-btn" data-target="exerciseScreen">
+      <button class="nav-btn" data-target="exerciseScreen" data-label="Räkna">
         <span class="nav-btn-icon">🧮</span><span class="nav-btn-label">Räkna</span>
       </button>
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Verktyg</span>
-      <button class="nav-btn" data-target="formulaScreen">
+      <button class="nav-btn" data-target="formulaScreen" data-label="Formler">
         <span class="nav-btn-icon">📐</span><span class="nav-btn-label">Formler</span>
       </button>
-      <button class="nav-btn" data-target="calcScreen">
+      <button class="nav-btn" data-target="tablesScreen" data-label="Tabeller">
+        <span class="nav-btn-icon">📊</span><span class="nav-btn-label">Tabeller</span>
+      </button>
+      <button class="nav-btn" data-target="calcScreen" data-label="Kalkylator">
         <span class="nav-btn-icon">🔢</span><span class="nav-btn-label">Kalkylator</span>
       </button>
-      <button class="nav-btn" data-target="planScreen">
+      <button class="nav-btn" data-target="planScreen" data-label="Plan">
         <span class="nav-btn-icon">📅</span><span class="nav-btn-label">Plan</span>
       </button>
-      <button class="nav-btn" data-target="periodicScreen">
+      <button class="nav-btn" data-target="periodicScreen" data-label="PT">
         <span class="nav-btn-icon">⚗️</span><span class="nav-btn-label">PT</span>
       </button>
     </div>
     <div class="nav-section">
       <span class="nav-section-label">Övrigt</span>
-      <button class="nav-btn" data-target="profileScreen">
+      <button class="nav-btn" data-target="profileScreen" data-label="Profil">
         <span class="nav-btn-icon">👤</span><span class="nav-btn-label">Profil</span>
       </button>
     </div>
@@ -2972,6 +3166,24 @@
     </div>
     <div class="formula-cat-nav" id="formulaCatNav"></div>
     <div id="formulaContent"></div>
+  </div>
+
+  <!-- TABLES SCREEN -->
+  <div class="screen" id="tablesScreen">
+    <div id="tablesOverview">
+      <div class="section-header" style="margin-top:0">
+        <div class="section-header-icon">📊</div>
+        <div class="section-header-text">Tabeller</div>
+      </div>
+      <p class="tbl-intro">Referenstabeller för kemikursen — spänningsserien, syrastyrkor, bindningsenergier, termokemi och löslighet.</p>
+      <div class="exam-grid" id="tablesGrid"></div>
+    </div>
+    <div id="tablesDetail" style="display:none">
+      <div class="tbl-detail-head">
+        <button class="exam-back-btn" onclick="tablesBack()">← Tillbaka</button>
+      </div>
+      <div id="tablesDetailContent"></div>
+    </div>
   </div>
 
   <!-- KALKYLATOR SCREEN -->
@@ -8519,7 +8731,7 @@ function ssDone() {
 }
 
 // ── Init: nav buttons ──────────────────────────────────
-let _exInited = false, _fmInited = false, _ptInited = false, _tqInited = false, _examInited = false, _calcInited = false;
+let _exInited = false, _fmInited = false, _ptInited = false, _tqInited = false, _examInited = false, _calcInited = false, _tablesInited = false;
 
 document.querySelectorAll('.nav-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -8531,6 +8743,7 @@ document.querySelectorAll('.nav-btn').forEach(function(btn) {
     if (t === 'formulaScreen'  && !_fmInited)  { _fmInited   = true; initFormulas(); }
     if (t === 'calcScreen'     && !_calcInited){ _calcInited = true; initCalc(); }
     if (t === 'periodicScreen' && !_ptInited)  { _ptInited   = true; initPeriodic(); }
+    if (t === 'tablesScreen'  && !_tablesInited){ _tablesInited = true; initTables(); }
     if (t === 'theoryScreen') { renderTheory(); }
     if (t === 'planScreen') { ssGoTo(1); ssRenderTags(); }
     if (t === 'profileScreen') { renderProfile(); }
@@ -9950,6 +10163,7 @@ function initExercise() {
   catRow.querySelectorAll('.ex-cat-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => selectCat(btn.dataset.cat));
   });
+  initScrollFade(catRow);
 
   levelRow.innerHTML = [1,2,3].map(lv => {
     const li = LEVEL_INFO[lv];
@@ -11239,6 +11453,7 @@ function initTQ() {
   catRow.querySelectorAll('.ex-cat-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => tqSelectCat(btn.dataset.cat));
   });
+  initScrollFade(catRow);
 
   const lvRow = document.getElementById('tqLevelRow');
   lvRow.innerHTML =
@@ -13903,6 +14118,19 @@ function tgRunSearch(q) {
 
 function tgEscRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+// Horisontell scroll-fade för tab-rader
+function initScrollFade(el) {
+  if (!el) return;
+  function check() {
+    el.classList.toggle('scroll-end', el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+  }
+  el.addEventListener('scroll', check, { passive: true });
+  check();
+  var active = el.querySelector('.active');
+  if (active) active.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+}
+document.querySelectorAll('.sp-tabs').forEach(initScrollFade);
+
 function tgToggleSidebar() {
   document.getElementById('tgSidebar').classList.toggle('open');
   document.getElementById('tgOverlay').classList.toggle('active');
@@ -13931,20 +14159,376 @@ function tgSetupObserver() {
   });
 }
 
-// Sidebar mobile toggle
+// Sidebar toggle (mobile + desktop collapse)
 (function() {
+  var SIDEBAR_KEY = 'kemi1_sidebar_state';
+  var sidebar = document.querySelector('.sidebar');
+  var appMain = document.querySelector('.app-main');
+  var collapseBtn = document.getElementById('sidebarCollapseBtn');
   var toggleBtn = document.getElementById('sidebarToggleBtn');
   var overlay = document.getElementById('sidebarOverlay');
-  var sidebar = document.querySelector('.sidebar');
-  if (toggleBtn) toggleBtn.addEventListener('click', function() {
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('active');
-  });
-  if (overlay) overlay.addEventListener('click', function() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
+
+  if (!sidebar || !appMain) return;
+
+  function isDesktop() { return window.innerWidth > 768; }
+
+  function applyCollapsed(collapsed) {
+    if (collapsed) {
+      sidebar.classList.add('sidebar--collapsed');
+      appMain.classList.add('app-main--collapsed');
+      if (collapseBtn) {
+        collapseBtn.innerHTML = '&#8594;';
+        collapseBtn.setAttribute('aria-label', 'Visa meny');
+      }
+    } else {
+      sidebar.classList.remove('sidebar--collapsed');
+      appMain.classList.remove('app-main--collapsed');
+      if (collapseBtn) {
+        collapseBtn.innerHTML = '&#8592;';
+        collapseBtn.setAttribute('aria-label', 'Dölj meny');
+      }
+    }
+  }
+
+  // Restore desktop state from localStorage
+  if (isDesktop()) {
+    var saved = localStorage.getItem(SIDEBAR_KEY);
+    applyCollapsed(saved === 'collapsed');
+  }
+
+  // Desktop collapse button
+  if (collapseBtn) {
+    collapseBtn.addEventListener('click', function() {
+      var willCollapse = !sidebar.classList.contains('sidebar--collapsed');
+      applyCollapsed(willCollapse);
+      localStorage.setItem(SIDEBAR_KEY, willCollapse ? 'collapsed' : 'expanded');
+    });
+  }
+
+  // Mobile hamburger
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+  }
+
+  // On resize: re-apply desktop state, clear mobile open state
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (isDesktop()) {
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        var saved = localStorage.getItem(SIDEBAR_KEY);
+        applyCollapsed(saved === 'collapsed');
+      } else {
+        applyCollapsed(false);
+      }
+    }, 100);
   });
 })();
+
+// ═══════════════════════════════════════════════════════
+//  TABELLER
+// ═══════════════════════════════════════════════════════
+
+var TABLES_META = [
+  { id: 'spanningsserien', icon: '⚡', name: 'Spänningsserien',   desc: 'Metaller ordnade från oädlast till ädlast',    color: '#f59e0b' },
+  { id: 'syror',           icon: '🧪', name: 'Syror och baser',   desc: 'pKa-värden för vanliga syror',                 color: '#6366f1' },
+  { id: 'bindningar',      icon: '🔥', name: 'Bindningsenergier', desc: 'Energi som krävs för att bryta bindningar',    color: '#ef4444' },
+  { id: 'termokemi',       icon: '♨️', name: 'Termokemi',         desc: 'Bildningsentalpier för vanliga ämnen',         color: '#10b981' },
+  { id: 'loslighet',       icon: '🔬', name: 'Löslighet',         desc: 'Löslighetsprodukter (Ksp) för salter',         color: '#3b82f6' }
+];
+
+var SPANNINGS_DATA = [
+  { name: 'Litium',    sym: 'Li', ion: 'Li⁺',  eo: -3.04, rel: 'Oädlare' },
+  { name: 'Kalium',    sym: 'K',  ion: 'K⁺',   eo: -2.93, rel: 'Oädlare' },
+  { name: 'Kalcium',   sym: 'Ca', ion: 'Ca²⁺', eo: -2.87, rel: 'Oädlare' },
+  { name: 'Natrium',   sym: 'Na', ion: 'Na⁺',  eo: -2.71, rel: 'Oädlare' },
+  { name: 'Magnesium', sym: 'Mg', ion: 'Mg²⁺', eo: -2.37, rel: 'Oädlare' },
+  { name: 'Aluminium', sym: 'Al', ion: 'Al³⁺', eo: -1.66, rel: 'Oädlare' },
+  { name: 'Zink',      sym: 'Zn', ion: 'Zn²⁺', eo: -0.76, rel: 'Oädlare' },
+  { name: 'Järn',      sym: 'Fe', ion: 'Fe²⁺', eo: -0.44, rel: 'Oädlare' },
+  { name: 'Nickel',    sym: 'Ni', ion: 'Ni²⁺', eo: -0.26, rel: 'Oädlare' },
+  { name: 'Tenn',      sym: 'Sn', ion: 'Sn²⁺', eo: -0.14, rel: 'Oädlare' },
+  { name: 'Bly',       sym: 'Pb', ion: 'Pb²⁺', eo: -0.13, rel: 'Oädlare' },
+  { name: 'VÄTE',      sym: 'H',  ion: 'H⁺',   eo:  0.00, rel: 'Referens', isRef: true },
+  { name: 'Koppar',    sym: 'Cu', ion: 'Cu²⁺', eo:  0.34, rel: 'Ädlare' },
+  { name: 'Silver',    sym: 'Ag', ion: 'Ag⁺',  eo:  0.80, rel: 'Ädlare' },
+  { name: 'Platina',   sym: 'Pt', ion: 'Pt²⁺', eo:  1.19, rel: 'Ädlare' },
+  { name: 'Guld',      sym: 'Au', ion: 'Au³⁺', eo:  1.52, rel: 'Ädlare' }
+];
+
+var SYROR_DATA = [
+  { name: 'Saltsyra',        formula: 'HCl',          ka: '&gt;&gt; 1',       pka: '&lt;&lt; 0', pkaNum: null,  styrka: 'Stark',        strong: true },
+  { name: 'Salpetersyra',    formula: 'HNO₃',         ka: '&gt;&gt; 1',       pka: '&lt;&lt; 0', pkaNum: null,  styrka: 'Stark',        strong: true },
+  { name: 'Svavelsyra (1)',  formula: 'H₂SO₄',        ka: '&gt;&gt; 1',       pka: '&lt;&lt; 0', pkaNum: null,  styrka: 'Stark',        strong: true },
+  { name: 'Oxalsyra (1)',    formula: 'H₂C₂O₄',       ka: '5,9 × 10⁻²',  pka: '1,23',       pkaNum: 1.23,  styrka: 'Svag' },
+  { name: 'Fosforsyra (1)',  formula: 'H₃PO₄',        ka: '7,5 × 10⁻³',  pka: '2,12',       pkaNum: 2.12,  styrka: 'Svag' },
+  { name: 'Citronsyra (1)', formula: 'H₃C₆H₅O₇',     ka: '7,4 × 10⁻⁴',  pka: '3,13',       pkaNum: 3.13,  styrka: 'Svag' },
+  { name: 'Myrsyra',        formula: 'HCOOH',          ka: '1,8 × 10⁻⁴',  pka: '3,74',       pkaNum: 3.74,  styrka: 'Svag' },
+  { name: 'Benzoesyra',     formula: 'C₆H₅COOH',      ka: '6,3 × 10⁻⁵',  pka: '4,20',       pkaNum: 4.20,  styrka: 'Svag' },
+  { name: 'Ättiksyra',      formula: 'CH₃COOH',       ka: '1,8 × 10⁻⁵',  pka: '4,74',       pkaNum: 4.74,  styrka: 'Svag' },
+  { name: 'Kolsyra (1)',    formula: 'H₂CO₃',          ka: '4,3 × 10⁻⁷',  pka: '6,37',       pkaNum: 6.37,  styrka: 'Svag' },
+  { name: 'Vätesulfid (1)', formula: 'H₂S',            ka: '1,0 × 10⁻⁷',  pka: '7,00',       pkaNum: 7.00,  styrka: 'Svag' },
+  { name: 'Ammoniumjon',    formula: 'NH₄⁺',           ka: '5,6 × 10⁻¹⁰', pka: '9,25',       pkaNum: 9.25,  styrka: 'Svag' },
+  { name: 'Kolsyra (2)',    formula: 'HCO₃⁻',          ka: '4,7 × 10⁻¹¹', pka: '10,33',      pkaNum: 10.33, styrka: 'Svag' },
+  { name: 'Vatten',         formula: 'H₂O',            ka: '1,0 × 10⁻¹⁴', pka: '14,0',       pkaNum: 14.0,  styrka: 'Mycket svag' }
+];
+
+var BINDING_DATA = [
+  { bond: 'H–H',  type: 'Enkel',   energy: 436, length: 74 },
+  { bond: 'H–C',  type: 'Enkel',   energy: 414, length: 109 },
+  { bond: 'H–N',  type: 'Enkel',   energy: 389, length: 101 },
+  { bond: 'H–O',  type: 'Enkel',   energy: 464, length: 96 },
+  { bond: 'H–F',  type: 'Enkel',   energy: 569, length: 92 },
+  { bond: 'H–Cl', type: 'Enkel',   energy: 432, length: 127 },
+  { bond: 'C–C',  type: 'Enkel',   energy: 347, length: 154 },
+  { bond: 'C–N',  type: 'Enkel',   energy: 305, length: 147 },
+  { bond: 'C–O',  type: 'Enkel',   energy: 360, length: 143 },
+  { bond: 'C–F',  type: 'Enkel',   energy: 485, length: 135 },
+  { bond: 'C–Cl', type: 'Enkel',   energy: 339, length: 177 },
+  { bond: 'N–N',  type: 'Enkel',   energy: 163, length: 145 },
+  { bond: 'O–O',  type: 'Enkel',   energy: 157, length: 148 },
+  { bond: 'N–O',  type: 'Enkel',   energy: 201, length: 140 },
+  { bond: 'C=C',  type: 'Dubbel',  energy: 614, length: 134 },
+  { bond: 'C=N',  type: 'Dubbel',  energy: 615, length: 128 },
+  { bond: 'C=O',  type: 'Dubbel',  energy: 799, length: 120 },
+  { bond: 'N=N',  type: 'Dubbel',  energy: 418, length: 125 },
+  { bond: 'O=O',  type: 'Dubbel',  energy: 498, length: 121 },
+  { bond: 'C≡C',  type: 'Trippel', energy: 839, length: 120 },
+  { bond: 'C≡N',  type: 'Trippel', energy: 891, length: 116 },
+  { bond: 'N≡N',  type: 'Trippel', energy: 945, length: 110 }
+];
+
+var TERMO_DATA = [
+  { name: 'Vatten',             formula: 'H₂O',     fas: 'l', dhf: -285.8 },
+  { name: 'Vatten',             formula: 'H₂O',     fas: 'g', dhf: -241.8 },
+  { name: 'Koldioxid',          formula: 'CO₂',     fas: 'g', dhf: -393.5 },
+  { name: 'Kolmonoxid',         formula: 'CO',      fas: 'g', dhf: -110.5 },
+  { name: 'Ammoniak',           formula: 'NH₃',     fas: 'g', dhf: -46.1 },
+  { name: 'Väteklorid',         formula: 'HCl',     fas: 'g', dhf: -92.3 },
+  { name: 'Svaveldioxid',       formula: 'SO₂',     fas: 'g', dhf: -296.8 },
+  { name: 'Svaveltioxid',       formula: 'SO₃',     fas: 'g', dhf: -395.7 },
+  { name: 'Kväveoxid',          formula: 'NO',      fas: 'g', dhf: 90.3 },
+  { name: 'Kvävedioxid',        formula: 'NO₂',     fas: 'g', dhf: 33.2 },
+  { name: 'Metan',              formula: 'CH₄',     fas: 'g', dhf: -74.8 },
+  { name: 'Etan',               formula: 'C₂H₆',    fas: 'g', dhf: -84.7 },
+  { name: 'Eten',               formula: 'C₂H₄',    fas: 'g', dhf: 52.5 },
+  { name: 'Etin',               formula: 'C₂H₂',    fas: 'g', dhf: 227.4 },
+  { name: 'Bensen',             formula: 'C₆H₆',    fas: 'l', dhf: 49.0 },
+  { name: 'Metanol',            formula: 'CH₃OH',   fas: 'l', dhf: -238.7 },
+  { name: 'Etanol',             formula: 'C₂H₅OH',  fas: 'l', dhf: -277.7 },
+  { name: 'Natriumklorid',      formula: 'NaCl',    fas: 's', dhf: -411.2 },
+  { name: 'Kalciumkarbonat',    formula: 'CaCO₃',   fas: 's', dhf: -1206.9 },
+  { name: 'Järn(III)oxid',      formula: 'Fe₂O₃',   fas: 's', dhf: -824.2 }
+];
+
+var LOSLIGHET_DATA = [
+  { name: 'Silverklorid',      formula: 'AgCl',     ksp: '1,8 × 10⁻¹⁰', pksp: '9,74',  los: 'Svårlösligt' },
+  { name: 'Silverbromid',      formula: 'AgBr',     ksp: '5,0 × 10⁻¹³', pksp: '12,30', los: 'Svårlösligt' },
+  { name: 'Silverjodid',       formula: 'AgI',      ksp: '8,5 × 10⁻¹⁷', pksp: '16,07', los: 'Svårlösligt' },
+  { name: 'Bariumsulfat',      formula: 'BaSO₄',    ksp: '1,1 × 10⁻¹⁰', pksp: '9,96',  los: 'Svårlösligt' },
+  { name: 'Kalciumkarbonat',   formula: 'CaCO₃',    ksp: '3,3 × 10⁻⁹',  pksp: '8,48',  los: 'Svårlösligt' },
+  { name: 'Kalciumfluorid',    formula: 'CaF₂',     ksp: '3,9 × 10⁻¹¹', pksp: '10,41', los: 'Svårlösligt' },
+  { name: 'Kalciumhydroxid',   formula: 'Ca(OH)₂',  ksp: '4,7 × 10⁻⁶',  pksp: '5,33',  los: 'Delvis lösligt' },
+  { name: 'Koppar(II)hydroxid',formula: 'Cu(OH)₂',  ksp: '2,2 × 10⁻²⁰', pksp: '19,66', los: 'Svårlösligt' },
+  { name: 'Järn(III)hydroxid', formula: 'Fe(OH)₃',  ksp: '2,8 × 10⁻³⁹', pksp: '38,55', los: 'Svårlösligt' },
+  { name: 'Magnesiumhydroxid', formula: 'Mg(OH)₂',  ksp: '5,6 × 10⁻¹²', pksp: '11,25', los: 'Svårlösligt' },
+  { name: 'Blysulfat',         formula: 'PbSO₄',    ksp: '1,6 × 10⁻⁸',  pksp: '7,80',  los: 'Svårlösligt' },
+  { name: 'Zinkhydroxid',      formula: 'Zn(OH)₂',  ksp: '3,0 × 10⁻¹⁷', pksp: '16,52', los: 'Svårlösligt' }
+];
+
+function initTables() {
+  renderTablesOverview();
+}
+
+function renderTablesOverview() {
+  var grid = document.getElementById('tablesGrid');
+  if (!grid) return;
+  var html = '';
+  for (var i = 0; i < TABLES_META.length; i++) {
+    var t = TABLES_META[i];
+    var lightBg = hexToRgba(t.color, 0.13);
+    html += '<div class="exam-card" style="--exam-accent:' + t.color + ';--exam-accent-light:' + lightBg + '" onclick="tablesOpenTable(\'' + t.id + '\')">';
+    html += '<div class="exam-card-head"><div class="exam-card-icon">' + t.icon + '</div>';
+    html += '<div><div class="exam-card-title">' + t.name + '</div></div></div>';
+    html += '<div class="exam-card-desc">' + t.desc + '</div></div>';
+  }
+  grid.innerHTML = html;
+}
+
+function tablesOpenTable(id) {
+  document.getElementById('tablesOverview').style.display = 'none';
+  document.getElementById('tablesDetail').style.display = '';
+  var content = document.getElementById('tablesDetailContent');
+  if (id === 'spanningsserien') _tblRenderSpannings(content);
+  else if (id === 'syror')      _tblRenderSyror(content);
+  else if (id === 'bindningar') _tblRenderBindningar(content);
+  else if (id === 'termokemi')  _tblRenderTermokemi(content);
+  else if (id === 'loslighet')  _tblRenderLoslighet(content);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function tablesBack() {
+  document.getElementById('tablesOverview').style.display = '';
+  document.getElementById('tablesDetail').style.display = 'none';
+  document.getElementById('tablesDetailContent').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function _tblSearchWrap(inputId) {
+  return '<div class="tbl-search-wrap"><input type="search" class="tbl-search-input" id="' + inputId + '" placeholder="Sök…" autocomplete="off" spellcheck="false"><button class="tbl-search-clear" title="Rensa sökning">✕</button></div>';
+}
+
+function _tblInitSearch(inputId, tbodyId) {
+  var wrap = document.getElementById(inputId);
+  if (!wrap) return;
+  var clearBtn = wrap.nextElementSibling;
+  function apply() {
+    var q = wrap.value.trim().toLowerCase();
+    if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+    var tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+    tbody.querySelectorAll('tr').forEach(function(row) {
+      row.classList.toggle('tbl-dimmed', q.length > 0 && !row.textContent.toLowerCase().includes(q));
+    });
+  }
+  wrap.addEventListener('input', apply);
+  wrap.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { wrap.value = ''; apply(); }
+  });
+  if (clearBtn) clearBtn.addEventListener('click', function() { wrap.value = ''; apply(); wrap.focus(); });
+}
+
+function _tblHeader(icon, title) {
+  return '<div class="section-header" style="margin-top:0"><div class="section-header-icon">' + icon + '</div><div class="section-header-text">' + title + '</div></div>';
+}
+
+function _tblUsage(text) {
+  return '<div class="tbl-usage">' + text + '</div>';
+}
+
+function _tblRenderSpannings(el) {
+  var min = -3.04, max = 1.52, range = max - min;
+  var scale = '<div class="tbl-vs-wrap">';
+  scale += '<div class="tbl-vs-title">Spänningsskala — E° (V)</div>';
+  scale += '<div class="tbl-vs-labels"><span>← Oädlare (reagerar med syra)</span><span>(reagerar ej med syra) Ädlare →</span></div>';
+  scale += '<div class="tbl-vs-track"><div class="tbl-vs-bar"></div>';
+  var hPct = ((0 - min) / range * 100).toFixed(2);
+  scale += '<div class="tbl-vs-h-line" style="left:' + hPct + '%"><div class="tbl-vs-h-label">H₂ 0 V</div></div>';
+  for (var i = 0; i < SPANNINGS_DATA.length; i++) {
+    var d = SPANNINGS_DATA[i];
+    var pct = ((d.eo - min) / range * 100).toFixed(2);
+    var cls = d.isRef ? 'tbl-dot-ref' : (d.eo < 0 ? 'tbl-dot-base' : 'tbl-dot-noble');
+    var eoStr = (d.eo >= 0 ? '+' : '') + d.eo.toFixed(2);
+    scale += '<div class="tbl-vs-dot ' + cls + '" style="left:' + pct + '%"><span class="tbl-vs-tooltip">' + d.sym + ' ' + eoStr + ' V</span></div>';
+  }
+  scale += '</div></div>';
+
+  var rows = '';
+  for (var i = 0; i < SPANNINGS_DATA.length; i++) {
+    var d = SPANNINGS_DATA[i];
+    var eoStr = (d.eo >= 0 ? '+' : '') + d.eo.toFixed(2);
+    rows += '<tr' + (d.isRef ? ' class="tbl-h-ref"' : '') + '>';
+    rows += '<td>' + d.name + '</td><td><strong>' + d.sym + '</strong></td><td>' + d.ion + '</td><td>' + eoStr + '</td><td>' + d.rel + (d.isRef ? ' ◀' : '') + '</td></tr>';
+  }
+
+  el.innerHTML =
+    _tblHeader('⚡', 'Spänningsserien') +
+    scale +
+    _tblUsage('⚡ Används vid redox — metall till vänster om en jon reduceras bort av jonen. Väte (H) är nollpunkten.') +
+    _tblSearchWrap('tblSpSearch') +
+    '<div class="tbl-table-wrap"><table class="tbl-table"><thead><tr><th>Metall</th><th>Symbol</th><th>Jon</th><th>E° (V)</th><th>Förhållande till H</th></tr></thead><tbody id="tbl-span-body">' + rows + '</tbody></table></div>';
+  _tblInitSearch('tblSpSearch', 'tbl-span-body');
+}
+
+function _tblRenderSyror(el) {
+  var rows = '';
+  for (var i = 0; i < SYROR_DATA.length; i++) {
+    var d = SYROR_DATA[i];
+    rows += '<tr' + (d.strong ? ' class="tbl-strong-acid"' : '') + '>';
+    rows += '<td>' + d.name + '</td><td><em>' + d.formula + '</em></td><td>' + d.ka + '</td><td>' + d.pka + '</td><td>' + d.styrka + '</td></tr>';
+  }
+
+  var thermo = '<div class="tbl-thermo"><div class="tbl-thermo-title">pKa<br>0–14</div><div class="tbl-thermo-track"><div class="tbl-thermo-bar"></div>';
+  thermo += '<div class="tbl-thermo-tick" style="top:0%">0</div>';
+  thermo += '<div class="tbl-thermo-tick" style="top:50%">7</div>';
+  thermo += '<div class="tbl-thermo-tick" style="top:100%">14</div>';
+  for (var i = 0; i < SYROR_DATA.length; i++) {
+    var d = SYROR_DATA[i];
+    if (d.pkaNum === null) continue;
+    var pct = Math.min(100, Math.max(0, d.pkaNum / 14 * 100)).toFixed(1);
+    thermo += '<div class="tbl-thermo-dot" style="top:' + pct + '%" title="' + d.name + ' pKa=' + d.pka + '"><span class="tbl-thermo-dot-label">' + d.pka + '</span></div>';
+  }
+  thermo += '</div></div>';
+
+  el.innerHTML =
+    _tblHeader('🧪', 'Syror och baser — pKa') +
+    _tblUsage('🧪 pKa visar hur svag syran är — högt pKa = svagare syra. Används för att beräkna pH i lösningar av svaga syror.') +
+    _tblSearchWrap('tblSyrSearch') +
+    '<div class="tbl-syror-layout"><div class="tbl-table-wrap" style="flex:1;min-width:0"><table class="tbl-table"><thead><tr><th>Syra</th><th>Formel</th><th>Ka</th><th>pKa</th><th>Styrka</th></tr></thead><tbody id="tbl-syror-body">' + rows + '</tbody></table></div>' + thermo + '</div>';
+  _tblInitSearch('tblSyrSearch', 'tbl-syror-body');
+}
+
+function _tblRenderBindningar(el) {
+  var rows = '';
+  for (var i = 0; i < BINDING_DATA.length; i++) {
+    var d = BINDING_DATA[i];
+    var cls = d.type === 'Dubbel' ? ' class="tbl-bond-double"' : (d.type === 'Trippel' ? ' class="tbl-bond-triple"' : '');
+    rows += '<tr' + cls + '><td><strong>' + d.bond + '</strong></td><td>' + d.type + '</td><td>' + d.energy + '</td><td>' + d.length + '</td></tr>';
+  }
+
+  el.innerHTML =
+    _tblHeader('🔥', 'Bindningsenergier') +
+    _tblUsage('🔥 Används vid beräkning av reaktionsentalpi: ΔH = Σ(brutna bindningar) − Σ(bildade bindningar).') +
+    '<div class="tbl-bond-legend"><span class="tbl-bond-leg tbl-bond-leg-s">Enkelbindning</span><span class="tbl-bond-leg tbl-bond-leg-d">Dubbelbindning</span><span class="tbl-bond-leg tbl-bond-leg-t">Trippelbindning</span></div>' +
+    _tblSearchWrap('tblBindSearch') +
+    '<div class="tbl-table-wrap"><table class="tbl-table"><thead><tr><th>Bindning</th><th>Typ</th><th>Energi (kJ/mol)</th><th>Längd (pm)</th></tr></thead><tbody id="tbl-bind-body">' + rows + '</tbody></table></div>';
+  _tblInitSearch('tblBindSearch', 'tbl-bind-body');
+}
+
+function _tblRenderTermokemi(el) {
+  var rows = '';
+  for (var i = 0; i < TERMO_DATA.length; i++) {
+    var d = TERMO_DATA[i];
+    var cls = d.dhf > 0 ? ' class="tbl-pos-dh"' : ' class="tbl-neg-dh"';
+    var dhStr = (d.dhf > 0 ? '+' : '') + d.dhf;
+    rows += '<tr' + cls + '><td>' + d.name + '</td><td><em>' + d.formula + '</em></td><td><span class="tbl-phase tbl-phase-' + d.fas + '">' + d.fas + '</span></td><td>' + dhStr + '</td></tr>';
+  }
+
+  el.innerHTML =
+    _tblHeader('♨️', 'Termokemi — Bildningsentalpier ΔHf°') +
+    _tblUsage('♨️ Används med Hess lag: ΔH°rxn = Σ ΔHf°(produkter) − Σ ΔHf°(reaktanter).') +
+    '<div class="tbl-bond-legend"><span class="tbl-bond-leg tbl-bond-leg-neg">Exoterm bildning (ΔHf° &lt; 0)</span><span class="tbl-bond-leg tbl-bond-leg-pos">Endoterm bildning (ΔHf° &gt; 0)</span></div>' +
+    _tblSearchWrap('tblTermSearch') +
+    '<div class="tbl-table-wrap"><table class="tbl-table"><thead><tr><th>Ämne</th><th>Formel</th><th>Fas</th><th>ΔHf° (kJ/mol)</th></tr></thead><tbody id="tbl-termo-body">' + rows + '</tbody></table></div>';
+  _tblInitSearch('tblTermSearch', 'tbl-termo-body');
+}
+
+function _tblRenderLoslighet(el) {
+  var rows = '';
+  for (var i = 0; i < LOSLIGHET_DATA.length; i++) {
+    var d = LOSLIGHET_DATA[i];
+    rows += '<tr><td>' + d.name + '</td><td><em>' + d.formula + '</em></td><td>' + d.ksp + '</td><td>' + d.pksp + '</td><td>' + d.los + '</td></tr>';
+  }
+
+  el.innerHTML =
+    _tblHeader('🔬', 'Löslighet — Löslighetsprodukter Ksp') +
+    _tblUsage('🔬 Litet Ksp = svårlösligt salt. Används för att avgöra om en fällning bildas: Q &gt; Ksp → fällning sker.') +
+    _tblSearchWrap('tblLosSearch') +
+    '<div class="tbl-table-wrap"><table class="tbl-table"><thead><tr><th>Salt</th><th>Formel</th><th>Ksp</th><th>pKsp</th><th>Löslighet</th></tr></thead><tbody id="tbl-los-body">' + rows + '</tbody></table></div>';
+  _tblInitSearch('tblLosSearch', 'tbl-los-body');
+}
+
 </script>
 
 </body>
