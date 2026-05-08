@@ -927,6 +927,13 @@
   .sol-section-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.06em; opacity: 0.65; margin: 10px 0 4px; display: block; }
   .ex-cat-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  @media (max-width: 1023px) {
+    .ex-cat-row { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:4px;
+      -webkit-mask-image:linear-gradient(to right,black calc(100% - 48px),transparent 100%);
+      mask-image:linear-gradient(to right,black calc(100% - 48px),transparent 100%); }
+    .ex-cat-row::-webkit-scrollbar { display:none; }
+    .ex-cat-row.scroll-end { -webkit-mask-image:none; mask-image:none; }
+  }
   .ex-cat-filter-btn { padding:6px 13px; border-radius:20px; border:1.5px solid var(--border); background:var(--surface); color:var(--text); font-size:0.82rem; cursor:pointer; transition:all var(--transition); white-space:nowrap; }
   .ex-cat-filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
   .prob-formula-badge { font-size:0.75rem; color:var(--accent); background:var(--accent-light); padding:3px 10px; border-radius:20px; font-family:'Courier New',monospace; margin-bottom:10px; display:inline-block; }
@@ -1537,6 +1544,14 @@
   border-radius: 14px;
   padding: 4px;
   box-shadow: var(--shadow-card);
+}
+@media (max-width: 1023px) {
+  .sp-tabs { overflow-x:auto; scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(to right,black calc(100% - 40px),transparent 100%);
+    mask-image:linear-gradient(to right,black calc(100% - 40px),transparent 100%); }
+  .sp-tabs::-webkit-scrollbar { display:none; }
+  .sp-tabs.scroll-end { -webkit-mask-image:none; mask-image:none; }
+  .sp-tab { flex:0 0 auto; white-space:nowrap; }
 }
 .sp-tab {
   flex: 1;
@@ -9355,6 +9370,7 @@ function initExercise() {
   catRow.querySelectorAll('.ex-cat-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => selectCat(btn.dataset.cat));
   });
+  initScrollFade(catRow);
 
   levelRow.innerHTML = [1,2,3].map(lv => {
     const li = LEVEL_INFO[lv];
@@ -10209,6 +10225,7 @@ function initTQ() {
   catRow.querySelectorAll('.ex-cat-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => tqSelectCat(btn.dataset.cat));
   });
+  initScrollFade(catRow);
 
   const lvRow = document.getElementById('tqLevelRow');
   lvRow.innerHTML =
@@ -12872,6 +12889,19 @@ function tgRunSearch(q) {
 }
 
 function tgEscRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+// Horisontell scroll-fade för tab-rader
+function initScrollFade(el) {
+  if (!el) return;
+  function check() {
+    el.classList.toggle('scroll-end', el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+  }
+  el.addEventListener('scroll', check, { passive: true });
+  check();
+  var active = el.querySelector('.active');
+  if (active) active.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+}
+document.querySelectorAll('.sp-tabs').forEach(initScrollFade);
 
 function tgToggleSidebar() {
   document.getElementById('tgSidebar').classList.toggle('open');
