@@ -313,7 +313,7 @@
   .cat-card-top {
     display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
   }
-  .cat-card-top .cat-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cat-card-top .cat-name { flex: 1; min-width: 0; white-space: normal; word-break: break-word; }
   .cat-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-1px); }
   .cat-card.selected { border-color: var(--accent); background: var(--accent-bg); }
   .cat-card.all-selected { border-color: var(--green); background: var(--green-light); }
