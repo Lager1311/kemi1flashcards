@@ -1,0 +1,13 @@
+{
+  "name": "Kemi 1 – Studieverktyg",
+  "short_name": "Kemi1",
+  "description": "Flashcards och övningar för Kemi 1 Gy25",
+  "start_url": "/kemi1flashcards/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c3aed",
+  "icons": [
+    { "src": "favicon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "favicon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
