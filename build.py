@@ -1,48 +1,18 @@
 """
-build.py  –  Sätter ihop kemi1-flashcards.html från källfilerna i src/
-Kör:  python build.py
+build.py – Kopierar src/main-template.html till index.html / kemi1-flashcards.html.
+Kör: python build.py
 """
-import os, sys
+import os, shutil
 
-base = os.path.dirname(os.path.abspath(__file__))
-src  = os.path.join(base, 'src')
+base  = os.path.dirname(os.path.abspath(__file__))
+src   = os.path.join(base, 'src', 'main-template.html')
+out   = os.path.join(base, 'kemi1-flashcards.html')
+index = os.path.join(base, 'index.html')
 
-template_path = os.path.join(src, 'main-template.html')
-tq_path       = os.path.join(src, 'theory-questions.js')
-prob_path     = os.path.join(src, 'problems.js')
-tg_path       = os.path.join(src, 'teori-fran-grunden-content.js')
-out_path      = os.path.join(base, 'kemi1-flashcards.html')
-index_path    = os.path.join(base, 'index.html')
+shutil.copy2(src, out)
+shutil.copy2(src, index)
 
-def read(path):
-    with open(path, 'r', encoding='utf-8') as f:
-        return f.read()
-
-template   = read(template_path)
-tq_text    = read(tq_path).rstrip('\n')
-prob_text  = read(prob_path).rstrip('\n')
-tg_text    = read(tg_path).rstrip('\n')
-
-# Ersätt platshållare
-if '/* @@PROBLEMS@@ */' not in template:
-    print('FEL: Platshållare @@PROBLEMS@@ saknas i mallen!')
-    sys.exit(1)
-if '/* @@THEORY_QUESTIONS@@ */' not in template:
-    print('FEL: Platshållare @@THEORY_QUESTIONS@@ saknas i mallen!')
-    sys.exit(1)
-if '/* @@TEORI_GRUND_CONTENT@@ */' not in template:
-    print('FEL: Platshållare @@TEORI_GRUND_CONTENT@@ saknas i mallen!')
-    sys.exit(1)
-
-result = template.replace('/* @@PROBLEMS@@ */',          prob_text)
-result = result.replace('/* @@THEORY_QUESTIONS@@ */', tq_text)
-result = result.replace('/* @@TEORI_GRUND_CONTENT@@ */', tg_text)
-
-with open(out_path, 'w', encoding='utf-8') as f:
-    f.write(result)
-with open(index_path, 'w', encoding='utf-8') as f:
-    f.write(result)
-
-print(f'Byggd: {out_path} + {index_path}')
-print(f'Storlek: {len(result):,} tecken')
+size = os.path.getsize(index)
+print(f'Byggd: {out} + {index}')
+print(f'Storlek: {size:,} bytes ({size/1024:.1f} KB)')
 print('Klar!')
