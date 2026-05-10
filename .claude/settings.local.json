@@ -1,6 +1,9 @@
 {
   "permissions": {
     "allow": [
+      "Edit(*)",
+      "Write(*)",
+      "Bash(git *)",
       "Bash(python find_theory_end.py)",
       "Bash(python verify.py)",
       "Bash(python add_extra_fragor.py)",
