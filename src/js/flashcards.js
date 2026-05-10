@@ -102,7 +102,6 @@ function buildCategoryGrid() {
   const allActive = CARDS.filter(c => !state.mutedCards.has(c.id)).length;
   allCard.innerHTML = `
     <div class="cat-card-top">
-      <div class="cat-check">✓</div>
       <div class="cat-name">🌟 Alla kategorier</div>
       <div class="cat-count">${allActive} kort</div>
     </div>`;
@@ -127,7 +126,6 @@ function buildCategoryGrid() {
     div.title = cat;
     div.innerHTML = `
       <div class="cat-card-top">
-        <div class="cat-check">✓</div>
         <div class="cat-name">${cat}</div>
         <div class="cat-count">${cards.length} kort${mutedCount ? ' • <span style="color:var(--text2)">'+mutedCount+' tysta</span>' : ''}</div>
       </div>
@@ -148,6 +146,7 @@ function buildCategoryGrid() {
     });
     grid.appendChild(div);
   });
+  updateHomeStats();
 }
 
 function updateCatGrid() {
