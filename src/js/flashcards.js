@@ -221,8 +221,8 @@ function updateHomeStats() {
   const all = CARDS.filter(c => !state.mutedCards.has(c.id));
   const sel = CARDS.filter(c => (state.selectedCats.size === 0 || state.selectedCats.has(c.cat)) && !state.mutedCards.has(c.id));
   document.getElementById('totalCards').textContent = all.length;
-  document.getElementById('masteredCards').textContent = sel.length;
-  document.getElementById('remainingCards').textContent =
+  document.getElementById('selectedCards').textContent = sel.length;
+  document.getElementById('selectedCats').textContent =
     state.selectedCats.size === 0 ? 'Alla' : state.selectedCats.size;
 }
 
