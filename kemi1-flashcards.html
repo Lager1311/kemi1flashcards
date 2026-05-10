@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kemi 1 – Flashcards</title>
+<title>Kemi 1 – Flashcards & Studieverktyg</title>
+<meta name="description" content="Kemi 1 – 373 flashcards, övningsfrågor och teorigenomgång för Gy25. Gratis studieverktyg för svenska gymnasieelever.">
+<meta name="author" content="Kemi1">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="Kemi 1 – Flashcards & Studieverktyg">
+<meta property="og:description" content="Plugga Kemi 1 med 373 flashcards, lucktexter, flervalsfrågor och formelsamling för Gy25.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lager1311.github.io/kemi1flashcards/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" media="print" onload="this.onload=null;this.media='all'">
@@ -92,6 +101,12 @@
     --text1:         var(--text-primary);
     --text2:         var(--text-secondary);
     --accent2:       var(--accent);
+  }
+  [data-theme="dark"] {
+    --shadow:        0 4px 24px rgba(0,0,0,0.5);
+    --shadow-lg:     0 12px 48px rgba(0,0,0,0.7);
+    --shadow-card:   0 2px 16px rgba(0,0,0,0.35);
+    --glow:          0 0 24px rgba(124,106,247,0.3);
   }
   [data-theme="light"] .mode-btn.active .mode-desc { color: var(--accent); }
   h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
@@ -324,7 +339,7 @@
   .cat-card-top {
     display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
   }
-  .cat-card-top .cat-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cat-card-top .cat-name { flex: 1; min-width: 0; white-space: normal; word-break: break-word; }
   .cat-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateY(-1px); }
   .cat-card.selected { border-color: var(--accent); background: var(--accent-bg); }
   .cat-card.all-selected { border-color: var(--green); background: var(--green-light); }
@@ -352,6 +367,14 @@
   .mode-icon { font-size: 1.6rem; }
   .mode-label { font-weight: 700; font-size: 0.9rem; }
   .mode-desc { font-size: 0.75rem; color: var(--text-muted); }
+  .fc-keyboard-hint {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted, #888);
+    padding: 6px 0 2px;
+    opacity: 0.75;
+    letter-spacing: 0.01em;
+  }
   .mode-btn.active .mode-desc { color: var(--accent-light); }
 
   .direction-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -1325,6 +1348,23 @@
   .mode-icon { font-size: 1.5rem; display: block; }
   .mode-label { font-size: 0.82rem; font-weight: 700; color: var(--text); }
   .mode-desc { font-size: 0.7rem; color: var(--text2); line-height: 1.3; }
+  .mode-tool-badge {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #92400e;
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 4px;
+    padding: 1px 5px;
+    letter-spacing: 0.01em;
+  }
+  [data-theme="dark"] .mode-tool-badge {
+    color: #fbbf24;
+    background: rgba(251,191,36,0.12);
+    border-color: #d97706;
+  }
   .mode-btn[data-mode="flip"].active { border-color: #2563eb; background: #dbeafe; }
   .mode-btn[data-mode="flip"].active .mode-label { color: #2563eb; }
   .mode-btn[data-mode="mc"].active { border-color: #16a34a; background: #dcfce7; }
@@ -2769,11 +2809,11 @@
         <div class="stat-label">Totalt kort</div>
       </div>
       <div class="stat-card stat-green">
-        <div class="stat-num s-green" id="masteredCards">—</div>
+        <div class="stat-num s-green" id="selectedCards">—</div>
         <div class="stat-label">Valda kort</div>
       </div>
       <div class="stat-card stat-yellow">
-        <div class="stat-num s-blue" id="remainingCards">—</div>
+        <div class="stat-num s-blue" id="selectedCats">—</div>
         <div class="stat-label">Kategorier</div>
       </div>
     </div>
@@ -2821,6 +2861,7 @@
         <span class="mode-icon">✍️</span>
         <span class="mode-label">Lucktexter</span>
         <span class="mode-desc">Fyll i rätt ord i meningarna</span>
+        <span class="mode-tool-badge">Öppnar separat verktyg</span>
       </button>
     </div>
 
@@ -2879,6 +2920,7 @@
         <button class="fc-btn-wrong" id="btnWrong" disabled onclick="markAnswer(false)">✗ Fel</button>
         <button class="fc-btn-right" id="btnCorrect" disabled onclick="markAnswer(true)">✓ Rätt</button>
       </div>
+      <div class="fc-keyboard-hint" id="fcKeyboardHint">Genvägar: Mellanslag = vänd &nbsp;|&nbsp; → = Rätt &nbsp;|&nbsp; ← = Fel</div>
     </div>
 
     <!-- Multiple choice mode -->
@@ -2960,7 +3002,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-num s-green" id="profileMastered">—</div>
-          <div class="stat-label">Sessioner kort</div>
+          <div class="stat-label">Inlärda kort</div>
         </div>
         <div class="stat-card">
           <div class="stat-num" id="profileSessions">0</div>
@@ -6579,6 +6621,7 @@ function buildCategoryGrid() {
   const allCard = document.createElement('div');
   allCard.className = 'cat-card all-btn' + (state.selectedCats.size === 0 ? ' selected' : '');
   allCard.dataset.cat = '__all__';
+  allCard.title = 'Alla kategorier';
   const allActive = CARDS.filter(c => !state.mutedCards.has(c.id)).length;
   allCard.innerHTML = `
     <div class="cat-card-top">
@@ -6604,6 +6647,7 @@ function buildCategoryGrid() {
     const div = document.createElement('div');
     div.className = 'cat-card' + (state.selectedCats.has(cat) ? ' selected' : '');
     div.dataset.cat = cat;
+    div.title = cat;
     div.innerHTML = `
       <div class="cat-card-top">
         <div class="cat-check">✓</div>
@@ -6700,8 +6744,8 @@ function updateHomeStats() {
   const all = CARDS.filter(c => !state.mutedCards.has(c.id));
   const sel = CARDS.filter(c => (state.selectedCats.size === 0 || state.selectedCats.has(c.cat)) && !state.mutedCards.has(c.id));
   document.getElementById('totalCards').textContent = all.length;
-  document.getElementById('masteredCards').textContent = sel.length;
-  document.getElementById('remainingCards').textContent =
+  document.getElementById('selectedCards').textContent = sel.length;
+  document.getElementById('selectedCats').textContent =
     state.selectedCats.size === 0 ? 'Alla' : state.selectedCats.size;
 }
 
@@ -7010,6 +7054,68 @@ function renderFlip(card, dir) {
 }
 
 document.getElementById('cardScene').addEventListener('click', flipCard);
+
+document.addEventListener('keydown', function(e) {
+  // ── Flashcard shortcuts (flip mode only) ──────────────────
+  const quizActive = document.getElementById('quizScreen') &&
+                     document.getElementById('quizScreen').classList.contains('active');
+  if (quizActive && state.mode === 'flip') {
+    const tag = (e.target.tagName || '').toUpperCase();
+    const inInput = tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable;
+    if (!inInput) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        flipCard();
+        return;
+      }
+      if ((e.key === 'ArrowRight' || e.key === '1') && session.flipped) {
+        e.preventDefault();
+        markAnswer(true);
+        return;
+      }
+      if ((e.key === 'ArrowLeft' || e.key === '2') && session.flipped) {
+        e.preventDefault();
+        markAnswer(false);
+        return;
+      }
+    }
+  }
+
+  // ── Escape: close any open modal / overlay ────────────────
+  if (e.key === 'Escape') {
+    // Periodic element detail modal
+    var periodicBackdrop = document.getElementById('elModalBackdrop');
+    if (periodicBackdrop && periodicBackdrop.classList.contains('open')) {
+      periodicBackdrop.classList.remove('open');
+      return;
+    }
+    // Exam prep popup overlay
+    var examOv = document.getElementById('examPopupOverlay');
+    if (examOv && examOv.style.display !== 'none' && typeof examClosePopup === 'function') {
+      examClosePopup();
+      return;
+    }
+    // Theory guide sidebar (mobile)
+    var tgSidebar = document.getElementById('tgSidebar');
+    if (tgSidebar && tgSidebar.classList.contains('open') && typeof tgCloseSidebar === 'function') {
+      tgCloseSidebar();
+      return;
+    }
+    // Mobile navigation sidebar
+    var navSidebar = document.querySelector('.sidebar');
+    if (navSidebar && navSidebar.classList.contains('open')) {
+      navSidebar.classList.remove('open');
+      var navOverlay = document.getElementById('sidebarOverlay');
+      if (navOverlay) navOverlay.classList.remove('active');
+      return;
+    }
+    // Suggestion dropdown in study session builder
+    var sug = document.getElementById('ssSuggestions');
+    if (sug && sug.style.display !== 'none') {
+      sug.style.display = 'none';
+    }
+  }
+});
 
 function flipCard() {
   const wrap = document.getElementById('cardWrap');
@@ -7338,10 +7444,6 @@ function ssTagKeydown(e) {
   if (e.key === 'Enter') {
     const val = e.target.value.trim();
     if (val) { ssAddTag(val); }
-  }
-  if (e.key === 'Escape') {
-    const sug = document.getElementById('ssSuggestions');
-    if (sug) sug.style.display = 'none';
   }
 }
 
@@ -12259,13 +12361,6 @@ function initExamPrep() {
       if (e.target === ov) examClosePopup();
     });
   }
-  // close popup on Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var o = document.getElementById('examPopupOverlay');
-      if (o && o.style.display !== 'none') examClosePopup();
-    }
-  });
 }
 
 function renderExamOverview() {
