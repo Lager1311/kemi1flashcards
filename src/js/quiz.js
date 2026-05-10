@@ -3739,13 +3739,6 @@ function initExamPrep() {
       if (e.target === ov) examClosePopup();
     });
   }
-  // close popup on Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var o = document.getElementById('examPopupOverlay');
-      if (o && o.style.display !== 'none') examClosePopup();
-    }
-  });
 }
 
 function renderExamOverview() {
