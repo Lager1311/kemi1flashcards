@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#7c3aed">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="manifest.json">
 <meta property="og:title" content="Kemi 1 – Flashcards & Studieverktyg">
 <meta property="og:description" content="Plugga Kemi 1 med 373 flashcards, lucktexter, flervalsfrågor och formelsamling för Gy25.">
 <meta property="og:type" content="website">
@@ -14669,6 +14670,12 @@ setTimeout(function() {
   pomoReset();
 }, 500);
 
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/kemi1flashcards/sw.js');
+}
 </script>
 
 
