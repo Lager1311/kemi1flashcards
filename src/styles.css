@@ -1340,6 +1340,11 @@
     padding: 1px 5px;
     letter-spacing: 0.01em;
   }
+  [data-theme="dark"] .mode-tool-badge {
+    color: #fbbf24;
+    background: rgba(251,191,36,0.12);
+    border-color: #d97706;
+  }
   .mode-btn[data-mode="flip"].active { border-color: #2563eb; background: #dbeafe; }
   .mode-btn[data-mode="flip"].active .mode-label { color: #2563eb; }
   .mode-btn[data-mode="mc"].active { border-color: #16a34a; background: #dcfce7; }
