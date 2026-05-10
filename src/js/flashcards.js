@@ -98,6 +98,7 @@ function buildCategoryGrid() {
   const allCard = document.createElement('div');
   allCard.className = 'cat-card all-btn' + (state.selectedCats.size === 0 ? ' selected' : '');
   allCard.dataset.cat = '__all__';
+  allCard.title = 'Alla kategorier';
   const allActive = CARDS.filter(c => !state.mutedCards.has(c.id)).length;
   allCard.innerHTML = `
     <div class="cat-card-top">
@@ -123,6 +124,7 @@ function buildCategoryGrid() {
     const div = document.createElement('div');
     div.className = 'cat-card' + (state.selectedCats.has(cat) ? ' selected' : '');
     div.dataset.cat = cat;
+    div.title = cat;
     div.innerHTML = `
       <div class="cat-card-top">
         <div class="cat-check">✓</div>
