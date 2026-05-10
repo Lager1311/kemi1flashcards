@@ -68,9 +68,23 @@ themeBtn.addEventListener('click', () => {
 // ═══════════════════════════════════════════════════════
 //  SCREENS
 // ═══════════════════════════════════════════════════════
+const SCREEN_TITLES = {
+  homeScreen: 'Flashcards', theoryScreen: 'Teorigenomgång',
+  tqScreen: 'Övningsfrågor', examScreen: 'Inför prov',
+  formulaScreen: 'Formelsamling', tablesScreen: 'Tabeller',
+  calcScreen: 'Kalkylator', periodicScreen: 'Periodiska systemet',
+  planScreen: 'Studieplan', profileScreen: 'Profil', exerciseScreen: 'Räkna'
+};
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  const title = SCREEN_TITLES[id] || id;
+  const el = document.getElementById('topbarTitle');
+  if (el) el.textContent = title;
+  document.title = 'Kemi 1 \u2013 ' + title;
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.screen === id);
+  });
 }
 
 // ═══════════════════════════════════════════════════════

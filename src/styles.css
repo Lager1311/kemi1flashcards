@@ -2018,7 +2018,7 @@
   background: var(--accent); color: #fff; padding: 10px 16px;
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   position: sticky; top: 0; z-index: 500; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  box-shadow: 0 4px 16px rgba(79,70,229,0.35); margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(79,70,229,0.35);
 }
 .session-bar-info {
   display: flex; align-items: center; justify-content: space-between; flex: 1;
