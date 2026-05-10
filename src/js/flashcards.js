@@ -532,6 +532,68 @@ function renderFlip(card, dir) {
 
 document.getElementById('cardScene').addEventListener('click', flipCard);
 
+document.addEventListener('keydown', function(e) {
+  // ── Flashcard shortcuts (flip mode only) ──────────────────
+  const quizActive = document.getElementById('quizScreen') &&
+                     document.getElementById('quizScreen').classList.contains('active');
+  if (quizActive && state.mode === 'flip') {
+    const tag = (e.target.tagName || '').toUpperCase();
+    const inInput = tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable;
+    if (!inInput) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        flipCard();
+        return;
+      }
+      if ((e.key === 'ArrowRight' || e.key === '1') && session.flipped) {
+        e.preventDefault();
+        markAnswer(true);
+        return;
+      }
+      if ((e.key === 'ArrowLeft' || e.key === '2') && session.flipped) {
+        e.preventDefault();
+        markAnswer(false);
+        return;
+      }
+    }
+  }
+
+  // ── Escape: close any open modal / overlay ────────────────
+  if (e.key === 'Escape') {
+    // Periodic element detail modal
+    var periodicBackdrop = document.getElementById('elModalBackdrop');
+    if (periodicBackdrop && periodicBackdrop.classList.contains('open')) {
+      periodicBackdrop.classList.remove('open');
+      return;
+    }
+    // Exam prep popup overlay
+    var examOv = document.getElementById('examPopupOverlay');
+    if (examOv && examOv.style.display !== 'none' && typeof examClosePopup === 'function') {
+      examClosePopup();
+      return;
+    }
+    // Theory guide sidebar (mobile)
+    var tgSidebar = document.getElementById('tgSidebar');
+    if (tgSidebar && tgSidebar.classList.contains('open') && typeof tgCloseSidebar === 'function') {
+      tgCloseSidebar();
+      return;
+    }
+    // Mobile navigation sidebar
+    var navSidebar = document.querySelector('.sidebar');
+    if (navSidebar && navSidebar.classList.contains('open')) {
+      navSidebar.classList.remove('open');
+      var navOverlay = document.getElementById('sidebarOverlay');
+      if (navOverlay) navOverlay.classList.remove('active');
+      return;
+    }
+    // Suggestion dropdown in study session builder
+    var sug = document.getElementById('ssSuggestions');
+    if (sug && sug.style.display !== 'none') {
+      sug.style.display = 'none';
+    }
+  }
+});
+
 function flipCard() {
   const wrap = document.getElementById('cardWrap');
   wrap.classList.toggle('flipped');
@@ -859,10 +921,6 @@ function ssTagKeydown(e) {
   if (e.key === 'Enter') {
     const val = e.target.value.trim();
     if (val) { ssAddTag(val); }
-  }
-  if (e.key === 'Escape') {
-    const sug = document.getElementById('ssSuggestions');
-    if (sug) sug.style.display = 'none';
   }
 }
 
