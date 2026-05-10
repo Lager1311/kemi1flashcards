@@ -82,6 +82,12 @@
     --text2:         var(--text-secondary);
     --accent2:       var(--accent);
   }
+  [data-theme="dark"] {
+    --shadow:        0 4px 24px rgba(0,0,0,0.5);
+    --shadow-lg:     0 12px 48px rgba(0,0,0,0.7);
+    --shadow-card:   0 2px 16px rgba(0,0,0,0.35);
+    --glow:          0 0 24px rgba(124,106,247,0.3);
+  }
   [data-theme="light"] .mode-btn.active .mode-desc { color: var(--accent); }
   h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
